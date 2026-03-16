@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elia's Film Roll — AI Works</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a08;
+  --film-black: #111110;
+  --film-edge: #1a1a18;
+  --canister-body: #2a2a28;
+  --canister-top: #3a3a36;
+  --kodak-yellow: #F5C518;
+  --kodak-red: #D4382C;
+  --portra-pink: #e8c4b8;
+  --portra-warm: #d4a574;
+  --grain-opacity: 0.04;
+  --cream: #f5f0e8;
+  --text-muted: #8a8680;
+  --text-light: #c4beb6;
+  --safety-red: #8B2500;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'DM Mono', monospace;
+  cursor: crosshair;
+  overflow-x: hidden;
+}
+
+/* ===== GRAIN OVERLAY ===== */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: var(--grain-opacity);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ===== HERO / CANISTER SECTION ===== */
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-ambient {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,197,24,0.06) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Film Canister */
+.canister-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.canister-group:hover {
+  transform: scale(1.02);
+}
+
+.canister-cap {
+  width: 120px;
+  height: 20px;
+  background: var(--canister-top);
+  border-radius: 8px 8px 0 0;
+  position: relative;
+  z-index: 2;
+  border: 1px solid #4a4a44;
+  border-bottom: none;
+}
+
+.canister-cap::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 8px;
+  border-radius: 4px;
+  background: #4a4a44;
+}
+
+.canister-body {
+  width: 120px;
+  height: 160px;
+  background: linear-gradient(180deg, var(--canister-body) 0%, #222220 100%);
+  border-radius: 0 0 12px 12px;
+  position: relative;
+  z-index: 2;
+  border: 1px solid #3a3a36;
+  border-top: none;
+  overflow: hidden;
+}
+
+.canister-label {
+  position: absolute;
+  top: 12px;
+  left: 8px;
+  right: 8px;
+  bottom: 30px;
+  background: var(--kodak-yellow);
+  border-radius: 4px;
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.canister-label-brand {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  font-weight: 400;
+  color: var(--kodak-red);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.canister-label-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a18;
+  line-height: 1.1;
+}
+
+.canister-label-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 7px;
+  color: #4a4a38;
+  letter-spacing: 1px;
+}
+
+.canister-label-iso {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--kodak-red);
+  line-height: 1;
+}
+
+.canister-label-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.canister-label-type {
+  font-family: 'DM Mono', monospace;
+  font-size: 7px;
+  color: #6a6a58;
+}
+
+/* Film strip coming out of canister */
+.film-tail {
+  width: 90px;
+  height: 0;
+  background: var(--film-edge);
+  position: relative;
+  z-index: 1;
+  transition: height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+}
+
+.film-tail::before,
+.film-tail::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 10px;
+  height: 100%;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0px,
+    transparent 2px,
+    #2a2a26 2px,
+    #2a2a26 8px,
+    transparent 8px,
+    transparent 10px
+  );
+}
+
+.film-tail::before { left: 2px; }
+.film-tail::after { right: 2px; }
+
+.canister-group:hover .film-tail {
+  height: 60px;
+}
+
+/* Hero text */
+.hero-title {
+  margin-top: 48px;
+  text-align: center;
+}
+
+.hero-title h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--cream);
+}
+
+.hero-title h1 em {
+  font-style: italic;
+  color: var(--kodak-yellow);
+}
+
+.hero-subtitle {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 16px;
+  letter-spacing: 4px;
+}
+
+.hero-cta {
+  margin-top: 40px;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  animation: pulse-down 2s ease-in-out infinite;
+}
+
+@keyframes pulse-down {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+
+/* ===== FILM STRIP SECTION ===== */
+.film-section {
+  padding: 80px 0;
+  position: relative;
+}
+
+.film-section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.film-section-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 400;
+  color: var(--cream);
+}
+
+.film-section-header p {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 8px;
+  letter-spacing: 2px;
+}
+
+/* Horizontal film strip scroll */
+.film-strip-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 20px 0;
+}
+
+.film-strip-container::-webkit-scrollbar { display: none; }
+
+.film-strip {
+  display: flex;
+  gap: 0;
+  padding: 0 80px;
+  width: max-content;
+}
+
+/* Individual film frame */
+.film-frame {
+  width: 320px;
+  flex-shrink: 0;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+
+.film-frame:hover {
+  transform: scale(1.03);
+  z-index: 10;
+}
+
+.film-frame-inner {
+  background: var(--film-black);
+  border-left: 28px solid var(--film-edge);
+  border-right: 28px solid var(--film-edge);
+  padding: 20px 12px;
+  position: relative;
+}
+
+/* Sprocket holes */
+.film-frame-inner::before,
+.film-frame-inner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 16px;
+  height: 100%;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0px,
+    transparent 6px,
+    #0a0a08 6px,
+    #0a0a08 16px,
+    transparent 16px,
+    transparent 22px
+  );
+  z-index: 2;
+}
+
+.film-frame-inner::before { left: -22px; }
+.film-frame-inner::after { right: -22px; }
+
+/* Photo area */
+.film-photo {
+  width: 100%;
+  aspect-ratio: 3/2;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.film-photo-bg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Project-specific colors */
+.frame-jianghai .film-photo-bg {
+  background: linear-gradient(135deg, #1a2a3a 0%, #0d1b2a 40%, #1b3a4b 100%);
+}
+
+.frame-ideashu .film-photo-bg {
+  background: linear-gradient(135deg, #2a1a2e 0%, #1a0d2a 40%, #3b1a4b 100%);
+}
+
+.frame-moodmix .film-photo-bg {
+  background: linear-gradient(135deg, #2a2218 0%, #1a1508 40%, #3b2a18 100%);
+}
+
+.frame-about .film-photo-bg {
+  background: linear-gradient(135deg, #1a2a1a 0%, #0d1a0d 40%, #1b3b1b 100%);
+}
+
+/* Project icon/illustration inside frame */
+.project-icon {
+  font-size: 48px;
+  opacity: 0.3;
+  color: var(--cream);
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Light leak overlay */
+.film-photo::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(245,197,24,0.08) 50%,
+    rgba(212,56,44,0.05) 70%,
+    transparent 90%
+  );
+  pointer-events: none;
+}
+
+/* Frame number */
+.film-frame-number {
+  position: absolute;
+  bottom: 6px;
+  right: 36px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: #5a5a50;
+  letter-spacing: 1px;
+}
+
+.film-frame-number-left {
+  position: absolute;
+  top: 6px;
+  left: 36px;
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  color: #3a3a34;
+}
+
+/* Frame caption */
+.film-caption {
+  padding: 16px 0 8px;
+  text-align: center;
+}
+
+.film-caption-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 6px;
+}
+
+.film-caption-desc {
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  line-height: 1.6;
+  max-width: 260px;
+  margin: 0 auto;
+}
+
+.film-caption-tag {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--kodak-yellow);
+  border: 1px solid rgba(245,197,24,0.3);
+  padding: 3px 10px;
+  border-radius: 2px;
+}
+
+/* ===== SCROLL HINT ===== */
+.scroll-hint {
+  text-align: center;
+  padding: 12px 0 40px;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+/* ===== DETAIL / EXPANDED VIEW ===== */
+.detail-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(10,10,8,0.95);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  overflow-y: auto;
+}
+
+.detail-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.detail-content {
+  max-width: 680px;
+  width: 90%;
+  padding: 60px 40px;
+  position: relative;
+}
+
+.detail-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  cursor: pointer;
+  border: 1px solid #3a3a36;
+  padding: 8px 16px;
+  background: none;
+  font-family: 'DM Mono', monospace;
+  transition: all 0.3s;
+}
+
+.detail-close:hover {
+  color: var(--cream);
+  border-color: var(--cream);
+}
+
+.detail-header {
+  margin-bottom: 40px;
+}
+
+.detail-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.detail-header .detail-tag {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--kodak-yellow);
+  text-transform: uppercase;
+}
+
+.detail-body {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px;
+  line-height: 2;
+  color: var(--text-light);
+}
+
+.detail-body p {
+  margin-bottom: 20px;
+}
+
+.detail-tech {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #2a2a26;
+}
+
+.detail-tech-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.detail-tech-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.detail-tech-item {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--portra-warm);
+  border: 1px solid rgba(212,165,116,0.2);
+  padding: 4px 12px;
+  border-radius: 2px;
+}
+
+/* ===== ABOUT SECTION ===== */
+.about-section {
+  padding: 100px 40px;
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+
+.about-section p {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px;
+  line-height: 2;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.about-links {
+  margin-top: 40px;
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.about-link {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 8px 20px;
+  border: 1px solid #2a2a26;
+  transition: all 0.3s;
+}
+
+.about-link:hover {
+  color: var(--kodak-yellow);
+  border-color: var(--kodak-yellow);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 40px;
+  border-top: 1px solid #1a1a18;
+}
+
+.footer-film-edge {
+  font-size: 8px;
+  letter-spacing: 4px;
+  color: #3a3a34;
+  margin-bottom: 16px;
+}
+
+.footer p {
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+  .film-frame { width: 260px; }
+  .film-strip { padding: 0 30px; }
+  .detail-content { padding: 40px 24px; }
+  .detail-header h2 { font-size: 28px; }
+}
+
+/* ===== ENTRANCE ANIMATIONS ===== */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-title { animation: fade-up 1s ease 0.3s both; }
+.hero-subtitle { animation: fade-up 1s ease 0.5s both; }
+.canister-group { animation: fade-up 1s ease 0.1s both; }
+.hero-cta { animation: fade-up 1s ease 0.8s both; }
+
+@keyframes film-enter {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.film-frame:nth-child(1) { animation: film-enter 0.6s ease 0.2s both; }
+.film-frame:nth-child(2) { animation: film-enter 0.6s ease 0.35s both; }
+.film-frame:nth-child(3) { animation: film-enter 0.6s ease 0.5s both; }
+.film-frame:nth-child(4) { animation: film-enter 0.6s ease 0.65s both; }
+
+/* Canister pull interaction */
+.canister-group.pulling .film-tail {
+  height: 120px !important;
+  transition: height 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.canister-group.pulled {
+  animation: canister-fly-up 0.8s ease forwards;
+}
+
+@keyframes canister-fly-up {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-60px); opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-ambient"></div>
+  
+  <div class="canister-group" id="canister" onclick="pullFilm()">
+    <div class="canister-cap"></div>
+    <div class="canister-body">
+      <div class="canister-label">
+        <div>
+          <div class="canister-label-brand">Elia · Portfolio</div>
+          <div class="canister-label-name">AI Works</div>
+          <div class="canister-label-sub">PROFESSIONAL AI PRODUCT COLLECTION</div>
+        </div>
+        <div class="canister-label-bottom">
+          <div>
+            <div class="canister-label-iso">36</div>
+            <div class="canister-label-type">EXP 36 · 135</div>
+          </div>
+          <div class="canister-label-type">2024—25</div>
+        </div>
+      </div>
+    </div>
+    <div class="film-tail" id="filmTail"></div>
+  </div>
+
+  <div class="hero-title">
+    <h1>Elia's <em>Film Roll</em></h1>
+    <div class="hero-subtitle">AI 产品作品集 · 用胶片的方式讲故事</div>
+  </div>
+
+  <div class="hero-cta">↓ 点击胶片盒 · 拉出胶卷</div>
+</section>
+
+<!-- ===== FILM STRIP ===== -->
+<section class="film-section" id="works">
+  <div class="film-section-header">
+    <h2>Exposures</h2>
+    <p>← 横向滚动浏览胶卷 →</p>
+  </div>
+
+  <div class="scroll-hint">KODAK PORTRA 400 · 135 FILM · 36 EXP</div>
+
+  <div class="film-strip-container" id="filmStrip">
+    <div class="film-strip">
+
+      <!-- Frame 1: 疆海AI客服 -->
+      <div class="film-frame frame-jianghai" onclick="openDetail('jianghai')">
+        <div class="film-frame-inner">
+          <div class="film-frame-number-left">KODAK 400TX</div>
+          <div class="film-photo">
+            <div class="film-photo-bg">
+              <div class="project-icon">
+                疆<br>海
+              </div>
+            </div>
+          </div>
+          <div class="film-frame-number">→1  1A</div>
+        </div>
+        <div class="film-caption">
+          <div class="film-caption-title">疆海 AI 客服系统</div>
+          <div class="film-caption-desc">多语言级联调度架构<br>从FAQ缓存到Agent重链的智能路由</div>
+          <div class="film-caption-tag">LangGraph · RAG · Multi-Agent</div>
+        </div>
+      </div>
+
+      <!-- Frame 2: IdeaShu -->
+      <div class="film-frame frame-ideashu" onclick="openDetail('ideashu')">
+        <div class="film-frame-inner">
+          <div class="film-frame-number-left">KODAK 400TX</div>
+          <div class="film-photo">
+            <div class="film-photo-bg">
+              <div class="project-icon">
+                Idea<br>書
+              </div>
+            </div>
+          </div>
+          <div class="film-frame-number">→2  2A</div>
+        </div>
+        <div class="film-caption">
+          <div class="film-caption-title">IdeaShu 灵感书</div>
+          <div class="film-caption-desc">小红书AI内容创作工作台<br>5节点CrewAI多智能体流水线</div>
+          <div class="film-caption-tag">CrewAI · ChromaDB · GLM-4</div>
+        </div>
+      </div>
+
+      <!-- Frame 3: MoodMix -->
+      <div class="film-frame frame-moodmix" onclick="openDetail('moodmix')">
+        <div class="film-frame-inner">
+          <div class="film-frame-number-left">KODAK 400TX</div>
+          <div class="film-photo">
+            <div class="film-photo-bg">
+              <div class="project-icon">
+                情<br>调
+              </div>
+            </div>
+          </div>
+          <div class="film-frame-number">→3  3A</div>
+        </div>
+        <div class="film-caption">
+          <div class="film-caption-title">MoodMix 情绪调饮</div>
+          <div class="film-caption-desc">东方哲学驱动的情绪饮品推荐<br>五行·阴阳·时辰语义桥接</div>
+          <div class="film-caption-tag">React · 五行 · Cosine Similarity</div>
+        </div>
+      </div>
+
+      <!-- Frame 4: About -->
+      <div class="film-frame frame-about" onclick="openDetail('about')">
+        <div class="film-frame-inner">
+          <div class="film-frame-number-left">KODAK 400TX</div>
+          <div class="film-photo">
+            <div class="film-photo-bg">
+              <div class="project-icon">
+                关<br>于
+              </div>
+            </div>
+          </div>
+          <div class="film-frame-number">→E  END</div>
+        </div>
+        <div class="film-caption">
+          <div class="film-caption-title">关于 Elia</div>
+          <div class="film-caption-desc">清华大学 · 环境科学 × AI产品<br>价值发现 · 方案转化 · 驱动迭代</div>
+          <div class="film-caption-tag">AI PM · Tsinghua</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== DETAIL OVERLAYS ===== -->
+<div class="detail-overlay" id="detail-jianghai">
+  <div class="detail-content">
+    <button class="detail-close" onclick="closeDetail('jianghai')">✕ CLOSE</button>
+    <div class="detail-header">
+      <div class="detail-tag">Exposure 01 — 实习项目</div>
+      <h2>疆海 AI 客服系统</h2>
+    </div>
+    <div class="detail-body">
+      <p>在广州疆海科技独立搭建的AI多语言智能客服系统，服务海外储能产品线。核心架构是一套级联调度系统：FAQ缓存层做第一道拦截，意图分类层（16种意图，Qwen3-8B）做智能分流，之后并行进入RAG轻量链、Agent重链或人工转接三条通路。</p>
+      <p>评测体系使用LLM-as-Judge框架（Llama 3.3），从忠实度、准确度、相关性、安全性四个维度打分，配合约500条Golden Dataset做持续监测。数据飞轮机制确保系统能从真实对话中持续学习。</p>
+      <p>系统部署在AWS Bedrock上，使用Claude 3.5 Haiku/Sonnet做生成，BGE-M3做跨语言嵌入，符合GDPR合规要求。</p>
+    </div>
+    <div class="detail-tech">
+      <div class="detail-tech-label">Tech Stack</div>
+      <div class="detail-tech-items">
+        <span class="detail-tech-item">LangGraph</span>
+        <span class="detail-tech-item">RAG</span>
+        <span class="detail-tech-item">Qwen3-8B</span>
+        <span class="detail-tech-item">Claude 3.5</span>
+        <span class="detail-tech-item">BGE-M3</span>
+        <span class="detail-tech-item">AWS Bedrock</span>
+        <span class="detail-tech-item">LLM-as-Judge</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="detail-overlay" id="detail-ideashu">
+  <div class="detail-content">
+    <button class="detail-close" onclick="closeDetail('ideashu')">✕ CLOSE</button>
+    <div class="detail-header">
+      <div class="detail-tag">Exposure 02 — 个人项目</div>
+      <h2>IdeaShu 灵感书</h2>
+    </div>
+    <div class="detail-body">
+      <p>基于CrewAI搭建的小红书AI内容创作工作台，5节点多智能体流水线。Agent 1使用GLM-4.7通过SiliconFlow做多工具编排（SerperDevTool、JinaReaderTool、YoutubeVideoSearchTool等），Agent 2-5使用Qwen2.5-7B-Instruct控制成本。</p>
+      <p>引入ChromaDB做语义去重（余弦相似度阈值0.85），增量式风格学习通过异步diff分析实现——每10条记录触发一次System Prompt重构。Prompt Caching进一步优化了token消耗。</p>
+      <p>核心指标：95%+溯源成功率，34% token成本降低，50%生成时间缩短，修改率从35%降至14%。</p>
+    </div>
+    <div class="detail-tech">
+      <div class="detail-tech-label">Tech Stack</div>
+      <div class="detail-tech-items">
+        <span class="detail-tech-item">CrewAI</span>
+        <span class="detail-tech-item">GLM-4.7</span>
+        <span class="detail-tech-item">ChromaDB</span>
+        <span class="detail-tech-item">Qwen2.5-7B</span>
+        <span class="detail-tech-item">SiliconFlow</span>
+        <span class="detail-tech-item">Prompt Cache</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="detail-overlay" id="detail-moodmix">
+  <div class="detail-content">
+    <button class="detail-close" onclick="closeDetail('moodmix')">✕ CLOSE</button>
+    <div class="detail-header">
+      <div class="detail-tag">Exposure 03 — 个人项目</div>
+      <h2>MoodMix 情绪调饮</h2>
+    </div>
+    <div class="detail-body">
+      <p>一个以东方哲学（五行/阴阳/时辰）为语义桥梁的情绪饮品推荐应用。多智能体流水线将用户情绪解析为6维向量，通过加权余弦相似度映射到8维饮品特征向量，Kappa灵敏度常数实现动态权重调节。</p>
+      <p>哲学标签系统采用三标签结构（辨证/策略/体感），语录生成逻辑控制在15-28字的因果结构：状态→饮品→行动。前端React实现东方极简美学，部署在Render上。</p>
+    </div>
+    <div class="detail-tech">
+      <div class="detail-tech-label">Tech Stack</div>
+      <div class="detail-tech-items">
+        <span class="detail-tech-item">React</span>
+        <span class="detail-tech-item">Node.js</span>
+        <span class="detail-tech-item">五行/阴阳</span>
+        <span class="detail-tech-item">Cosine Similarity</span>
+        <span class="detail-tech-item">Multi-Agent</span>
+        <span class="detail-tech-item">Render</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="detail-overlay" id="detail-about">
+  <div class="detail-content">
+    <button class="detail-close" onclick="closeDetail('about')">✕ CLOSE</button>
+    <div class="detail-header">
+      <div class="detail-tag">The Photographer</div>
+      <h2>Elia</h2>
+    </div>
+    <div class="detail-body">
+      <p>清华大学研究生，环境科学背景 × AI产品方向。在实习中独立搭建了完整的AI系统，在个人项目中持续探索AI与东方美学的交汇点。</p>
+      <p>信奉「价值发现、方案转化、驱动迭代」的产品方法论。具备从技术架构到产品设计的完整视角——这种复合能力是稀缺的。</p>
+      <p>喜欢胶片摄影、极简设计与留白之美。相信好的AI产品应该像好的照片一样，既有技术的精确，也有感性的温度。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-film-edge">▪ ▪ ▪ ▪ ▪ KODAK 5219 ▪ ▪ ▪ ▪ ▪ KODAK 5219 ▪ ▪ ▪ ▪ ▪ KODAK 5219 ▪ ▪ ▪ ▪ ▪</div>
+  <p>© 2025 ELIA · SHOT ON PORTRA 400 · DEVELOPED WITH ♡</p>
+</footer>
+
+<script>
+// Pull film interaction
+let filmPulled = false;
+
+function pullFilm() {
+  if (filmPulled) return;
+  
+  const canister = document.getElementById('canister');
+  const filmTail = document.getElementById('filmTail');
+  
+  canister.classList.add('pulling');
+  
+  setTimeout(() => {
+    canister.classList.add('pulled');
+    filmPulled = true;
+    
+    setTimeout(() => {
+      document.getElementById('works').scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }, 400);
+  }, 800);
+}
+
+// Detail overlay
+function openDetail(id) {
+  const overlay = document.getElementById('detail-' + id);
+  overlay.style.display = 'flex';
+  requestAnimationFrame(() => {
+    overlay.classList.add('active');
+  });
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetail(id) {
+  const overlay = document.getElementById('detail-' + id);
+  overlay.classList.remove('active');
+  setTimeout(() => {
+    overlay.style.display = 'none';
+  }, 400);
+  document.body.style.overflow = '';
+}
+
+// Close on ESC
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.detail-overlay.active').forEach(el => {
+      const id = el.id.replace('detail-', '');
+      closeDetail(id);
+    });
+  }
+});
+
+// Close on backdrop click
+document.querySelectorAll('.detail-overlay').forEach(overlay => {
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      const id = overlay.id.replace('detail-', '');
+      closeDetail(id);
+    }
+  });
+});
+
+// Horizontal scroll with mouse wheel
+const stripContainer = document.getElementById('filmStrip');
+if (stripContainer) {
+  stripContainer.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      e.preventDefault();
+      stripContainer.scrollLeft += e.deltaY * 2;
+    }
+  }, { passive: false });
+}
+</script>
+
+</body>
+</html>
