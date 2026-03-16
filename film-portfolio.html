@@ -1451,6 +1451,9 @@ if (signatureEl) {
 // Pull film interaction
 let filmPulled = false;
 
+// 初始禁止页面纵向滚动，只能看 Hero
+document.body.style.overflowY = 'hidden';
+
 function pullFilm() {
   if (filmPulled) return;
   
@@ -1472,6 +1475,8 @@ function pullFilm() {
   setTimeout(() => {
     canister.classList.add('pulled');
     filmPulled = true;
+    // 允许纵向滚动
+    document.body.style.overflowY = 'auto';
     
     setTimeout(() => {
       document.getElementById('works').scrollIntoView({ 
