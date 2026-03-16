@@ -1448,11 +1448,23 @@ if (signatureEl) {
   setTimeout(typeNext, 900);
 }
 
-// Pull film interaction
+// Pull film interaction & scroll lock
 let filmPulled = false;
 
-// 初始禁止页面纵向滚动，只能看 Hero
+// 初始锁定：回到顶部并禁止纵向滚动
+window.scrollTo(0, 0);
 document.body.style.overflowY = 'hidden';
+
+function lockScroll(e) {
+  if (!filmPulled) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+}
+
+// 拦截滚轮和触摸滚动
+window.addEventListener('wheel', lockScroll, { passive: false });
+window.addEventListener('touchmove', lockScroll, { passive: false });
 
 function pullFilm() {
   if (filmPulled) return;
