@@ -815,7 +815,9 @@ body::after {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(10,10,8,0.95);
+  background: rgba(10, 10, 8, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   z-index: 1000;
   display: none;
   align-items: center;
@@ -1124,6 +1126,184 @@ body::after {
   0% { transform: translateY(0); opacity: 1; }
   100% { transform: translateY(-60px); opacity: 0; }
 }
+
+/* ===== JIANGHAI DETAIL PAGE ===== */
+.detail-overlay--jianghai {
+  /* Inherits dark background and blur from .detail-overlay */
+}
+
+.jh-page {
+  width: 100%;
+  max-width: 780px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #0c0e14;
+  border-radius: 16px;
+  position: relative;
+  scrollbar-width: none;
+}
+.jh-page::-webkit-scrollbar { display: none; }
+
+.jh-grain {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.035; pointer-events: none; z-index: 50; border-radius: 16px;
+}
+
+.jh-hero-grad {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, #0a3d2e 0%, #1a6b50 20%, #2ba882 40%, #5dcaa5 70%, #9fe1cb 100%);
+  opacity: 0.1; pointer-events: none; border-radius: 16px;
+}
+
+.jh-hero-orb {
+  position: absolute; top: -80px; right: -60px; width: 460px; height: 460px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(93,202,165,0.15) 0%, rgba(29,158,117,0.05) 50%, transparent 75%);
+  pointer-events: none;
+}
+
+.jh-infinity {
+  position: absolute; top: 26px; right: 76px; opacity: 0.05; z-index: 1;
+}
+
+.jh-content {
+  position: relative; z-index: 5; padding: 44px 40px 36px;
+}
+
+.jh-tag-row {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 2px;
+}
+
+.jh-tag {
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: #5dcaa5; font-family: 'DM Mono', monospace;
+}
+
+.jh-film-code {
+  font-size: 8px; letter-spacing: 2px; color: rgba(255,255,255,0.12);
+  font-family: 'DM Mono', monospace;
+}
+
+.jh-meta-row {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 4px; flex-wrap: wrap;
+}
+
+.jh-meta-item {
+  font-size: 15px; color: #f0ece4; font-weight: 600; letter-spacing: 0.3px;
+  font-family: 'Noto Serif SC', serif;
+}
+
+.jh-meta-dot {
+  width: 4px; height: 4px; border-radius: 50%; background: #5dcaa5;
+  flex-shrink: 0; opacity: 0.6;
+}
+
+.jh-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px; font-weight: 300; letter-spacing: -0.5px; margin-bottom: 4px;
+  color: #f0ece4;
+}
+
+.jh-metrics {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+  margin: 24px 0 28px;
+}
+
+.jh-metric-card {
+  background: rgba(93,202,165,0.05); border: 1px solid rgba(93,202,165,0.08);
+  border-radius: 10px; padding: 14px 12px;
+}
+
+.jh-metric-val {
+  font-size: 24px; font-weight: 600; color: #5dcaa5;
+  font-family: 'DM Mono', monospace; margin-bottom: 2px; line-height: 1.1;
+}
+
+.jh-metric-label {
+  font-size: 9px; letter-spacing: 1px; color: #6e7080;
+  text-transform: uppercase; line-height: 1.4;
+  font-family: 'DM Mono', monospace;
+}
+
+.jh-section-label {
+  font-size: 16px; font-weight: 600; letter-spacing: 1px; color: #f0ece4;
+  margin-bottom: 16px; font-family: 'Noto Serif SC', serif;
+}
+
+.jh-body {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13px; line-height: 2; color: #b0aaa0;
+  margin-bottom: 24px; max-width: 620px;
+}
+
+.jh-hl { color: #9fe1cb; }
+.jh-hl-green { color: #5dcaa5; font-weight: 500; }
+
+.jh-flow {
+  margin: 24px 0; padding: 20px;
+  background: transparent; border: 1px solid rgba(93,202,165,0.1);
+  border-radius: 12px;
+}
+
+.jh-flow-row {
+  display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 5px;
+}
+
+.jh-flow-node {
+  padding: 7px 16px; border-radius: 6px; font-size: 11px;
+  letter-spacing: 0.5px; text-align: center; white-space: nowrap;
+  font-family: 'DM Mono', monospace;
+}
+
+.jh-flow-entry {
+  background: rgba(93,202,165,0.12); border: 1px solid rgba(93,202,165,0.25); color: #9fe1cb;
+}
+
+.jh-flow-gate {
+  background: rgba(93,202,165,0.05); border: 1px dashed rgba(93,202,165,0.18); color: #5dcaa5;
+}
+
+.jh-flow-arrow {
+  color: rgba(93,202,165,0.35); font-size: 13px; font-family: 'DM Mono', monospace;
+}
+
+.jh-flow-branch {
+  display: flex; justify-content: center; gap: 12px; margin-top: 4px;
+}
+
+.jh-branch {
+  padding: 10px 14px; border-radius: 6px; font-size: 10px;
+  text-align: center; min-width: 110px; font-family: 'DM Mono', monospace;
+}
+
+.jh-branch small {
+  display: block; font-size: 9px; color: #6e7080; margin-top: 3px;
+}
+
+.jh-branch-rag {
+  background: rgba(55,138,221,0.07); border: 1px solid rgba(55,138,221,0.18); color: #85b7eb;
+}
+
+.jh-branch-agent {
+  background: rgba(93,202,165,0.08); border: 1px solid rgba(93,202,165,0.2); color: #5dcaa5;
+}
+
+.jh-branch-human {
+  background: rgba(212,56,44,0.06); border: 1px solid rgba(212,56,44,0.12); color: #f09595;
+}
+
+.jh-flow-judge {
+  margin-top: 5px; padding: 7px 18px; border-radius: 6px;
+  background: rgba(93,202,165,0.03); border: 1px solid rgba(93,202,165,0.08);
+  color: #9fe1cb; font-size: 10px; letter-spacing: 0.5px;
+  font-family: 'DM Mono', monospace;
+}
+
+.jh-film-bottom {
+  margin-top: 32px; font-size: 7px; letter-spacing: 3px;
+  color: rgba(255,255,255,0.07); font-family: 'DM Mono', monospace; text-align: center;
+}
 </style>
 </head>
 <body>
@@ -1309,29 +1489,58 @@ body::after {
 </section>
 
 <!-- ===== DETAIL OVERLAYS ===== -->
-<div class="detail-overlay" id="detail-jianghai">
-  <div class="detail-content">
-    <button class="detail-close" onclick="closeDetail('jianghai')">✕ CLOSE</button>
-    <div class="detail-header">
-      <div class="detail-tag">Exposure 01 — 实习项目</div>
-      <h2>疆海 AI 客服系统</h2>
-    </div>
-    <div class="detail-body">
-      <p>在广州疆海科技独立搭建的AI多语言智能客服系统，服务海外储能产品线。核心架构是一套级联调度系统：FAQ缓存层做第一道拦截，意图分类层（16种意图，Qwen3-8B）做智能分流，之后并行进入RAG轻量链、Agent重链或人工转接三条通路。</p>
-      <p>评测体系使用LLM-as-Judge框架（Llama 3.3），从忠实度、准确度、相关性、安全性四个维度打分，配合约500条Golden Dataset做持续监测。数据飞轮机制确保系统能从真实对话中持续学习。</p>
-      <p>系统部署在AWS Bedrock上，使用Claude 3.5 Haiku/Sonnet做生成，BGE-M3做跨语言嵌入，符合GDPR合规要求。</p>
-    </div>
-    <div class="detail-tech">
-      <div class="detail-tech-label">Tech Stack</div>
-      <div class="detail-tech-items">
-        <span class="detail-tech-item">LangGraph</span>
-        <span class="detail-tech-item">RAG</span>
-        <span class="detail-tech-item">Qwen3-8B</span>
-        <span class="detail-tech-item">Claude 3.5</span>
-        <span class="detail-tech-item">BGE-M3</span>
-        <span class="detail-tech-item">AWS Bedrock</span>
-        <span class="detail-tech-item">LLM-as-Judge</span>
+<div class="detail-overlay detail-overlay--jianghai" id="detail-jianghai">
+  <div class="jh-page">
+    <div class="jh-grain"></div>
+    <div class="jh-hero-grad"></div>
+    <div class="jh-hero-orb"></div>
+    <svg class="jh-infinity" width="110" height="55" viewBox="0 0 120 60">
+      <path d="M30 30C30 14 45 5 55 15C60 20 60 25 60 30C60 35 60 40 65 45C75 55 90 46 90 30C90 14 75 5 65 15C60 20 60 25 60 30C60 35 60 40 55 45C45 55 30 46 30 30Z" fill="none" stroke="#5dcaa5" stroke-width="3"/>
+      <circle cx="38" cy="30" r="6" fill="none" stroke="#5dcaa5" stroke-width="1.5"/>
+      <line x1="34" y1="30" x2="42" y2="30" stroke="#5dcaa5" stroke-width="1.5"/>
+      <line x1="38" y1="26" x2="38" y2="34" stroke="#5dcaa5" stroke-width="1.5"/>
+      <circle cx="82" cy="30" r="6" fill="none" stroke="#5dcaa5" stroke-width="1.5"/>
+      <line x1="78" y1="30" x2="86" y2="30" stroke="#5dcaa5" stroke-width="1.5"/>
+    </svg>
+    <button class="detail-close" onclick="closeDetail('jianghai')" style="position:absolute;top:20px;right:24px;z-index:10;">✕ CLOSE</button>
+    <div class="jh-content">
+      <div class="jh-tag-row">
+        <span class="jh-tag">Exposure 01 — internship</span>
+        <span class="jh-film-code">KODAK 5219 ▪ EXP 01</span>
       </div>
+      <div class="jh-meta-row">
+        <span class="jh-meta-item">广州疆海科技有限公司</span>
+        <span class="jh-meta-dot"></span>
+        <span class="jh-meta-item">AI产品经理实习生</span>
+        <span class="jh-meta-dot"></span>
+        <span class="jh-meta-item">2025.07 — 2025.10</span>
+      </div>
+      <h2 class="jh-title">AI 客服系统</h2>
+      <div class="jh-metrics">
+        <div class="jh-metric-card"><div class="jh-metric-val">&gt;40%</div><div class="jh-metric-label">AI接管率</div></div>
+        <div class="jh-metric-card"><div class="jh-metric-val">80%+</div><div class="jh-metric-label">回复准确率</div></div>
+        <div class="jh-metric-card"><div class="jh-metric-val">+15%</div><div class="jh-metric-label">满意度同比</div></div>
+        <div class="jh-metric-card"><div class="jh-metric-val">-25%</div><div class="jh-metric-label">人均处理时长</div></div>
+      </div>
+      <div class="jh-section-label"><span style="color:#5dcaa5;">◆</span> 工作概述</div>
+      <div class="jh-body">重点参与公司出海业务AI智能客服体系<span class="jh-hl">从0到1</span>的搭建。围绕<span class="jh-hl">大促人力过载</span>、<span class="jh-hl">跨国语言壁垒</span>、<span class="jh-hl">产品知识更新滞后</span>三大痛点，设计并落地<span class="jh-hl-green">「RAG + 多Agent协同」</span>的分层智能客服架构，黑五大促前完成灰度上线。</div>
+      <div class="jh-section-label"><span style="color:#5dcaa5;">◆</span> 级联调度架构</div>
+      <div class="jh-flow">
+        <div class="jh-flow-row"><div class="jh-flow-node jh-flow-entry">● 用户提问进入系统</div></div>
+        <div class="jh-flow-row"><span class="jh-flow-arrow">↓</span></div>
+        <div class="jh-flow-row"><div class="jh-flow-node jh-flow-gate">Gate 01 · FAQ缓存 · 命中则毫秒级返回</div></div>
+        <div class="jh-flow-row"><span class="jh-flow-arrow">↓ 未命中</span></div>
+        <div class="jh-flow-row"><div class="jh-flow-node jh-flow-gate">Gate 02 · 意图分类 · 意图 + 实体 + 置信度</div></div>
+        <div class="jh-flow-row"><span class="jh-flow-arrow">↓ ↙ ↘</span></div>
+        <div class="jh-flow-branch">
+          <div class="jh-branch jh-branch-rag">RAG 轻量链<small>标准问答 · 1x LLM</small></div>
+          <div class="jh-branch jh-branch-agent">Agent 调度<small>工具调用 · Nx LLM</small></div>
+          <div class="jh-branch jh-branch-human">转人工<small>投诉 / 低置信度</small></div>
+        </div>
+        <div class="jh-flow-row" style="margin-top:8px;"><span class="jh-flow-arrow">↓</span></div>
+        <div class="jh-flow-row"><div class="jh-flow-node jh-flow-judge">LLM-as-Judge · 忠实度 · 准确度 · 相关性 · 安全性</div></div>
+      </div>
+      <div class="jh-film-bottom">▪ ▪ ▪ KODAK 5219 ▪ ▪ ▪ PORTRA 400 ▪ ▪ ▪ PROCESS C-41 ▪ ▪ ▪</div>
     </div>
   </div>
 </div>
