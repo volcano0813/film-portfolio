@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0a08;
+  --bg: #050712;
   --film-black: #111110;
   --film-edge: #1a1a18;
   --canister-body: #2a2a28;
@@ -21,6 +21,9 @@
   --text-muted: #8a8680;
   --text-light: #c4beb6;
   --safety-red: #8B2500;
+  --tech-blue: #3a6cff;
+  --tech-cyan: #4de2ff;
+  --tech-violet: #7b5cff;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,14 +34,46 @@ html {
 }
 
 body {
-  background: var(--bg);
+  background: radial-gradient(circle at 0% 0%, #151827 0%, #050712 45%, #02030a 100%);
   color: var(--cream);
   font-family: 'DM Mono', monospace;
-  cursor: crosshair;
+  cursor: none;
   overflow-x: hidden;
+  position: relative;
 }
 
-/* ===== GRAIN OVERLAY ===== */
+@keyframes bg-orbit {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate3d(-2%, 1%, 0) scale(1.05);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate3d(2%, -1%, 0) scale(1.08);
+    opacity: 0.8;
+  }
+}
+
+/* ===== BG FLOW & GRAIN OVERLAY ===== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: -10%;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(61, 156, 255, 0.18) 0%, transparent 55%),
+    radial-gradient(circle at 80% 100%, rgba(123, 92, 255, 0.18) 0%, transparent 55%),
+    radial-gradient(circle at 10% 90%, rgba(77, 226, 255, 0.15) 0%, transparent 50%);
+  mix-blend-mode: screen;
+  opacity: 0.9;
+  filter: blur(4px);
+  animation: bg-orbit 18s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: -1;
+}
+
 body::after {
   content: '';
   position: fixed;
@@ -50,11 +85,84 @@ body::after {
   z-index: 9999;
 }
 
+/* ===== CUSTOM CURSOR (VIEWFINDER) ===== */
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 56px;
+  height: 56px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 1100;
+  transition: transform 0.08s ease-out, width 0.18s ease, height 0.18s ease, opacity 0.18s ease;
+  opacity: 0.9;
+}
+
+.cursor-ring::before,
+.cursor-ring::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    /* 左上角 */
+    linear-gradient(to right, var(--kodak-yellow), var(--kodak-yellow)) left 8px top 10px / 14px 2px no-repeat,
+    linear-gradient(to bottom, var(--kodak-yellow), var(--kodak-yellow)) left 10px top 8px / 2px 14px no-repeat,
+    /* 右上角 */
+    linear-gradient(to left, var(--kodak-yellow), var(--kodak-yellow)) right 8px top 10px / 14px 2px no-repeat,
+    linear-gradient(to bottom, var(--kodak-yellow), var(--kodak-yellow)) right 10px top 8px / 2px 14px no-repeat,
+    /* 左下角 */
+    linear-gradient(to right, var(--kodak-yellow), var(--kodak-yellow)) left 8px bottom 10px / 14px 2px no-repeat,
+    linear-gradient(to top, var(--kodak-yellow), var(--kodak-yellow)) left 10px bottom 8px / 2px 14px no-repeat,
+    /* 右下角 */
+    linear-gradient(to left, var(--kodak-yellow), var(--kodak-yellow)) right 8px bottom 10px / 14px 2px no-repeat,
+    linear-gradient(to top, var(--kodak-yellow), var(--kodak-yellow)) right 10px bottom 8px / 2px 14px no-repeat;
+}
+
+.cursor-ring::before {
+  opacity: 0.9;
+}
+
+.cursor-ring::after {
+  opacity: 0.4;
+}
+
+.cursor-ring.cursor-hover {
+  width: 42px;
+  height: 42px;
+  opacity: 1;
+}
+
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 2px;
+  background: var(--kodak-yellow);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 1101;
+  box-shadow:
+    0 0 8px rgba(245, 197, 24, 0.9),
+    0 0 16px rgba(245, 197, 24, 0.5);
+  transition: transform 0.08s ease-out;
+}
+
+@media (hover: none), (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+  .cursor-ring,
+  .cursor-dot {
+    display: none;
+  }
+}
+
 /* ===== HERO / CANISTER SECTION ===== */
 .hero {
   height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -66,11 +174,240 @@ body::after {
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(245,197,24,0.06) 0%, transparent 70%);
+  background:
+    radial-gradient(circle at 30% 20%, rgba(245,197,24,0.12) 0%, transparent 55%),
+    radial-gradient(circle at 70% 80%, rgba(77,226,255,0.14) 0%, transparent 60%);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
+}
+
+.hero-layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
+  padding: 0 80px;
+  max-width: 1100px;
+  width: 100%;
+}
+
+.hero-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.hero-photo-shell {
+  position: relative;
+  width: 240px;
+  max-width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(245,240,232,0.28);
+  box-shadow:
+    0 18px 45px rgba(0,0,0,0.65),
+    0 0 0 1px rgba(123,92,255,0.3);
+  background:
+    linear-gradient(135deg, rgba(245,197,24,0.09), transparent 55%),
+    linear-gradient(315deg, rgba(77,226,255,0.12), transparent 65%),
+    #12131f;
+}
+
+.hero-photo-shell::before {
+  content: 'ELIA · 36EXP';
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  padding: 2px 6px;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: rgba(0,0,0,0.5);
+  border-radius: 999px;
+  border: 1px solid rgba(245,240,232,0.24);
+  color: var(--text-light);
+}
+
+.hero-photo-shell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: screen;
+  opacity: 0.95;
+}
+
+.hero-photo-glow {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(245,197,24,0.35) 0%, transparent 50%),
+    radial-gradient(circle at 80% 100%, rgba(77,226,255,0.35) 0%, transparent 60%);
+  mix-blend-mode: screen;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.hero-photo-frame-code {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.7);
+  background: rgba(5,7,18,0.7);
+  border-radius: 999px;
+  padding: 2px 8px;
+  border: 1px solid rgba(123,92,255,0.5);
+}
+
+.hero-meta {
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hero-meta-school {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 12px;
+  color: var(--cream);
+  align-self: flex-start;
+  width: auto;
+}
+
+.hero-meta-school-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(5,7,18,0.9);
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(245,197,24,0.9);
+}
+
+.hero-meta-role {
+  font-size: 11px;
+  color: var(--text-light);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero-meta-line {
+  font-size: 12px;
+  color: var(--text-light);
+  line-height: 1.8;
+}
+
+.hero-meta-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--kodak-yellow);
+  margin-right: 10px;
+}
+
+.hero-name-cn {
+  margin-top: 18px;
+  font-family: 'Noto Serif SC', serif;
+  color: var(--cream);
+}
+
+.hero-name-cn-label {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--kodak-yellow);
+  margin-bottom: 4px;
+}
+
+.hero-name-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.hero-name-cn-text {
+  font-size: 20px;
+  letter-spacing: 0.24em;
+}
+
+.hero-profile-line {
+  margin-top: 2px;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+.hero-edu {
+  margin-top: 12px;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13px;
+  color: var(--text-light);
+  line-height: 1.8;
+}
+
+.hero-meta-section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--kodak-yellow);
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+.hero-signature {
+  margin-top: 10px;
+  font-family: 'Noto Serif SC', serif;
+  color: var(--text-light);
+}
+
+.hero-signature-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 4px;
+  color: var(--kodak-yellow);
+}
+
+.hero-signature-text {
+  display: inline-block;
+  min-height: 1.6em;
+  border-right: 1px solid rgba(196,190,182,0.8);
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  animation: signature-caret 0.9s steps(1) infinite;
+}
+
+@keyframes signature-caret {
+  0%, 49% { border-color: transparent; }
+  50%, 100% { border-color: rgba(196,190,182,0.9); }
+}
+
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
 }
 
 /* Film Canister */
@@ -218,16 +555,17 @@ body::after {
 
 /* Hero text */
 .hero-title {
-  margin-top: 48px;
-  text-align: center;
+  margin-top: 32px;
+  text-align: left;
 }
 
 .hero-title h1 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(32px, 5vw, 56px);
+  font-size: clamp(30px, 3.6vw, 44px);
   font-weight: 400;
   letter-spacing: 0.05em;
   color: var(--cream);
+  white-space: nowrap;
 }
 
 .hero-title h1 em {
@@ -674,6 +1012,104 @@ body::after {
 .film-frame:nth-child(3) { animation: film-enter 0.6s ease 0.5s both; }
 .film-frame:nth-child(4) { animation: film-enter 0.6s ease 0.65s both; }
 
+/* Shutter flash + HUD */
+.shutter-flash {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% 40%, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.4) 35%, transparent 80%);
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: screen;
+  transition: opacity 0.18s ease-out;
+  z-index: 1050;
+}
+
+.shutter-flash.active {
+  opacity: 1;
+}
+
+.camera-hud {
+  position: fixed;
+  inset: 18px 24px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1045;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(210,220,255,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.camera-hud-corner {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.camera-hud-line {
+  opacity: 0.8;
+}
+
+.camera-hud-center {
+  font-size: 9px;
+  opacity: 0.7;
+}
+
+.camera-hud.active {
+  animation: hud-fade 1s ease-out forwards;
+}
+
+@keyframes hud-fade {
+  0% { opacity: 0; transform: translateY(4px); }
+  20% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-2px); }
+}
+
+/* ===== GLITCH HOVER ON FILM FRAMES ===== */
+.film-frame {
+  transform-style: preserve-3d;
+}
+
+.film-frame-inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg,
+      rgba(255,0,80,0.18),
+      transparent 20%,
+      rgba(0,220,255,0.16),
+      transparent 60%,
+      rgba(120,80,255,0.18));
+  transition: opacity 0.18s ease;
+}
+
+.film-frame.glitch-hover-active .film-frame-inner::after {
+  opacity: 1;
+  animation: glitch-shift 480ms steps(2, end) infinite;
+}
+
+@keyframes glitch-shift {
+  0% { transform: translate3d(0,0,0); }
+  20% { transform: translate3d(-1px,-1px,0); }
+  40% { transform: translate3d(1px,1px,0); }
+  60% { transform: translate3d(-2px,1px,0); }
+  80% { transform: translate3d(2px,-1px,0); }
+  100% { transform: translate3d(0,0,0); }
+}
+
+/* ===== PARALLAX TILT ===== */
+.film-frame.tilt-active {
+  transition: transform 0.18s ease-out;
+}
+
 /* Canister pull interaction */
 .canister-group.pulling .film-tail {
   height: 120px !important;
@@ -691,38 +1127,89 @@ body::after {
 </style>
 </head>
 <body>
-
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="shutter-flash" id="shutterFlash"></div>
+<div class="camera-hud" id="cameraHud">
+  <div class="camera-hud-corner">
+    <div class="camera-hud-line">ISO 400</div>
+    <div class="camera-hud-line">F1.8</div>
+  </div>
+  <div class="camera-hud-center">ELIA · FILM ROLL · 36EXP</div>
+  <div class="camera-hud-corner" style="text-align:right;">
+    <div class="camera-hud-line">1/60 S</div>
+    <div class="camera-hud-line">REC ●</div>
+  </div>
+</div>
 <!-- ===== HERO ===== -->
 <section class="hero" id="hero">
   <div class="hero-ambient"></div>
-  
-  <div class="canister-group" id="canister" onclick="pullFilm()">
-    <div class="canister-cap"></div>
-    <div class="canister-body">
-      <div class="canister-label">
-        <div>
-          <div class="canister-label-brand">Elia · Portfolio</div>
-          <div class="canister-label-name">AI Works</div>
-          <div class="canister-label-sub">PROFESSIONAL AI PRODUCT COLLECTION</div>
+
+  <div class="hero-layout">
+    <div class="hero-profile">
+      <div class="hero-photo-shell">
+        <div class="hero-photo-glow"></div>
+        <!-- TODO: 替换为你的真实照片链接 -->
+        <img src="D:\volcano\Pictures\环球.jpg" alt="Elia portrait placeholder">
+        <div class="hero-photo-frame-code">THU · AI PM</div>
+      </div>
+      <div class="hero-name-cn">
+        <span class="hero-name-cn-label">name</span>
+        <div class="hero-name-row">
+          <span class="hero-name-cn-text">严梦灿</span>
+          <span class="hero-meta-school-tag">TSINGHUA</span>
         </div>
-        <div class="canister-label-bottom">
-          <div>
-            <div class="canister-label-iso">36</div>
-            <div class="canister-label-type">EXP 36 · 135</div>
-          </div>
-          <div class="canister-label-type">2024—25</div>
+        <div class="hero-profile-line">一个充满探索欲的人生体验派玩家🧩</div>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-edu">
+          <span class="hero-meta-section-label">Background</span><br>
+          硕士：清华大学，保研，2027届毕业生<br>
+          本科：北京林业大学（211），国家奖学金
+        </div>
+        <div class="hero-meta-line">
+          <span class="hero-meta-tag">AI skills</span>日常使用 OpenClaw 提升效率，深度使用 Cursor、Antigravity 等 Vibe Coding 工具搭建产品 demo。
+        </div>
+        <div class="hero-meta-line">
+          <span class="hero-meta-tag">English</span>IELTS 6.5，CET-6 560，具备优秀的英文阅读与沟通能力。
         </div>
       </div>
+      <div class="hero-signature">
+        <div class="hero-signature-label">signature</div><br>
+        <span class="hero-signature-text" id="heroSignatureText" data-full-text="AI是工具🛠️但不能替我们想象和表达。"></span>
+      </div>
     </div>
-    <div class="film-tail" id="filmTail"></div>
-  </div>
 
-  <div class="hero-title">
-    <h1>Elia's <em>Film Roll</em></h1>
-    <div class="hero-subtitle">AI 产品作品集 · 用胶片的方式讲故事</div>
-  </div>
+    <div class="hero-right">
+      <div class="canister-group magnetic-hover" id="canister" onclick="pullFilm()">
+        <div class="canister-cap"></div>
+        <div class="canister-body">
+          <div class="canister-label">
+            <div>
+              <div class="canister-label-brand">Elia · Portfolio</div>
+              <div class="canister-label-name">AI Works</div>
+              <div class="canister-label-sub">PROFESSIONAL AI PRODUCT COLLECTION</div>
+            </div>
+            <div class="canister-label-bottom">
+              <div>
+                <div class="canister-label-iso">36</div>
+                <div class="canister-label-type">EXP 36 · 135</div>
+              </div>
+              <div class="canister-label-type">2024—25</div>
+            </div>
+          </div>
+        </div>
+        <div class="film-tail" id="filmTail"></div>
+      </div>
 
-  <div class="hero-cta">↓ 点击胶片盒 · 拉出胶卷</div>
+      <div class="hero-title">
+        <h1>Elia's <em>Film Roll</em></h1>
+        <div class="hero-subtitle">AI 产品作品集 · 用胶片的方式讲故事</div>
+      </div>
+
+      <div class="hero-cta">↓ 点击胶片盒 · 拉出胶卷</div>
+    </div>
+  </div>
 </section>
 
 <!-- ===== FILM STRIP ===== -->
@@ -922,6 +1409,45 @@ body::after {
 </footer>
 
 <script>
+// Custom cursor: viewfinder style
+const cursorRing = document.getElementById('cursorRing');
+const cursorDot = document.getElementById('cursorDot');
+let cursorLocked = false;
+
+if (cursorRing && cursorDot) {
+  window.addEventListener('pointermove', (e) => {
+    if (cursorLocked) return;
+    const { clientX, clientY } = e;
+    cursorRing.style.transform = `translate(${clientX}px, ${clientY}px) translate(-50%, -50%)`;
+    cursorDot.style.transform = `translate(${clientX}px, ${clientY}px) translate(-50%, -50%)`;
+  });
+
+  document.querySelectorAll('.magnetic-hover, .film-frame, .about-link, .detail-close').forEach(el => {
+    el.addEventListener('pointerenter', () => {
+      cursorRing.classList.add('cursor-hover');
+    });
+    el.addEventListener('pointerleave', () => {
+      cursorRing.classList.remove('cursor-hover');
+    });
+  });
+}
+
+// Signature typing effect
+const signatureEl = document.getElementById('heroSignatureText');
+if (signatureEl) {
+  const fullText = signatureEl.getAttribute('data-full-text') || '';
+  let idx = 0;
+  const typeSpeed = 65;
+  function typeNext() {
+    if (idx <= fullText.length) {
+      signatureEl.textContent = fullText.slice(0, idx);
+      idx += 1;
+      setTimeout(typeNext, typeSpeed);
+    }
+  }
+  setTimeout(typeNext, 900);
+}
+
 // Pull film interaction
 let filmPulled = false;
 
@@ -930,8 +1456,18 @@ function pullFilm() {
   
   const canister = document.getElementById('canister');
   const filmTail = document.getElementById('filmTail');
+  const shutter = document.getElementById('shutterFlash');
+  const hud = document.getElementById('cameraHud');
   
   canister.classList.add('pulling');
+  if (shutter) {
+    shutter.classList.add('active');
+    setTimeout(() => shutter.classList.remove('active'), 240);
+  }
+  if (hud) {
+    hud.classList.add('active');
+    setTimeout(() => hud.classList.remove('active'), 1200);
+  }
   
   setTimeout(() => {
     canister.classList.add('pulled');
@@ -985,16 +1521,43 @@ document.querySelectorAll('.detail-overlay').forEach(overlay => {
   });
 });
 
-// Horizontal scroll with mouse wheel
+// Horizontal scroll with mouse wheel + parallax tilt + glitch
 const stripContainer = document.getElementById('filmStrip');
+const frames = document.querySelectorAll('.film-frame');
+
 if (stripContainer) {
   stripContainer.addEventListener('wheel', (e) => {
     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
       e.preventDefault();
       stripContainer.scrollLeft += e.deltaY * 2;
+      applyParallaxTilt();
     }
   }, { passive: false });
 }
+
+function applyParallaxTilt() {
+  const viewportWidth = window.innerWidth;
+  const containerRect = stripContainer.getBoundingClientRect();
+  frames.forEach(frame => {
+    const rect = frame.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const relative = (centerX - viewportWidth / 2) / (viewportWidth / 2);
+    const maxTilt = 6;
+    const tilt = -relative * maxTilt;
+    frame.classList.add('tilt-active');
+    frame.style.transform = `translateZ(0) rotateY(${tilt}deg)`;
+  });
+}
+
+frames.forEach(frame => {
+  frame.addEventListener('mouseenter', () => {
+    frame.classList.add('glitch-hover-active');
+  });
+  frame.addEventListener('mouseleave', () => {
+    frame.classList.remove('glitch-hover-active');
+    frame.style.transform = '';
+  });
+});
 </script>
 
 </body>
