@@ -33,6 +33,13 @@ html {
   scroll-behavior: smooth;
 }
 
+p {
+  letter-spacing: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+  white-space: normal;
+}
+
 body {
   background: radial-gradient(circle at 0% 0%, #151827 0%, #050712 45%, #02030a 100%);
   color: var(--cream);
@@ -270,7 +277,7 @@ body::after {
   margin-top: 22px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0;
 }
 
 .hero-meta-school {
@@ -308,13 +315,22 @@ body::after {
   line-height: 1.8;
 }
 
+.hero-meta-group {
+  margin-bottom: 1.5rem;
+}
+
+.hero-meta-group:last-child {
+  margin-bottom: 0;
+}
+
 .hero-meta-tag {
   font-family: 'DM Mono', monospace;
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--kodak-yellow);
-  margin-right: 10px;
+  display: block;
+  margin-bottom: 4px;
 }
 
 .hero-name-cn {
@@ -353,7 +369,7 @@ body::after {
 }
 
 .hero-edu {
-  margin-top: 12px;
+  margin-top: 0;
   font-family: 'Noto Serif SC', serif;
   font-size: 13px;
   color: var(--text-light);
@@ -366,12 +382,12 @@ body::after {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--kodak-yellow);
-  display: inline-block;
+  display: block;
   margin-bottom: 4px;
 }
 
 .hero-signature {
-  margin-top: 10px;
+  margin-top: 0;
   font-family: 'Noto Serif SC', serif;
   color: var(--text-light);
 }
@@ -381,7 +397,7 @@ body::after {
   font-size: 9px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  display: inline-block;
+  display: block;
   margin-bottom: 4px;
   color: var(--kodak-yellow);
 }
@@ -582,17 +598,23 @@ body::after {
 }
 
 .hero-cta {
-  margin-top: 40px;
-  font-size: 11px;
-  letter-spacing: 3px;
+  margin-bottom: 12px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--cream);
+  text-shadow: 0 0 20px rgba(255, 220, 150, 0.4);
+  border: 1px solid rgba(255, 220, 150, 0.5);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
   animation: pulse-down 2s ease-in-out infinite;
 }
 
 @keyframes pulse-down {
-  0%, 100% { transform: translateY(0); opacity: 0.5; }
-  50% { transform: translateY(8px); opacity: 1; }
+  0%, 100% { transform: translateY(0); opacity: 0.85; }
+  50% { transform: translateY(6px); opacity: 1; }
 }
 
 /* ===== FILM STRIP SECTION ===== */
@@ -703,19 +725,37 @@ body::after {
 
 /* Project-specific colors */
 .frame-jianghai .film-photo-bg {
-  background: linear-gradient(135deg, #1a2a3a 0%, #0d1b2a 40%, #1b3a4b 100%);
+  background: linear-gradient(135deg, #0a3d2e 0%, #1a6b50 40%, #1a3040 100%);
 }
 
 .frame-ideashu .film-photo-bg {
-  background: linear-gradient(135deg, #2a1a2e 0%, #1a0d2a 40%, #3b1a4b 100%);
+  background: linear-gradient(135deg, #2a0e12 0%, #4a1520 40%, #301a20 100%);
 }
 
 .frame-moodmix .film-photo-bg {
-  background: linear-gradient(135deg, #2a2218 0%, #1a1508 40%, #3b2a18 100%);
+  background: linear-gradient(135deg, #2a1525 0%, #3a1830 40%, #4a2040 100%);
 }
 
 .frame-about .film-photo-bg {
-  background: linear-gradient(135deg, #1a2a1a 0%, #0d1a0d 40%, #1b3b1b 100%);
+  background: linear-gradient(135deg, #1a1420 0%, #2a1838 40%, #3d2060 100%);
+}
+
+/* Frame tag brand colors */
+.frame-jianghai .film-caption-tag {
+  color: #5dcaa5;
+  border: 1px solid rgba(93,202,165,0.25);
+}
+.frame-ideashu .film-caption-tag {
+  color: #FF2442;
+  border: 1px solid rgba(255,36,66,0.25);
+}
+.frame-moodmix .film-caption-tag {
+  color: #d4a0c8;
+  border: 1px solid rgba(212,160,200,0.25);
+}
+.frame-about .film-caption-tag {
+  color: #a855f7;
+  border: 1px solid rgba(168,85,247,0.25);
 }
 
 /* Project icon/illustration inside frame */
@@ -833,9 +873,9 @@ body::after {
 }
 
 .detail-content {
-  max-width: 680px;
+  max-width: 780px;
   width: 90%;
-  padding: 60px 40px;
+  padding: 60px 36px;
   position: relative;
 }
 
@@ -882,10 +922,17 @@ body::after {
   font-size: 14px;
   line-height: 2;
   color: var(--text-light);
+  letter-spacing: normal;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 .detail-body p {
+  width: 100%;
+  max-width: none;
   margin-bottom: 20px;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .detail-tech {
@@ -920,8 +967,8 @@ body::after {
 
 /* ===== ABOUT SECTION ===== */
 .about-section {
-  padding: 100px 40px;
-  max-width: 680px;
+  padding: 100px 36px;
+  max-width: 780px;
   margin: 0 auto;
   text-align: center;
 }
@@ -938,7 +985,15 @@ body::after {
   font-size: 14px;
   line-height: 2;
   color: var(--text-light);
+  width: 100%;
+  max-width: none;
   margin-bottom: 16px;
+  margin-left: 0;
+  margin-right: 0;
+  letter-spacing: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+  white-space: normal;
 }
 
 .about-links {
@@ -1200,30 +1255,36 @@ body::after {
 }
 
 .jh-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 34px; font-weight: 300; letter-spacing: -0.5px; margin-bottom: 4px;
-  color: #f0ece4;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px; font-weight: 600; letter-spacing: 0.3px; margin-bottom: 20px;
+  color: #5dcaa5;
 }
 
 .jh-metrics {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
-  margin: 24px 0 28px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+  margin: 16px 0 16px;
 }
 
 .jh-metric-card {
   background: rgba(93,202,165,0.05); border: 1px solid rgba(93,202,165,0.08);
-  border-radius: 10px; padding: 14px 12px;
+  border-radius: 10px; padding: 10px 8px;
 }
 
 .jh-metric-val {
-  font-size: 24px; font-weight: 600; color: #5dcaa5;
+  font-size: 20px; font-weight: 600; color: #5dcaa5;
   font-family: 'DM Mono', monospace; margin-bottom: 2px; line-height: 1.1;
 }
 
 .jh-metric-label {
-  font-size: 9px; letter-spacing: 1px; color: #6e7080;
+  font-size: 8px; letter-spacing: 1px; color: #6e7080;
   text-transform: uppercase; line-height: 1.4;
   font-family: 'DM Mono', monospace;
+}
+
+@media (max-width: 1100px) {
+  .jh-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .jh-section-label {
@@ -1234,7 +1295,13 @@ body::after {
 .jh-body {
   font-family: 'Noto Serif SC', serif;
   font-size: 13px; line-height: 2; color: #b0aaa0;
-  margin-bottom: 24px; max-width: 620px;
+  width: 100%;
+  max-width: none;
+  margin-bottom: 24px;
+  letter-spacing: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+  white-space: normal;
 }
 
 .jh-hl { color: #9fe1cb; }
@@ -1304,6 +1371,953 @@ body::after {
   margin-top: 32px; font-size: 7px; letter-spacing: 3px;
   color: rgba(255,255,255,0.07); font-family: 'DM Mono', monospace; text-align: center;
 }
+
+/* ===== SPEAKFLOW DETAIL PAGE ===== */
+.detail-overlay--speakflow {
+  background: none;
+}
+
+.sf-page {
+  width: 100%;
+  max-width: 780px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #0c0e14;
+  border-radius: 16px;
+  position: relative;
+  scrollbar-width: none;
+}
+.sf-page::-webkit-scrollbar { display: none; }
+
+.sf-grain {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.035; pointer-events: none; z-index: 50; border-radius: 16px;
+}
+
+.sf-hero-grad {
+  position: absolute; top: 0; left: 0; right: 0; height: 320px;
+  background: linear-gradient(135deg, #1a1420 0%, #2a1838 40%, #3d2060 80%);
+  opacity: 0.1; pointer-events: none; border-radius: 16px 16px 0 0;
+}
+
+.sf-orb {
+  position: absolute; top: -60px; right: -40px; width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168,85,247,0.1) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.sf-content {
+  position: relative; z-index: 5; padding: 40px 36px 32px;
+}
+
+.sf-tag-row {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 2px;
+}
+
+.sf-tag {
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: #a855f7; font-family: 'DM Mono', monospace;
+}
+
+.sf-film-code {
+  font-size: 8px; letter-spacing: 2px; color: rgba(255,255,255,0.12);
+  font-family: 'DM Mono', monospace;
+}
+
+.sf-meta-row {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 4px; flex-wrap: wrap;
+}
+
+.sf-meta-item {
+  font-size: 15px; color: #f0ece4; font-weight: 600; font-family: 'Noto Serif SC', serif;
+}
+
+.sf-meta-sub {
+  font-size: 13px; color: #8a7fa0; font-weight: 400; font-family: 'Noto Serif SC', serif;
+}
+
+.sf-meta-dot {
+  width: 4px; height: 4px; border-radius: 50%; background: #a855f7;
+  flex-shrink: 0; opacity: 0.5;
+}
+
+.sf-sub {
+  font-size: 12px; color: #8a7fa0; line-height: 1.8; margin-bottom: 20px;
+  width: 100%;
+  max-width: none;
+  white-space: normal;
+}
+
+.sf-video-frame {
+  position: relative; width: 100%; aspect-ratio: 16/9;
+  background: #08090d; border-radius: 10px; overflow: hidden;
+  border: 1px solid rgba(168,85,247,0.1);
+}
+
+.sf-sprocket {
+  position: absolute; top: 0; width: 14px; height: 100%; z-index: 2;
+  background: repeating-linear-gradient(180deg, transparent 0px, transparent 5px, rgba(255,255,255,0.025) 5px, rgba(255,255,255,0.025) 14px, transparent 14px, transparent 19px);
+}
+
+.sf-sprocket-l { left: 0; }
+.sf-sprocket-r { right: 0; }
+
+.sf-video-inner {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+}
+
+.sf-video-inner video {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 10px;
+}
+
+.sf-video-code {
+  position: absolute; bottom: 8px; left: 28px;
+  font-size: 8px; letter-spacing: 2px; color: rgba(255,255,255,0.12);
+  font-family: 'DM Mono', monospace; z-index: 3;
+}
+
+.sf-video-time {
+  position: absolute; bottom: 8px; right: 28px;
+  font-size: 8px; letter-spacing: 2px; color: rgba(255,255,255,0.12);
+  font-family: 'DM Mono', monospace; z-index: 3;
+}
+
+.sf-tabs {
+  display: flex; gap: 0; margin-top: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.sf-tab {
+  flex: 1; padding: 13px 0; text-align: center;
+  font-size: 11px; letter-spacing: 1.5px; color: #6e7080;
+  font-family: 'DM Mono', monospace; cursor: none;
+  border-bottom: 2px solid transparent; transition: all 0.3s;
+}
+
+.sf-tab:hover { color: #b0aaa0; }
+.sf-tab.on { color: #a855f7; border-bottom-color: #a855f7; }
+
+.sf-panel {
+  display: none; padding: 24px 0 0;
+}
+
+.sf-panel.on { display: block; }
+
+.sf-panel-hint {
+  text-align: center; font-size: 12px; color: #6e7080;
+  line-height: 1.8; padding: 12px 30px; font-family: 'DM Mono', monospace;
+}
+
+.sf-sl {
+  font-size: 15px; font-weight: 600; color: #f0ece4;
+  margin-bottom: 12px; font-family: 'Noto Serif SC', serif;
+}
+
+.sf-sl span { color: #a855f7; }
+
+.sf-bd {
+  font-size: 13px; line-height: 2; color: #b0aaa0;
+  width: 100%;
+  max-width: none;
+  margin-bottom: 20px;
+  font-family: 'Noto Serif SC', serif;
+  letter-spacing: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+  white-space: normal;
+}
+
+.sf-hl { color: #c4b5fd; }
+.sf-hlp { color: #a855f7; font-weight: 500; }
+
+.sf-card-row-3 {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px; margin-bottom: 20px;
+}
+
+.sf-card {
+  background: rgba(168,85,247,0.04); border: 1px solid rgba(168,85,247,0.08);
+  border-radius: 10px; padding: 14px;
+}
+
+.sf-card-t {
+  font-size: 11px; font-weight: 600; color: #c4b5fd;
+  margin-bottom: 6px; font-family: 'DM Mono', monospace;
+}
+
+.sf-card-b {
+  font-size: 11px; color: #8a8690; line-height: 1.7;
+}
+
+.sf-card-b b { color: #b0aaa0; font-weight: 500; }
+
+.sf-scene-cards {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px; margin-bottom: 20px;
+}
+
+.sf-scene-card {
+  background: rgba(168,85,247,0.03); border: 1px solid rgba(168,85,247,0.06);
+  border-radius: 10px; padding: 12px;
+}
+
+.sf-scene-num {
+  font-size: 9px; color: #a855f7; font-family: 'DM Mono', monospace;
+  letter-spacing: 1px; margin-bottom: 4px;
+}
+
+.sf-scene-name {
+  font-size: 11px; font-weight: 600; color: #c4b5fd; margin-bottom: 4px;
+}
+
+.sf-scene-desc {
+  font-size: 10px; color: #8a8690; line-height: 1.6;
+}
+
+.sf-func-cards {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-bottom: 20px;
+}
+
+.sf-func-card {
+  background: rgba(168,85,247,0.03); border: 1px solid rgba(168,85,247,0.06);
+  border-radius: 10px; padding: 14px;
+}
+
+.sf-func-icon {
+  font-size: 9px; color: #a855f7; font-family: 'DM Mono', monospace;
+  letter-spacing: 1px; margin-bottom: 4px;
+}
+
+.sf-func-name {
+  font-size: 11px; font-weight: 600; color: #c4b5fd; margin-bottom: 5px;
+}
+
+.sf-func-desc {
+  font-size: 10px; color: #8a8690; line-height: 1.6;
+}
+
+.sf-arch-box {
+  background: rgba(255,255,255,0.015); border: 1px solid rgba(168,85,247,0.06);
+  border-radius: 10px; padding: 16px; margin-bottom: 16px;
+}
+
+.sf-arch-label {
+  font-size: 9px; color: #8a7fa0; font-family: 'DM Mono', monospace;
+  letter-spacing: 1.5px; margin-bottom: 8px;
+}
+
+.sf-arch-flow {
+  display: flex; align-items: center; justify-content: center;
+  gap: 6px; flex-wrap: wrap; font-size: 10px; font-family: 'DM Mono', monospace;
+}
+
+.sf-an {
+  padding: 6px 12px; border-radius: 5px; font-size: 10px; white-space: nowrap;
+}
+
+.sf-a-in {
+  background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.2); color: #c4b5fd;
+}
+
+.sf-a-mid {
+  background: rgba(96,165,250,0.08); border: 1px solid rgba(96,165,250,0.15); color: #93c5fd;
+}
+
+.sf-a-out {
+  background: rgba(168,85,247,0.06); border: 1px solid rgba(168,85,247,0.12); color: #a78bfa;
+}
+
+.sf-a-arr { color: rgba(168,85,247,0.3); }
+
+.sf-arch-note {
+  font-size: 10px; color: #6e7080; line-height: 1.6; margin-top: 12px;
+  font-family: 'Noto Serif SC', serif;
+}
+
+.sf-tags {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px;
+}
+
+.sf-tag-item {
+  font-size: 10px; color: #a855f7; border: 1px solid rgba(168,85,247,0.18);
+  padding: 3px 10px; border-radius: 3px; font-family: 'DM Mono', monospace;
+}
+
+.sf-film-bottom {
+  margin-top: 28px; font-size: 7px; letter-spacing: 3px;
+  color: rgba(255,255,255,0.06); font-family: 'DM Mono', monospace; text-align: center;
+}
+/* ===== IDEASHU DETAIL PAGE ===== */
+.detail-overlay--ideashu {
+  background: none;
+}
+
+.is-page {
+  width: 100%;
+  max-width: 780px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #0c0e14;
+  border-radius: 16px;
+  position: relative;
+  scrollbar-width: none;
+}
+.is-page::-webkit-scrollbar { display: none; }
+
+.is-grain {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n3'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n3)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.035; pointer-events: none; z-index: 50; border-radius: 16px;
+}
+
+.is-hero-grad {
+  position: absolute; top: 0; left: 0; right: 0; height: 320px;
+  background: linear-gradient(135deg, #2a0e12 0%, #4a1520 40%, #6e1a28 80%);
+  opacity: 0.12; pointer-events: none; border-radius: 16px 16px 0 0;
+}
+
+.is-orb {
+  position: absolute; top: -60px; right: -40px; width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,36,66,0.1) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.is-content {
+  position: relative; z-index: 5; padding: 40px 36px 32px;
+}
+
+.is-tag-row {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 2px;
+}
+
+.is-tag {
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: #FF2442; font-family: 'DM Mono', monospace;
+}
+
+.is-film-code {
+  font-size: 8px; letter-spacing: 2px; color: rgba(255,255,255,0.12);
+  font-family: 'DM Mono', monospace;
+}
+
+.is-meta-row {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 4px; flex-wrap: wrap;
+}
+
+.is-meta-item {
+  font-size: 15px; color: #f0ece4; font-weight: 600; font-family: 'Noto Serif SC', serif;
+}
+
+.is-meta-sub {
+  font-size: 13px; color: #a08080; font-weight: 400; font-family: 'Noto Serif SC', serif;
+}
+
+.is-meta-dot {
+  width: 4px; height: 4px; border-radius: 50%; background: #FF2442;
+  flex-shrink: 0; opacity: 0.5;
+}
+
+.is-sub {
+  font-size: 12px; color: #a08080; line-height: 1.8; margin-bottom: 20px;
+  width: 100%;
+  max-width: none;
+}
+
+.is-video-frame {
+  position: relative; width: 100%; aspect-ratio: 16/9;
+  background: #08090d; border-radius: 10px; overflow: hidden;
+  border: 1px solid rgba(255,36,66,0.1);
+}
+
+.is-sprocket {
+  position: absolute; top: 0; width: 14px; height: 100%; z-index: 2;
+  background: repeating-linear-gradient(180deg, transparent 0px, transparent 5px, rgba(255,255,255,0.025) 5px, rgba(255,255,255,0.025) 14px, transparent 14px, transparent 19px);
+}
+
+.is-sprocket-l { left: 0; }
+.is-sprocket-r { right: 0; }
+
+.is-video-inner {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+}
+
+.is-video-inner video {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 10px;
+}
+
+.is-video-code {
+  position: absolute; bottom: 8px; left: 28px;
+  font-size: 8px; letter-spacing: 2px; color: rgba(255,255,255,0.12);
+  font-family: 'DM Mono', monospace; z-index: 3;
+}
+
+.is-video-time {
+  position: absolute; bottom: 8px; right: 28px;
+  font-size: 8px; letter-spacing: 2px; color: rgba(255,255,255,0.12);
+  font-family: 'DM Mono', monospace; z-index: 3;
+}
+
+.is-tabs {
+  display: flex; gap: 0; margin-top: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.is-tab {
+  flex: 1; padding: 13px 0; text-align: center;
+  font-size: 11px; letter-spacing: 1.5px; color: #6e7080;
+  font-family: 'DM Mono', monospace; cursor: none;
+  border-bottom: 2px solid transparent; transition: all 0.3s;
+}
+
+.is-tab:hover { color: #b0aaa0; }
+.is-tab.on { color: #FF2442; border-bottom-color: #FF2442; }
+
+.is-panel {
+  display: none; padding: 24px 0 0;
+}
+
+.is-panel.on { display: block; }
+
+.is-panel-hint {
+  text-align: center; font-size: 12px; color: #6e7080;
+  line-height: 1.8; padding: 12px 30px; font-family: 'DM Mono', monospace;
+}
+
+.is-sl {
+  font-size: 15px; font-weight: 600; color: #f0ece4;
+  margin-bottom: 12px; font-family: 'Noto Serif SC', serif;
+}
+
+.is-sl span { color: #FF2442; }
+
+.is-bd {
+  font-size: 13px; line-height: 2; color: #b0aaa0;
+  width: 100%;
+  max-width: none;
+  margin-bottom: 20px;
+  font-family: 'Noto Serif SC', serif;
+  letter-spacing: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+  white-space: normal;
+}
+
+.is-hl { color: #ff9090; }
+.is-hlr { color: #FF2442; font-weight: 500; }
+
+.is-card-row-2 {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-bottom: 20px;
+}
+
+.is-card {
+  background: rgba(255,36,66,0.03); border: 1px solid rgba(255,36,66,0.07);
+  border-radius: 10px; padding: 14px;
+}
+
+.is-card-t {
+  font-size: 11px; font-weight: 600; color: #ff9090;
+  margin-bottom: 6px; font-family: 'DM Mono', monospace;
+}
+
+.is-card-b {
+  font-size: 11px; color: #8a8690; line-height: 1.7;
+}
+
+.is-card-b b { color: #b0aaa0; font-weight: 500; }
+
+.is-agent-cards {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 8px; margin-bottom: 20px;
+}
+
+.is-agent-card {
+  background: rgba(255,36,66,0.03); border: 1px solid rgba(255,36,66,0.06);
+  border-radius: 8px; padding: 10px; text-align: center;
+}
+
+.is-agent-num {
+  font-size: 8px; color: #FF2442; font-family: 'DM Mono', monospace;
+  letter-spacing: 1px; margin-bottom: 3px;
+}
+
+.is-agent-name {
+  font-size: 10px; font-weight: 600; color: #ff9090; margin-bottom: 2px;
+}
+
+.is-agent-role {
+  font-size: 9px; color: #8a8690; line-height: 1.4; margin-bottom: 3px;
+}
+
+.is-agent-model {
+  font-size: 9px; color: #6e7080; font-family: 'DM Mono', monospace;
+}
+
+.is-diff-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-bottom: 20px;
+}
+
+.is-diff-card {
+  background: rgba(255,36,66,0.025); border: 1px solid rgba(255,36,66,0.06);
+  border-radius: 10px; padding: 14px;
+}
+
+.is-diff-label {
+  font-size: 9px; color: #FF2442; font-family: 'DM Mono', monospace;
+  letter-spacing: 1px; margin-bottom: 6px;
+}
+
+.is-diff-title {
+  font-size: 11px; font-weight: 600; color: #ff9090; margin-bottom: 5px;
+}
+
+.is-diff-desc {
+  font-size: 10px; color: #8a8690; line-height: 1.6;
+}
+
+.is-func-cards {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-bottom: 20px;
+}
+
+.is-func-card {
+  background: rgba(255,36,66,0.03); border: 1px solid rgba(255,36,66,0.06);
+  border-radius: 10px; padding: 14px;
+}
+
+.is-func-icon {
+  font-size: 9px; color: #FF2442; font-family: 'DM Mono', monospace;
+  letter-spacing: 1px; margin-bottom: 4px;
+}
+
+.is-func-name {
+  font-size: 11px; font-weight: 600; color: #ff9090; margin-bottom: 5px;
+}
+
+.is-func-desc {
+  font-size: 10px; color: #8a8690; line-height: 1.6;
+}
+
+.is-arch-box {
+  background: rgba(255,255,255,0.015); border: 1px solid rgba(255,36,66,0.06);
+  border-radius: 10px; padding: 16px; margin-bottom: 16px;
+}
+
+.is-arch-label {
+  font-size: 9px; color: #a08080; font-family: 'DM Mono', monospace;
+  letter-spacing: 1.5px; margin-bottom: 8px;
+}
+
+.is-arch-flow {
+  display: flex; align-items: center; justify-content: center;
+  gap: 5px; flex-wrap: wrap; font-size: 10px; font-family: 'DM Mono', monospace;
+}
+
+.is-an {
+  padding: 5px 10px; border-radius: 5px; font-size: 10px; white-space: nowrap;
+}
+
+.is-a-in {
+  background: rgba(255,36,66,0.1); border: 1px solid rgba(255,36,66,0.2); color: #ff9090;
+}
+
+.is-a-mid {
+  background: rgba(255,160,80,0.08); border: 1px solid rgba(255,160,80,0.15); color: #ffc090;
+}
+
+.is-a-out {
+  background: rgba(255,36,66,0.06); border: 1px solid rgba(255,36,66,0.12); color: #ff7070;
+}
+
+.is-a-arr { color: rgba(255,36,66,0.3); }
+
+.is-arch-note {
+  font-size: 10px; color: #6e7080; line-height: 1.7; margin-top: 12px;
+  font-family: 'Noto Serif SC', serif;
+}
+
+.is-metrics {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 10px; margin-top: 16px;
+}
+
+.is-metric {
+  background: rgba(255,36,66,0.04); border: 1px solid rgba(255,36,66,0.07);
+  border-radius: 8px; padding: 12px;
+}
+
+.is-metric-val {
+  font-size: 20px; font-weight: 600; color: #FF2442;
+  font-family: 'DM Mono', monospace;
+}
+
+.is-metric-lbl {
+  font-size: 9px; color: #6e7080; letter-spacing: 1px; margin-top: 2px;
+  font-family: 'DM Mono', monospace;
+}
+
+.is-tags {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px;
+}
+
+.is-tag-item {
+  font-size: 10px; color: #FF2442; border: 1px solid rgba(255,36,66,0.18);
+  padding: 3px 10px; border-radius: 3px; font-family: 'DM Mono', monospace;
+}
+
+.is-film-bottom {
+  margin-top: 28px; font-size: 7px; letter-spacing: 3px;
+  color: rgba(255,255,255,0.06); font-family: 'DM Mono', monospace; text-align: center;
+}
+/* ===== MOODMIX DETAIL PAGE ===== */
+.detail-overlay--moodmix {
+  background: none;
+}
+
+.mm-page {
+  width: 100%;
+  max-width: 780px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #0c0e14;
+  border-radius: 16px;
+  position: relative;
+  scrollbar-width: none;
+}
+.mm-page::-webkit-scrollbar { display: none; }
+
+.mm-grain {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n4'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n4)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.03; pointer-events: none; z-index: 50; border-radius: 16px;
+}
+
+.mm-hero-grad {
+  position: absolute; top: 0; left: 0; right: 0; height: 400px;
+  background: linear-gradient(135deg, #1a1828 0%, #201828 20%, #281a2a 40%, #2a1820 60%, #1e1a28 100%);
+  opacity: 0.18; pointer-events: none; border-radius: 16px 16px 0 0;
+}
+
+.mm-orb1 {
+  position: absolute; top: -40px; left: -30px; width: 360px; height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(160,170,210,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.mm-orb2 {
+  position: absolute; top: 60px; right: -60px; width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(210,170,170,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.mm-content {
+  position: relative; z-index: 5; padding: 40px 36px 32px;
+}
+
+.mm-tag-row {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 2px;
+}
+
+.mm-tag {
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: #d4a0c8; font-family: 'DM Mono', monospace;
+}
+
+.mm-film-code {
+  font-size: 8px; letter-spacing: 2px; color: rgba(255,255,255,0.12);
+  font-family: 'DM Mono', monospace;
+}
+
+.mm-hero-split {
+  display: grid; grid-template-columns: 200px 1fr;
+  gap: 28px; align-items: start; margin-bottom: 4px;
+}
+
+.mm-vf-vert {
+  position: relative; width: 200px; aspect-ratio: 9/16;
+  background: #0a0a10; border-radius: 12px; overflow: hidden;
+  border: 1px solid rgba(212,160,200,0.1); flex-shrink: 0;
+}
+
+.mm-sprocket {
+  position: absolute; width: 100%; height: 12px; z-index: 2;
+  background: repeating-linear-gradient(90deg, transparent 0px, transparent 5px, rgba(255,255,255,0.02) 5px, rgba(255,255,255,0.02) 14px, transparent 14px, transparent 19px);
+}
+
+.mm-sprocket-t { top: 0; }
+.mm-sprocket-b { bottom: 0; }
+
+.mm-video-inner {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  display: block;
+}
+
+.mm-video-inner video {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 12px;
+}
+
+.mm-video-code {
+  position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+  font-size: 7px; letter-spacing: 2px; color: rgba(255,255,255,0.1);
+  font-family: 'DM Mono', monospace; z-index: 3; white-space: nowrap;
+}
+
+.mm-hero-info {
+  display: flex; flex-direction: column; justify-content: center; padding-top: 8px;
+}
+
+.mm-hero-name {
+  font-size: 18px; color: #f0ece4; font-weight: 600;
+  font-family: 'Noto Serif SC', serif; margin-bottom: 2px;
+}
+
+.mm-hero-sub {
+  font-size: 13px; color: #a890a0; font-family: 'Noto Serif SC', serif; margin-bottom: 14px;
+}
+
+.mm-hero-desc {
+  font-size: 12px; color: #a890a0; line-height: 1.9; margin-bottom: 18px; max-width: 420px;
+}
+
+.mm-hero-quote {
+  font-size: 13px; color: #d8b0c8; font-style: italic;
+  font-family: 'Noto Serif SC', serif;
+  padding: 12px 16px; border-left: 2px solid rgba(212,160,200,0.2);
+  margin-bottom: 16px; line-height: 1.7;
+}
+
+.mm-hero-tags {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+
+.mm-hero-tag-item {
+  font-size: 9px; color: #d4a0c8; border: 1px solid rgba(212,160,200,0.15);
+  padding: 3px 10px; border-radius: 20px; font-family: 'DM Mono', monospace;
+}
+
+.mm-tabs {
+  display: flex; gap: 0; margin-top: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.mm-tab {
+  flex: 1; padding: 13px 0; text-align: center;
+  font-size: 11px; letter-spacing: 1.5px; color: #6e7080;
+  font-family: 'DM Mono', monospace; cursor: none;
+  border-bottom: 2px solid transparent; transition: all 0.3s;
+}
+
+.mm-tab:hover { color: #b0aaa0; }
+.mm-tab.on { color: #d4a0c8; border-bottom-color: #d4a0c8; }
+
+.mm-panel {
+  display: none; padding: 24px 0 0;
+}
+
+.mm-panel.on { display: block; }
+
+.mm-panel-hint {
+  text-align: center; font-size: 12px; color: #6e7080;
+  line-height: 1.8; padding: 12px 30px; font-family: 'DM Mono', monospace;
+}
+
+.mm-sl {
+  font-size: 15px; font-weight: 600; color: #f0ece4;
+  margin-bottom: 12px; font-family: 'Noto Serif SC', serif;
+}
+
+.mm-sl span { color: #d4a0c8; }
+
+.mm-bd {
+  font-size: 13px; line-height: 2; color: #b0aaa0;
+  margin-bottom: 20px; max-width: 620px; font-family: 'Noto Serif SC', serif;
+}
+
+.mm-hl { color: #e8c0d8; }
+.mm-hlg { color: #d4a0c8; font-weight: 500; }
+
+.mm-card-row-3 {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px; margin-bottom: 20px;
+}
+
+.mm-card {
+  background: rgba(212,160,200,0.03); border: 1px solid rgba(212,160,200,0.06);
+  border-radius: 10px; padding: 14px;
+}
+
+.mm-card-t {
+  font-size: 11px; font-weight: 600; color: #e8c0d8;
+  margin-bottom: 6px; font-family: 'DM Mono', monospace;
+}
+
+.mm-card-t-accent {
+  font-size: 11px; font-weight: 600; color: #d4a0c8;
+  margin-bottom: 6px; font-family: 'DM Mono', monospace;
+}
+
+.mm-card-b {
+  font-size: 11px; color: #8a8690; line-height: 1.7;
+}
+
+.mm-card-b b { color: #b0aaa0; font-weight: 500; }
+
+.mm-flow-box {
+  background: rgba(255,255,255,0.015); border: 1px solid rgba(212,160,200,0.06);
+  border-radius: 10px; padding: 18px; margin-bottom: 20px;
+}
+
+.mm-flow-row {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; flex-wrap: wrap; font-family: 'DM Mono', monospace; font-size: 10px;
+}
+
+.mm-fn {
+  padding: 8px 14px; border-radius: 6px; font-size: 11px; white-space: nowrap;
+}
+
+.mm-fn-in {
+  background: rgba(212,160,200,0.1); border: 1px solid rgba(212,160,200,0.2); color: #e8c0d8;
+}
+
+.mm-fn-mid {
+  background: rgba(212,160,200,0.05); border: 1px solid rgba(212,160,200,0.12); color: #d4a0c8;
+}
+
+.mm-fn-out {
+  background: rgba(212,160,200,0.08); border: 1px solid rgba(212,160,200,0.15); color: #e8c0d8;
+}
+
+.mm-fa { color: rgba(212,160,200,0.3); }
+
+.mm-agent-cards {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 8px; margin-bottom: 20px;
+}
+
+.mm-agent-card {
+  background: rgba(212,160,200,0.03); border: 1px solid rgba(212,160,200,0.06);
+  border-radius: 8px; padding: 10px; text-align: center;
+}
+
+.mm-agent-num {
+  font-size: 8px; color: #d4a0c8; font-family: 'DM Mono', monospace;
+  letter-spacing: 1px; margin-bottom: 3px;
+}
+
+.mm-agent-name {
+  font-size: 10px; font-weight: 600; color: #e8c0d8; margin-bottom: 2px;
+}
+
+.mm-agent-role {
+  font-size: 9px; color: #8a8690; line-height: 1.4; margin-bottom: 3px;
+}
+
+.mm-agent-model {
+  font-size: 9px; color: #6e7080; font-family: 'DM Mono', monospace;
+}
+
+.mm-func-cards {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-bottom: 20px;
+}
+
+.mm-func-card {
+  background: rgba(212,160,200,0.03); border: 1px solid rgba(212,160,200,0.06);
+  border-radius: 10px; padding: 14px;
+}
+
+.mm-func-icon {
+  font-size: 9px; color: #d4a0c8; font-family: 'DM Mono', monospace;
+  letter-spacing: 1px; margin-bottom: 4px;
+}
+
+.mm-func-name {
+  font-size: 11px; font-weight: 600; color: #e8c0d8; margin-bottom: 5px;
+}
+
+.mm-func-desc {
+  font-size: 10px; color: #8a8690; line-height: 1.6;
+}
+
+.mm-arch-box {
+  background: rgba(255,255,255,0.015); border: 1px solid rgba(212,160,200,0.06);
+  border-radius: 10px; padding: 16px; margin-bottom: 16px;
+}
+
+.mm-arch-label {
+  font-size: 9px; color: #a890a0; font-family: 'DM Mono', monospace;
+  letter-spacing: 1.5px; margin-bottom: 8px;
+}
+
+.mm-arch-flow {
+  display: flex; align-items: center; justify-content: center;
+  gap: 5px; flex-wrap: wrap; font-size: 10px; font-family: 'DM Mono', monospace;
+}
+
+.mm-an {
+  padding: 5px 10px; border-radius: 5px; font-size: 10px; white-space: nowrap;
+}
+
+.mm-a-in {
+  background: rgba(212,160,200,0.1); border: 1px solid rgba(212,160,200,0.2); color: #e8c0d8;
+}
+
+.mm-a-mid {
+  background: rgba(160,150,190,0.08); border: 1px solid rgba(160,150,190,0.15); color: #c0b0d8;
+}
+
+.mm-a-out {
+  background: rgba(212,160,200,0.06); border: 1px solid rgba(212,160,200,0.12); color: #d4a0c8;
+}
+
+.mm-a-arr { color: rgba(212,160,200,0.3); }
+
+.mm-arch-note {
+  font-size: 10px; color: #6e7080; line-height: 1.7; margin-top: 12px;
+  font-family: 'Noto Serif SC', serif;
+}
+
+.mm-metrics {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 10px; margin-top: 16px;
+}
+
+.mm-metric {
+  background: rgba(212,160,200,0.04); border: 1px solid rgba(212,160,200,0.07);
+  border-radius: 8px; padding: 12px;
+}
+
+.mm-metric-val {
+  font-size: 20px; font-weight: 600; color: #d4a0c8;
+  font-family: 'DM Mono', monospace;
+}
+
+.mm-metric-lbl {
+  font-size: 9px; color: #6e7080; letter-spacing: 1px; margin-top: 2px;
+  font-family: 'DM Mono', monospace;
+}
+
+.mm-tags {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px;
+}
+
+.mm-tag-item {
+  font-size: 10px; color: #d4a0c8; border: 1px solid rgba(212,160,200,0.18);
+  padding: 3px 10px; border-radius: 3px; font-family: 'DM Mono', monospace;
+}
+
+.mm-film-bottom {
+  margin-top: 28px; font-size: 7px; letter-spacing: 3px;
+  color: rgba(255,255,255,0.06); font-family: 'DM Mono', monospace; text-align: center;
+}
 </style>
 </head>
 <body>
@@ -1342,25 +2356,29 @@ body::after {
         <div class="hero-profile-line">一个充满探索欲的人生体验派玩家🧩</div>
       </div>
       <div class="hero-meta">
-        <div class="hero-edu">
-          <span class="hero-meta-section-label">Background</span><br>
+        <div class="hero-meta-group hero-edu">
+          <span class="hero-meta-section-label">Background</span>
           硕士：清华大学，保研，2027届毕业生<br>
           本科：北京林业大学（211），国家奖学金
         </div>
-        <div class="hero-meta-line">
-          <span class="hero-meta-tag">AI skills</span>日常使用 OpenClaw 提升效率，深度使用 Cursor、Antigravity 等 Vibe Coding 工具搭建产品 demo。
+        <div class="hero-meta-group hero-meta-line">
+          <span class="hero-meta-tag">AI skills</span>
+          日常使用 OpenClaw 提升效率，<br>
+          深度使用 Cursor、Antigravity 等 Vibe Coding 工具搭建产品 demo。
         </div>
-        <div class="hero-meta-line">
-          <span class="hero-meta-tag">English</span>IELTS 6.5，CET-6 560，具备优秀的英文阅读与沟通能力。
+        <div class="hero-meta-group hero-meta-line">
+          <span class="hero-meta-tag">English</span>
+          IELTS 6.5，CET-6 560，具备优秀的英文阅读与沟通能力。
         </div>
       </div>
-      <div class="hero-signature">
-        <div class="hero-signature-label">signature</div><br>
+      <div class="hero-meta-group hero-signature">
+        <div class="hero-signature-label">signature</div>
         <span class="hero-signature-text" id="heroSignatureText" data-full-text="AI是工具🛠️但不能替我们想象和表达。"></span>
       </div>
     </div>
 
     <div class="hero-right">
+      <div class="hero-cta">↓ 点击胶片盒 · 拉出胶卷</div>
       <div class="canister-group magnetic-hover" id="canister" onclick="pullFilm()">
         <div class="canister-cap"></div>
         <div class="canister-body">
@@ -1386,8 +2404,6 @@ body::after {
         <h1>Elia's <em>Film Roll</em></h1>
         <div class="hero-subtitle">AI 产品作品集 · 用胶片的方式讲故事</div>
       </div>
-
-      <div class="hero-cta">↓ 点击胶片盒 · 拉出胶卷</div>
     </div>
   </div>
 </section>
@@ -1420,7 +2436,7 @@ body::after {
         <div class="film-caption">
           <div class="film-caption-title">疆海 AI 客服系统</div>
           <div class="film-caption-desc">多语言级联调度架构<br>从FAQ缓存到Agent重链的智能路由</div>
-          <div class="film-caption-tag">LangGraph · RAG · Multi-Agent</div>
+          <div class="film-caption-tag">实习项目 · 广州疆海科技</div>
         </div>
       </div>
 
@@ -1439,8 +2455,8 @@ body::after {
         </div>
         <div class="film-caption">
           <div class="film-caption-title">IdeaShu 灵感书</div>
-          <div class="film-caption-desc">小红书AI内容创作工作台<br>5节点CrewAI多智能体流水线</div>
-          <div class="film-caption-tag">CrewAI · ChromaDB · GLM-4</div>
+          <div class="film-caption-desc">小红书AI内容创作工作台<br>5-Agent · 风格定制化</div>
+          <div class="film-caption-tag">个人项目 · Vibe Coding</div>
         </div>
       </div>
 
@@ -1451,16 +2467,16 @@ body::after {
           <div class="film-photo">
             <div class="film-photo-bg">
               <div class="project-icon">
-                情<br>调
+                Mood<br>Mix
               </div>
             </div>
           </div>
           <div class="film-frame-number">→3  3A</div>
         </div>
         <div class="film-caption">
-          <div class="film-caption-title">MoodMix 情绪调饮</div>
-          <div class="film-caption-desc">东方哲学驱动的情绪饮品推荐<br>五行·阴阳·时辰语义桥接</div>
-          <div class="film-caption-tag">React · 五行 · Cosine Similarity</div>
+          <div class="film-caption-title">喝一杯 MoodMix</div>
+          <div class="film-caption-desc">说出心境 · AI 推荐那一杯<br>东方哲学做语义桥梁</div>
+          <div class="film-caption-tag">个人项目 · Vibe Coding</div>
         </div>
       </div>
 
@@ -1471,16 +2487,16 @@ body::after {
           <div class="film-photo">
             <div class="film-photo-bg">
               <div class="project-icon">
-                关<br>于
+                Speak<br>Flow
               </div>
             </div>
           </div>
           <div class="film-frame-number">→E  END</div>
         </div>
         <div class="film-caption">
-          <div class="film-caption-title">关于 Elia</div>
-          <div class="film-caption-desc">清华大学 · 环境科学 × AI产品<br>价值发现 · 方案转化 · 驱动迭代</div>
-          <div class="film-caption-tag">AI PM · Tsinghua</div>
+          <div class="film-caption-title">SpeakFlow</div>
+          <div class="film-caption-desc">IELTS AI Speaking Partner<br>结构化评分 · 逐句纠错</div>
+          <div class="film-caption-tag">个人项目 · Vibe Coding</div>
         </div>
       </div>
 
@@ -1516,12 +2532,6 @@ body::after {
         <span class="jh-meta-item">2025.07 — 2025.10</span>
       </div>
       <h2 class="jh-title">AI 客服系统</h2>
-      <div class="jh-metrics">
-        <div class="jh-metric-card"><div class="jh-metric-val">&gt;40%</div><div class="jh-metric-label">AI接管率</div></div>
-        <div class="jh-metric-card"><div class="jh-metric-val">80%+</div><div class="jh-metric-label">回复准确率</div></div>
-        <div class="jh-metric-card"><div class="jh-metric-val">+15%</div><div class="jh-metric-label">满意度同比</div></div>
-        <div class="jh-metric-card"><div class="jh-metric-val">-25%</div><div class="jh-metric-label">人均处理时长</div></div>
-      </div>
       <div class="jh-section-label"><span style="color:#5dcaa5;">◆</span> 工作概述</div>
       <div class="jh-body">重点参与公司出海业务AI智能客服体系<span class="jh-hl">从0到1</span>的搭建。围绕<span class="jh-hl">大促人力过载</span>、<span class="jh-hl">跨国语言壁垒</span>、<span class="jh-hl">产品知识更新滞后</span>三大痛点，设计并落地<span class="jh-hl-green">「RAG + 多Agent协同」</span>的分层智能客服架构，黑五大促前完成灰度上线。</div>
       <div class="jh-section-label"><span style="color:#5dcaa5;">◆</span> 级联调度架构</div>
@@ -1540,73 +2550,548 @@ body::after {
         <div class="jh-flow-row" style="margin-top:8px;"><span class="jh-flow-arrow">↓</span></div>
         <div class="jh-flow-row"><div class="jh-flow-node jh-flow-judge">LLM-as-Judge · 忠实度 · 准确度 · 相关性 · 安全性</div></div>
       </div>
+      <div class="jh-section-label"><span style="color:#5dcaa5;">◆</span> 核心成果</div>
+      <div class="jh-metrics">
+        <div class="jh-metric-card"><div class="jh-metric-val">&gt;40%</div><div class="jh-metric-label">AI接管率</div></div>
+        <div class="jh-metric-card"><div class="jh-metric-val">80%+</div><div class="jh-metric-label">回复准确率</div></div>
+        <div class="jh-metric-card"><div class="jh-metric-val">+15%</div><div class="jh-metric-label">满意度同比</div></div>
+        <div class="jh-metric-card"><div class="jh-metric-val">-25%</div><div class="jh-metric-label">人均处理时长</div></div>
+      </div>
       <div class="jh-film-bottom">▪ ▪ ▪ KODAK 5219 ▪ ▪ ▪ PORTRA 400 ▪ ▪ ▪ PROCESS C-41 ▪ ▪ ▪</div>
     </div>
   </div>
 </div>
 
-<div class="detail-overlay" id="detail-ideashu">
-  <div class="detail-content">
-    <button class="detail-close" onclick="closeDetail('ideashu')">✕ CLOSE</button>
-    <div class="detail-header">
-      <div class="detail-tag">Exposure 02 — 个人项目</div>
-      <h2>IdeaShu 灵感书</h2>
-    </div>
-    <div class="detail-body">
-      <p>基于CrewAI搭建的小红书AI内容创作工作台，5节点多智能体流水线。Agent 1使用GLM-4.7通过SiliconFlow做多工具编排（SerperDevTool、JinaReaderTool、YoutubeVideoSearchTool等），Agent 2-5使用Qwen2.5-7B-Instruct控制成本。</p>
-      <p>引入ChromaDB做语义去重（余弦相似度阈值0.85），增量式风格学习通过异步diff分析实现——每10条记录触发一次System Prompt重构。Prompt Caching进一步优化了token消耗。</p>
-      <p>核心指标：95%+溯源成功率，34% token成本降低，50%生成时间缩短，修改率从35%降至14%。</p>
-    </div>
-    <div class="detail-tech">
-      <div class="detail-tech-label">Tech Stack</div>
-      <div class="detail-tech-items">
-        <span class="detail-tech-item">CrewAI</span>
-        <span class="detail-tech-item">GLM-4.7</span>
-        <span class="detail-tech-item">ChromaDB</span>
-        <span class="detail-tech-item">Qwen2.5-7B</span>
-        <span class="detail-tech-item">SiliconFlow</span>
-        <span class="detail-tech-item">Prompt Cache</span>
+<div class="detail-overlay detail-overlay--ideashu" id="detail-ideashu">
+  <div class="is-page">
+    <div class="is-grain"></div>
+    <div class="is-hero-grad"></div>
+    <div class="is-orb"></div>
+    <button class="detail-close" onclick="closeDetail('ideashu')" style="position:absolute;top:20px;right:24px;z-index:10;">✕ CLOSE</button>
+    <div class="is-content">
+      <div class="is-tag-row">
+        <span class="is-tag">Exposure 02 — personal project</span>
+        <span class="is-film-code">KODAK 5219 ▪ EXP 02</span>
       </div>
+      <div class="is-meta-row">
+        <span class="is-meta-item">IdeaShu 灵感书</span>
+        <span class="is-meta-dot"></span>
+        <span class="is-meta-sub">小红书 AI 图文创作工作台</span>
+      </div>
+      <div class="is-sub">打通「一手信息获取」到「可发布内容」的全链路。将资讯采集、溯源去重、风格化改写、封面生成压缩到 60 秒，同时通过增量学习机制让输出越用越像你自己的风格。</div>
+
+      <div class="is-video-frame">
+        <div class="is-sprocket is-sprocket-l"></div>
+        <div class="is-sprocket is-sprocket-r"></div>
+        <div class="is-video-inner">
+          <video controls preload="metadata">
+            <source src="ideashu.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="is-video-code">IDEASHU ▪ CREWAI ▪ 2025</div>
+        <div class="is-video-time">02:45</div>
+      </div>
+
+      <div class="is-tabs">
+        <div class="is-tab on" onclick="isTab(0)">▶ 视频演示</div>
+        <div class="is-tab" onclick="isTab(1)">◆ 痛点 &amp; 方案</div>
+        <div class="is-tab" onclick="isTab(2)">◆ 架构 &amp; 成果</div>
+      </div>
+
+      <div class="is-panel on" id="isp0">
+        <div class="is-panel-hint">▲ 点击上方播放键观看完整产品 Demo</div>
+      </div>
+
+      <div class="is-panel" id="isp1">
+        <div class="is-sl"><span>◆</span> 核心痛点</div>
+        <div class="is-bd">自己做 AI 内容创作时发现链路极长——手动刷资讯、筛选题、写文案、做封面，费时费力；直接用 AI 生成又缺少人味，网友一眼能识别。调研 + 访谈后提炼出两个核心痛点：</div>
+        <div class="is-card-row-2">
+          <div class="is-card">
+            <div class="is-card-t">✕ 资讯获取滞后</div>
+            <div class="is-card-b">一手信息散落在 <b>arXiv、GitHub、X、YouTube</b> 等平台，普通创作者无法每天稳定聚合；依赖二手转述导致内容同质化、时效性差，错过<b>黄金流量窗口</b></div>
+          </div>
+          <div class="is-card">
+            <div class="is-card-t">✕ "AI 味"过重</div>
+            <div class="is-card-b">排比句+数字列举、"赋能""颠覆"等惯用表达、所有内容遵循相同模板结构——<b>千篇一律，缺乏个人风格</b>，读者一眼识别</div>
+          </div>
+        </div>
+
+        <div class="is-sl"><span>◆</span> 解决方案：5-Agent 协作工作流</div>
+        <div class="is-bd">用 CrewAI 框架搭建 5 个专职 Agent 的串行工作流。<span class="is-hl">Agent 2-5 每个节点用户均可介入修改</span>（HITL），不是全程黑盒。</div>
+        <div class="is-agent-cards">
+          <div class="is-agent-card">
+            <div class="is-agent-num">AGENT 01</div>
+            <div class="is-agent-name">资讯猎人</div>
+            <div class="is-agent-role">全网采集 + 强制溯源一手来源</div>
+            <div class="is-agent-model">GLM-4.7</div>
+          </div>
+          <div class="is-agent-card">
+            <div class="is-agent-num">AGENT 02</div>
+            <div class="is-agent-name">创意总监</div>
+            <div class="is-agent-role">3个差异化选题角度供用户选择</div>
+            <div class="is-agent-model">Qwen2.5-7B</div>
+          </div>
+          <div class="is-agent-card">
+            <div class="is-agent-num">AGENT 03</div>
+            <div class="is-agent-name">金牌文案</div>
+            <div class="is-agent-role">根据选定角度生成正文</div>
+            <div class="is-agent-model">Qwen2.5-7B</div>
+          </div>
+          <div class="is-agent-card">
+            <div class="is-agent-num">AGENT 04</div>
+            <div class="is-agent-name">视觉策划</div>
+            <div class="is-agent-role">同步生成封面 Midjourney Prompt</div>
+            <div class="is-agent-model">Qwen2.5-7B</div>
+          </div>
+          <div class="is-agent-card">
+            <div class="is-agent-num">AGENT 05</div>
+            <div class="is-agent-name">风格对齐</div>
+            <div class="is-agent-role">合规 + 风格一致性 + 质量终检</div>
+            <div class="is-agent-model">Qwen2.5-7B</div>
+          </div>
+        </div>
+
+        <div class="is-sl"><span>◆</span> 两个核心机制</div>
+        <div class="is-diff-row">
+          <div class="is-diff-card">
+            <div class="is-diff-label">HIGHLIGHT</div>
+            <div class="is-diff-title">来源约束 + 语义去重</div>
+            <div class="is-diff-desc">Prompt 硬约束：二手报道强制继续爬取溯源，无一手链接的内容不得写入。ChromaDB 向量检索做历史去重（余弦相似度 > 0.85 判定重复），手动标注 50 条数据遍历阈值选出平衡点。</div>
+          </div>
+          <div class="is-diff-card">
+            <div class="is-diff-label">HIGHLIGHT</div>
+            <div class="is-diff-title">偏好对齐增量学习</div>
+            <div class="is-diff-desc">记录用户在 Agent 3/5 的修改 diff，每 10 条异步触发 LLM 分析，逆向提取高频修改特征（句长、标点、结构偏好），动态重构 System Prompt。不是靠预设模板适配，而是从真实编辑行为里"学"出来的。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="is-panel" id="isp2">
+        <div class="is-sl"><span>◆</span> 技术决策</div>
+        <div class="is-func-cards">
+          <div class="is-func-card">
+            <div class="is-func-icon">DECISION 01</div>
+            <div class="is-func-name">大小模型分发调度</div>
+            <div class="is-func-desc">Agent 1 走 GLM-4.7（多工具串行调用需强推理），Agent 2-5 走 Qwen2.5-7B（文本生成靠 Prompt 质量，成本约 1/50）。通过 LLM-as-Judge 横向选型确认。</div>
+          </div>
+          <div class="is-func-card">
+            <div class="is-func-icon">DECISION 02</div>
+            <div class="is-func-name">多工具编排采集</div>
+            <div class="is-func-desc">SerperDevTool 发现入口 → ScrapeWebsiteTool 爬取普通页面 → JinaReaderTool 穿透强反爬（X/Reddit/LinkedIn）→ YouTubeVideoSearchTool 补充视频资讯。</div>
+          </div>
+          <div class="is-func-card">
+            <div class="is-func-icon">DECISION 03</div>
+            <div class="is-func-name">Prompt Caching</div>
+            <div class="is-func-desc">固定 System Prompt + Few-shot 示例标记为可缓存前缀，动态内容放后面。SiliconFlow 兼容 OpenAI 缓存机制，命中后复用 KV Cache 不重复计算。</div>
+          </div>
+          <div class="is-func-card">
+            <div class="is-func-icon">DECISION 04</div>
+            <div class="is-func-name">语义去重阈值调优</div>
+            <div class="is-func-desc">手动标注 50 条历史资讯 ground truth，脚本遍历 0.75-0.95 阈值，观察 precision/recall 变化曲线，选 0.85 作为误杀率和漏判率的平衡点。</div>
+          </div>
+        </div>
+
+        <div class="is-sl"><span>◆</span> 技术架构</div>
+        <div class="is-arch-box">
+          <div class="is-arch-label">CREWAI SEQUENTIAL PIPELINE</div>
+          <div class="is-arch-flow">
+            <span class="is-an is-a-in">用户选题</span>
+            <span class="is-a-arr">→</span>
+            <span class="is-an is-a-mid">资讯猎人</span>
+            <span class="is-a-arr">→</span>
+            <span class="is-an is-a-mid">创意总监</span>
+            <span class="is-a-arr">→</span>
+            <span class="is-an is-a-mid">金牌文案</span>
+            <span class="is-a-arr">→</span>
+            <span class="is-an is-a-mid">视觉策划</span>
+            <span class="is-a-arr">→</span>
+            <span class="is-an is-a-out">风格对齐</span>
+          </div>
+          <div style="height:10px;"></div>
+          <div class="is-arch-label">STYLE LEARNING LOOP (ASYNC)</div>
+          <div class="is-arch-flow">
+            <span class="is-an is-a-in">用户 diff</span>
+            <span class="is-a-arr">→</span>
+            <span class="is-an is-a-mid">SQLite</span>
+            <span class="is-a-arr">→</span>
+            <span class="is-an is-a-mid">GLM-4-9b 分析</span>
+            <span class="is-a-arr">→</span>
+            <span class="is-an is-a-out">重构 Prompt</span>
+          </div>
+          <div class="is-arch-note">SiliconFlow 统一调用，兼容 OpenAI 接口零改造。bge-m3 做向量化，ChromaDB 做语义检索，SQLite 持久化风格偏好。异步分析用 threading.Thread 触发，不阻塞主流程。</div>
+        </div>
+
+        <div class="is-sl"><span>◆</span> 核心成果（50 组样本实测）</div>
+        <div class="is-metrics">
+          <div class="is-metric"><div class="is-metric-val">95%+</div><div class="is-metric-lbl">资讯溯源成功率</div></div>
+          <div class="is-metric"><div class="is-metric-val">-34%</div><div class="is-metric-lbl">Token 生成成本</div></div>
+          <div class="is-metric"><div class="is-metric-val">-21pp</div><div class="is-metric-lbl">修改幅度降幅</div></div>
+          <div class="is-metric"><div class="is-metric-val">-50%</div><div class="is-metric-lbl">生成耗时 120s→60s</div></div>
+        </div>
+
+        <div class="is-tags">
+          <span class="is-tag-item">CrewAI</span>
+          <span class="is-tag-item">GLM-4.7</span>
+          <span class="is-tag-item">Qwen2.5-7B</span>
+          <span class="is-tag-item">ChromaDB</span>
+          <span class="is-tag-item">bge-m3</span>
+          <span class="is-tag-item">SQLite</span>
+          <span class="is-tag-item">Prompt Cache</span>
+          <span class="is-tag-item">LLM-as-Judge</span>
+        </div>
+      </div>
+
+      <div class="is-film-bottom">▪ ▪ ▪ KODAK 5219 ▪ ▪ ▪ PORTRA 400 ▪ ▪ ▪ PROCESS C-41 ▪ ▪ ▪</div>
     </div>
   </div>
 </div>
 
-<div class="detail-overlay" id="detail-moodmix">
-  <div class="detail-content">
-    <button class="detail-close" onclick="closeDetail('moodmix')">✕ CLOSE</button>
-    <div class="detail-header">
-      <div class="detail-tag">Exposure 03 — 个人项目</div>
-      <h2>MoodMix 情绪调饮</h2>
-    </div>
-    <div class="detail-body">
-      <p>一个以东方哲学（五行/阴阳/时辰）为语义桥梁的情绪饮品推荐应用。多智能体流水线将用户情绪解析为6维向量，通过加权余弦相似度映射到8维饮品特征向量，Kappa灵敏度常数实现动态权重调节。</p>
-      <p>哲学标签系统采用三标签结构（辨证/策略/体感），语录生成逻辑控制在15-28字的因果结构：状态→饮品→行动。前端React实现东方极简美学，部署在Render上。</p>
-    </div>
-    <div class="detail-tech">
-      <div class="detail-tech-label">Tech Stack</div>
-      <div class="detail-tech-items">
-        <span class="detail-tech-item">React</span>
-        <span class="detail-tech-item">Node.js</span>
-        <span class="detail-tech-item">五行/阴阳</span>
-        <span class="detail-tech-item">Cosine Similarity</span>
-        <span class="detail-tech-item">Multi-Agent</span>
-        <span class="detail-tech-item">Render</span>
+<div class="detail-overlay detail-overlay--moodmix" id="detail-moodmix">
+  <div class="mm-page">
+    <div class="mm-grain"></div>
+    <div class="mm-hero-grad"></div>
+    <div class="mm-orb1"></div>
+    <div class="mm-orb2"></div>
+    <button class="detail-close" onclick="closeDetail('moodmix')" style="position:absolute;top:20px;right:24px;z-index:10;">✕ CLOSE</button>
+    <div class="mm-content">
+      <div class="mm-tag-row">
+        <span class="mm-tag">Exposure 03 — personal project</span>
+        <span class="mm-film-code">KODAK 5219 ▪ EXP 03</span>
       </div>
+
+      <div class="mm-hero-split">
+        <div class="mm-vf-vert">
+          <div class="mm-sprocket mm-sprocket-t"></div>
+          <div class="mm-sprocket mm-sprocket-b"></div>
+          <div class="mm-video-inner" id="mmVideoArea">
+            <video controls preload="metadata" id="mmVideo">
+              <source src="moodmix-demo.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="mm-video-code">MOODMIX ▪ 2025</div>
+        </div>
+        <div class="mm-hero-info">
+          <div class="mm-hero-name">喝一杯 MoodMix</div>
+          <div class="mm-hero-sub">基于心境的饮品推荐引擎</div>
+          <div class="mm-hero-desc">说出此刻心境，AI 推荐最契合的那一杯——附近买得到，在家也调得出。用东方哲学做语义桥梁，填补「情绪→饮品」之间的选择黑箱。</div>
+          <div class="mm-hero-quote">此刻，心境如何？<br>万般心绪，皆可入杯。</div>
+          <div class="mm-hero-tags">
+            <span class="mm-hero-tag-item">4 Agent</span>
+            <span class="mm-hero-tag-item">东方哲学体系</span>
+            <span class="mm-hero-tag-item">400+ 饮品库</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mm-tabs">
+        <div class="mm-tab on" onclick="mmTab(0)">▶ 视频演示</div>
+        <div class="mm-tab" onclick="mmTab(1)">◆ 痛点 &amp; 方案</div>
+        <div class="mm-tab" onclick="mmTab(2)">◆ 架构 &amp; 成果</div>
+      </div>
+
+      <div class="mm-panel on" id="mmp0">
+        <div class="mm-panel-hint">◀ 点击左侧播放键观看完整产品 Demo</div>
+      </div>
+
+      <div class="mm-panel" id="mmp1">
+        <div class="mm-sl"><span>◆</span> 市场洞察</div>
+        <div class="mm-bd">中国饮品市场规模超 <span class="mm-hlg">6400 亿</span>，<span class="mm-hl">61.2% 用户每周消费 3-5 次</span>，超 60% 购买为情绪愉悦。但现有平台按销量排序，不理解「我现在的感觉」——<span class="mm-hlg">从情绪到饮品之间没有桥梁</span>。</div>
+        <div class="mm-card-row-3">
+          <div class="mm-card">
+            <div class="mm-card-t">✕ 选择疲劳</div>
+            <div class="mm-card-b">菜单几十款，纠结十分钟翻三页，<b>最后点了和昨天一样的</b></div>
+          </div>
+          <div class="mm-card">
+            <div class="mm-card-t">✕ 情绪被忽视</div>
+            <div class="mm-card-b">外卖平台不懂「我累了」，<b>无法响应当下心境</b></div>
+          </div>
+          <div class="mm-card">
+            <div class="mm-card-t">✕ 推荐落不了地</div>
+            <div class="mm-card-b">配方做不了、店离太远，<b>双路径都缺失</b></div>
+          </div>
+        </div>
+
+        <div class="mm-sl"><span>◆</span> 产品方案</div>
+        <div class="mm-flow-box">
+          <div class="mm-flow-row">
+            <span class="mm-fn mm-fn-in">说出状态</span>
+            <span class="mm-fa">→</span>
+            <span class="mm-fn mm-fn-mid">AI 理解与匹配</span>
+            <span class="mm-fa">→</span>
+            <span class="mm-fn mm-fn-out">交付饮品</span>
+          </div>
+          <div class="mm-flow-row" style="margin-top:6px; font-size:10px; color:#8a8690;">
+            <span style="min-width:90px;text-align:center;">文本 / 场景标签</span>
+            <span style="min-width:16px;"></span>
+            <span style="min-width:150px;text-align:center;">情绪解析 · 五行推理 · 向量匹配</span>
+            <span style="min-width:16px;"></span>
+            <span style="min-width:100px;text-align:center;">附近可买 / DIY</span>
+          </div>
+        </div>
+
+        <div class="mm-sl"><span>◆</span> 三个创新点</div>
+        <div class="mm-card-row-3">
+          <div class="mm-card">
+            <div class="mm-card-t-accent">01 心境驱动</div>
+            <div class="mm-card-b">以情绪而非品类作为推荐入口，开创新决策路径</div>
+          </div>
+          <div class="mm-card">
+            <div class="mm-card-t-accent">02 双路径交付</div>
+            <div class="mm-card-b">附近门店可买 + 专属 DIY 配方，自制到店都能落地</div>
+          </div>
+          <div class="mm-card">
+            <div class="mm-card-t-accent">03 东方哲学桥梁</div>
+            <div class="mm-card-b">五行/阴阳/时辰做语义翻译层，不是噱头是匹配逻辑</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mm-panel" id="mmp2">
+        <div class="mm-sl"><span>◆</span> 4-Agent 协作架构</div>
+        <div class="mm-agent-cards">
+          <div class="mm-agent-card">
+            <div class="mm-agent-num">AGENT 01</div>
+            <div class="mm-agent-name">聚合分析师</div>
+            <div class="mm-agent-role">六维语义 + 中医辨证 + 八维向量</div>
+            <div class="mm-agent-model">Qwen2.5-7B</div>
+          </div>
+          <div class="mm-agent-card">
+            <div class="mm-agent-num">AGENT 02</div>
+            <div class="mm-agent-name">意境文案师</div>
+            <div class="mm-agent-role">30-50字诗意社交卡片</div>
+            <div class="mm-agent-model">Qwen2.5-32B</div>
+          </div>
+          <div class="mm-agent-card">
+            <div class="mm-agent-num">AGENT 03</div>
+            <div class="mm-agent-name">质量质检员</div>
+            <div class="mm-agent-role">8项安全检查+质量勋章</div>
+            <div class="mm-agent-model">Qwen2.5-7B</div>
+          </div>
+          <div class="mm-agent-card">
+            <div class="mm-agent-num">AGENT 04</div>
+            <div class="mm-agent-name">调饮专家</div>
+            <div class="mm-agent-role">自定义饮品分析+制作问答</div>
+            <div class="mm-agent-model">Qwen2.5-7B</div>
+          </div>
+        </div>
+
+        <div class="mm-sl"><span>◆</span> 核心技术决策</div>
+        <div class="mm-func-cards">
+          <div class="mm-func-card">
+            <div class="mm-func-icon">DECISION 01</div>
+            <div class="mm-func-name">六维情绪解析</div>
+            <div class="mm-func-desc">情绪/躯体/时空/神志/仪轨/场域六维拆解，经中医辨证转为八维饮品特征向量</div>
+          </div>
+          <div class="mm-func-card">
+            <div class="mm-func-icon">DECISION 02</div>
+            <div class="mm-func-name">本地向量搜索</div>
+            <div class="mm-func-desc">400+ 饮品库，加权余弦相似度 + Kappa 动态权重，无 LLM 调用，Top 9 &lt;100ms</div>
+          </div>
+          <div class="mm-func-card">
+            <div class="mm-func-icon">DECISION 03</div>
+            <div class="mm-func-name">首屏渲染优先</div>
+            <div class="mm-func-desc">主链路 3-5s 首屏，文案/质检 Agent 异步执行，推荐语渐进加载</div>
+          </div>
+          <div class="mm-func-card">
+            <div class="mm-func-icon">DECISION 04</div>
+            <div class="mm-func-name">哲学标签系统</div>
+            <div class="mm-func-desc">三标签（辨证/策略/体感），推荐语 15-28 字因果结构，本地规则无 LLM</div>
+          </div>
+        </div>
+
+        <div class="mm-sl"><span>◆</span> 技术架构</div>
+        <div class="mm-arch-box">
+          <div class="mm-arch-label">MAIN PIPELINE (SYNC) → 3-5s</div>
+          <div class="mm-arch-flow">
+            <span class="mm-an mm-a-in">用户输入</span>
+            <span class="mm-a-arr">→</span>
+            <span class="mm-an mm-a-mid">实体预处理</span>
+            <span class="mm-a-arr">→</span>
+            <span class="mm-an mm-a-mid">Agent 1</span>
+            <span class="mm-a-arr">→</span>
+            <span class="mm-an mm-a-mid">向量搜索</span>
+            <span class="mm-a-arr">→</span>
+            <span class="mm-an mm-a-out">首屏渲染</span>
+          </div>
+          <div style="height:10px;"></div>
+          <div class="mm-arch-label">ASYNC PIPELINE → 渐进加载</div>
+          <div class="mm-arch-flow">
+            <span class="mm-an mm-a-in">推荐结果</span>
+            <span class="mm-a-arr">→</span>
+            <span class="mm-an mm-a-mid">Agent 2 文案</span>
+            <span class="mm-a-arr">→</span>
+            <span class="mm-an mm-a-mid">Agent 3 质检</span>
+            <span class="mm-a-arr">→</span>
+            <span class="mm-an mm-a-out">UI 更新</span>
+          </div>
+          <div class="mm-arch-note">React + Node.js + Express。Agent 2 走 Qwen2.5-32B（文案需更强模型），其余走 Qwen2.5-7B。400+ 饮品库预加载内存，向量搜索零 LLM 调用。部署 Render。</div>
+        </div>
+
+        <div class="mm-sl"><span>◆</span> 核心成果</div>
+        <div class="mm-metrics">
+          <div class="mm-metric"><div class="mm-metric-val">4.2/5</div><div class="mm-metric-lbl">情绪解读一致性</div></div>
+          <div class="mm-metric"><div class="mm-metric-val">70%</div><div class="mm-metric-lbl">库存匹配命中率</div></div>
+          <div class="mm-metric"><div class="mm-metric-val">+32%</div><div class="mm-metric-lbl">个性化属性命中</div></div>
+        </div>
+
+        <div class="mm-tags">
+          <span class="mm-tag-item">React</span>
+          <span class="mm-tag-item">Node.js</span>
+          <span class="mm-tag-item">Qwen2.5-7B</span>
+          <span class="mm-tag-item">Qwen2.5-32B</span>
+          <span class="mm-tag-item">五行/阴阳/时辰</span>
+          <span class="mm-tag-item">Cosine Similarity</span>
+          <span class="mm-tag-item">Render</span>
+        </div>
+      </div>
+
+      <div class="mm-film-bottom">▪ ▪ ▪ KODAK 5219 ▪ ▪ ▪ PORTRA 400 ▪ ▪ ▪ PROCESS C-41 ▪ ▪ ▪</div>
     </div>
   </div>
 </div>
 
-<div class="detail-overlay" id="detail-about">
-  <div class="detail-content">
-    <button class="detail-close" onclick="closeDetail('about')">✕ CLOSE</button>
-    <div class="detail-header">
-      <div class="detail-tag">The Photographer</div>
-      <h2>Elia</h2>
-    </div>
-    <div class="detail-body">
-      <p>清华大学研究生，环境科学背景 × AI产品方向。在实习中独立搭建了完整的AI系统，在个人项目中持续探索AI与东方美学的交汇点。</p>
-      <p>信奉「价值发现、方案转化、驱动迭代」的产品方法论。具备从技术架构到产品设计的完整视角——这种复合能力是稀缺的。</p>
-      <p>喜欢胶片摄影、极简设计与留白之美。相信好的AI产品应该像好的照片一样，既有技术的精确，也有感性的温度。</p>
+<div class="detail-overlay detail-overlay--speakflow" id="detail-about">
+  <div class="sf-page">
+    <div class="sf-grain"></div>
+    <div class="sf-hero-grad"></div>
+    <div class="sf-orb"></div>
+    <button class="detail-close" onclick="closeDetail('about')" style="position:absolute;top:20px;right:24px;z-index:10;">✕ CLOSE</button>
+    <div class="sf-content">
+      <div class="sf-tag-row">
+        <span class="sf-tag">SpeakFlow · product teardown</span>
+        <span class="sf-film-code">KODAK 5219 ▪ VIBE CODING</span>
+      </div>
+      <div class="sf-meta-row">
+        <span class="sf-meta-item">SpeakFlow</span>
+        <span class="sf-meta-dot"></span>
+        <span class="sf-meta-sub">IELTS AI Speaking Partner</span>
+      </div>
+      <div class="sf-sub">以结构化评分与逐句纠错为核心差异，填补真人外教（贵、低频）和通用 AI 对话（有回应无诊断）之间的空白。</div>
+
+      <div class="sf-video-frame">
+        <div class="sf-sprocket sf-sprocket-l"></div>
+        <div class="sf-sprocket sf-sprocket-r"></div>
+        <div class="sf-video-inner">
+          <!-- 把 src 换成你的视频文件路径 -->
+          <video controls preload="metadata" poster="">
+            <source src="SpeakFlow.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="sf-video-code">SPEAKFLOW ▪ VIBE CODING ▪ 2025</div>
+        <div class="sf-video-time">03:20</div>
+      </div>
+
+      <div class="sf-tabs">
+        <div class="sf-tab on" onclick="sfTab(0)">▶ 视频演示</div>
+        <div class="sf-tab" onclick="sfTab(1)">◆ 痛点 &amp; 场景</div>
+        <div class="sf-tab" onclick="sfTab(2)">◆ 功能 &amp; 架构</div>
+      </div>
+
+      <div class="sf-panel on" id="sfp0">
+        <div class="sf-panel-hint">▲ 点击上方播放键观看完整产品拆解 Demo</div>
+      </div>
+
+      <div class="sf-panel" id="sfp1">
+        <div class="sf-sl"><span>◆</span> 核心痛点</div>
+        <div class="sf-bd">口语提分依赖<span class="sf-hl">「高频输出 + 精准反馈」</span>的闭环，现有方案均存在断裂：</div>
+        <div class="sf-card-row-3">
+          <div class="sf-card">
+            <div class="sf-card-t">✕ 真人外教</div>
+            <div class="sf-card-b"><b>$38-59/50min</b><br>贵且低频，频次撑不起提分</div>
+          </div>
+          <div class="sf-card">
+            <div class="sf-card-t">✕ 自己练</div>
+            <div class="sf-card-b">无反馈闭环<br>不知道错在哪，无法改进</div>
+          </div>
+          <div class="sf-card">
+            <div class="sf-card-t">✕ 通用 AI 对话</div>
+            <div class="sf-card-b">有交互无诊断<br>能陪聊不能纠错，无评分标尺</div>
+          </div>
+        </div>
+
+        <div class="sf-sl"><span>◆</span> 目标用户</div>
+        <div class="sf-bd">有雅思口语提分需求的考生</div>
+
+        <div class="sf-sl"><span>◆</span> 三个核心场景</div>
+        <div class="sf-scene-cards">
+          <div class="sf-scene-card">
+            <div class="sf-scene-num">SCENE 01</div>
+            <div class="sf-scene-name">碎片化跟读</div>
+            <div class="sf-scene-desc">Text Input Mode，发音标注可视化辅助 shadowing</div>
+          </div>
+          <div class="sf-scene-card">
+            <div class="sf-scene-num">SCENE 02</div>
+            <div class="sf-scene-name">模考自由对话</div>
+            <div class="sf-scene-desc">Voice Input Mode，AI 角色扮演考官推进 Part 1/2/3</div>
+          </div>
+          <div class="sf-scene-card">
+            <div class="sf-scene-num">SCENE 03</div>
+            <div class="sf-scene-name">说完即评即改</div>
+            <div class="sf-scene-desc">IELTS band 评分 + 逐句纠错 + 录音回放，形成「说→评→改→再说」闭环</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sf-panel" id="sfp2">
+        <div class="sf-sl"><span>◆</span> 四大功能模块</div>
+        <div class="sf-func-cards">
+          <div class="sf-func-card">
+            <div class="sf-func-icon">MODULE 01</div>
+            <div class="sf-func-name">会话配置</div>
+            <div class="sf-func-desc">5个差异化 AI 角色 × 语速可调（Relaxed→Brisk）× 断点续练</div>
+          </div>
+          <div class="sf-func-card">
+            <div class="sf-func-icon">MODULE 02</div>
+            <div class="sf-func-name">跟读训练</div>
+            <div class="sf-func-desc">文本输入 → AI 朗读 → Stress / Weak / Linking / Intonation 四维发音标注可视化</div>
+          </div>
+          <div class="sf-func-card">
+            <div class="sf-func-icon">MODULE 03</div>
+            <div class="sf-func-name">语音评测</div>
+            <div class="sf-func-desc">语音输入 → 实时转写 → IELTS band 评分 + 一句话诊断 + 逐条纠错含发音播放</div>
+          </div>
+          <div class="sf-func-card">
+            <div class="sf-func-icon">MODULE 04</div>
+            <div class="sf-func-name">会话管理</div>
+            <div class="sf-func-desc">对话历史保留、原始录音回放、上下文续接</div>
+          </div>
+        </div>
+
+        <div class="sf-sl"><span>◆</span> 技术架构</div>
+        <div class="sf-arch-box">
+          <div class="sf-arch-label">ANALYZE PIPELINE → /api/analyze</div>
+          <div class="sf-arch-flow">
+            <span class="sf-an sf-a-in">User Voice</span>
+            <span class="sf-a-arr">→</span>
+            <span class="sf-an sf-a-mid">STT 转写</span>
+            <span class="sf-a-arr">→</span>
+            <span class="sf-an sf-a-mid">Gemini Pro</span>
+            <span class="sf-a-arr">→</span>
+            <span class="sf-an sf-a-out">评分 + 纠错</span>
+          </div>
+          <div style="height:12px;"></div>
+          <div class="sf-arch-label">TTS PIPELINE → /api/tts</div>
+          <div class="sf-arch-flow">
+            <span class="sf-an sf-a-in">LLM Reply</span>
+            <span class="sf-a-arr">→</span>
+            <span class="sf-an sf-a-mid">角色 + 参数</span>
+            <span class="sf-a-arr">→</span>
+            <span class="sf-an sf-a-mid">TTS API</span>
+            <span class="sf-a-arr">→</span>
+            <span class="sf-an sf-a-out">多角色语音</span>
+          </div>
+          <div class="sf-arch-note">Prompt 内嵌 IELTS 四维评分 rubric，发音标注由 LLM 基于语音学规则生成。</div>
+        </div>
+
+        <div class="sf-tags">
+          <span class="sf-tag-item">Next.js App Router</span>
+          <span class="sf-tag-item">React + TypeScript</span>
+          <span class="sf-tag-item">Google Cloud TTS</span>
+          <span class="sf-tag-item">STT</span>
+        </div>
+      </div>
+
+      <div class="sf-film-bottom">▪ ▪ ▪ KODAK 5219 ▪ ▪ ▪ PORTRA 400 ▪ ▪ ▪ PROCESS C-41 ▪ ▪ ▪</div>
     </div>
   </div>
 </div>
@@ -1614,7 +3099,7 @@ body::after {
 <!-- ===== FOOTER ===== -->
 <footer class="footer">
   <div class="footer-film-edge">▪ ▪ ▪ ▪ ▪ KODAK 5219 ▪ ▪ ▪ ▪ ▪ KODAK 5219 ▪ ▪ ▪ ▪ ▪ KODAK 5219 ▪ ▪ ▪ ▪ ▪</div>
-  <p>© 2025 ELIA · SHOT ON PORTRA 400 · DEVELOPED WITH ♡</p>
+  <p>© 2026 ELIA · SHOT ON PORTRA 400 · DEVELOPED WITH ♡</p>
 </footer>
 
 <script>
@@ -1784,6 +3269,25 @@ frames.forEach(frame => {
     frame.style.transform = '';
   });
 });
+
+function sfTab(i) {
+  document.querySelectorAll('.sf-tab').forEach(function(t, x) {
+    t.classList.toggle('on', x === i);
+  });
+  document.querySelectorAll('.sf-panel').forEach(function(p, x) {
+    p.classList.toggle('on', x === i);
+  });
+}
+
+function isTab(i) {
+  document.querySelectorAll('.is-tab').forEach(function(t,x){ t.classList.toggle('on',x===i); });
+  document.querySelectorAll('.is-panel').forEach(function(p,x){ p.classList.toggle('on',x===i); });
+}
+
+function mmTab(i) {
+  document.querySelectorAll('.mm-tab').forEach(function(t,x){ t.classList.toggle('on',x===i); });
+  document.querySelectorAll('.mm-panel').forEach(function(p,x){ p.classList.toggle('on',x===i); });
+}
 </script>
 
 </body>
