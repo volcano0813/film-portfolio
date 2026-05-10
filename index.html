@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Elia's Film Roll — AI Works</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #050712;
@@ -294,6 +294,7 @@ body::after {
 .hero-meta-school-tag {
   font-family: 'DM Mono', monospace;
   font-size: 9px;
+  font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: rgba(5,7,18,0.9);
@@ -309,12 +310,6 @@ body::after {
   text-transform: uppercase;
 }
 
-.hero-meta-line {
-  font-size: 12px;
-  color: var(--text-light);
-  line-height: 1.8;
-}
-
 .hero-meta-group {
   margin-bottom: 1.5rem;
 }
@@ -323,41 +318,21 @@ body::after {
   margin-bottom: 0;
 }
 
-.hero-meta-tag {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--kodak-yellow);
-  display: block;
-  margin-bottom: 4px;
-}
-
 .hero-name-cn {
   margin-top: 18px;
   font-family: 'Noto Serif SC', serif;
   color: var(--cream);
 }
 
-.hero-name-cn-label {
-  display: block;
-  font-family: 'DM Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--kodak-yellow);
-  margin-bottom: 4px;
-}
-
 .hero-name-row {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  margin-top: 6px;
 }
 
 .hero-name-cn-text {
   font-size: 20px;
+  font-weight: 700;
   letter-spacing: 0.24em;
 }
 
@@ -378,7 +353,8 @@ body::after {
 
 .hero-meta-section-label {
   font-family: 'DM Mono', monospace;
-  font-size: 9px;
+  font-size: 12px;
+  font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--kodak-yellow);
@@ -394,7 +370,8 @@ body::after {
 
 .hero-signature-label {
   font-family: 'DM Mono', monospace;
-  font-size: 9px;
+  font-size: 12px;
+  font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   display: block;
@@ -740,6 +717,27 @@ body::after {
   background: linear-gradient(135deg, #1a1420 0%, #2a1838 40%, #3d2060 100%);
 }
 
+.negative-frame .film-photo-bg {
+  background: #e8dcc8;
+}
+
+.negative-frame .project-icon {
+  color: #1a1714;
+  opacity: 0.72;
+  font-size: 42px;
+  font-weight: 700;
+}
+
+.negative-frame .film-caption-tag {
+  color: #f5c518;
+  border: 1px solid #f5c518;
+}
+
+.negative-frame:hover .film-photo-bg {
+  filter: invert(1);
+  transition: filter 0.6s ease;
+}
+
 /* Frame tag brand colors */
 .frame-jianghai .film-caption-tag {
   color: #5dcaa5;
@@ -1020,6 +1018,51 @@ body::after {
   border-color: var(--kodak-yellow);
 }
 
+/* ===== FIXED TOP-RIGHT NAV ===== */
+.site-nav-corner {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10000;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2.5rem;
+  padding: 1.25rem 1.5rem;
+  pointer-events: none;
+}
+
+.site-nav-corner__link {
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  text-decoration: none;
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.site-nav-corner__link:hover {
+  opacity: 1;
+}
+
+.site-nav-corner__cn {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--kodak-yellow);
+  letter-spacing: 0.15em;
+}
+
+.site-nav-corner__en {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+}
+
 /* ===== FOOTER ===== */
 .footer {
   text-align: center;
@@ -1223,7 +1266,7 @@ body::after {
 }
 
 .jh-content {
-  position: relative; z-index: 5; padding: 44px 40px 36px;
+  position: relative; z-index: 5; padding: 32px 40px 36px;
 }
 
 .jh-tag-row {
@@ -1290,6 +1333,11 @@ body::after {
 .jh-section-label {
   font-size: 16px; font-weight: 600; letter-spacing: 1px; color: #f0ece4;
   margin-bottom: 16px; font-family: 'Noto Serif SC', serif;
+}
+
+/* Pull the “核心成果” block upward without resizing cards */
+.jh-flow + .jh-section-label {
+  margin-top: -10px;
 }
 
 .jh-body {
@@ -2102,6 +2150,70 @@ body::after {
   padding: 3px 10px; border-radius: 20px; font-family: 'DM Mono', monospace;
 }
 
+.mm-hero-cta-wrap {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.mm-hero-cta-label {
+  font-size: 8px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(212, 160, 200, 0.55);
+  font-family: 'DM Mono', monospace;
+}
+
+.mm-hero-cta {
+  position: relative;
+  z-index: 6;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 18px 11px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: #f5f0e8;
+  border: 1px solid rgba(212, 160, 200, 0.45);
+  background:
+    linear-gradient(145deg, rgba(212, 160, 200, 0.14) 0%, rgba(18, 14, 22, 0.85) 45%, rgba(10, 10, 16, 0.95) 100%);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.35),
+    0 8px 28px rgba(0, 0, 0, 0.35),
+    0 0 32px rgba(212, 160, 200, 0.12);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+
+.mm-hero-cta:hover {
+  border-color: rgba(245, 197, 24, 0.55);
+  color: #fffef8;
+  box-shadow:
+    0 0 0 1px rgba(245, 197, 24, 0.15),
+    0 10px 36px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(245, 197, 24, 0.12);
+  transform: translateY(-1px);
+}
+
+.mm-hero-cta-text {
+  font-weight: 500;
+}
+
+.mm-hero-cta-arrow {
+  font-size: 14px;
+  color: var(--kodak-yellow);
+  line-height: 1;
+  transition: transform 0.25s ease;
+}
+
+.mm-hero-cta:hover .mm-hero-cta-arrow {
+  transform: translateX(4px);
+}
+
 .mm-tabs {
   display: flex; gap: 0; margin-top: 0;
   border-bottom: 1px solid rgba(255,255,255,0.06);
@@ -2335,6 +2447,20 @@ body::after {
     <div class="camera-hud-line">REC ●</div>
   </div>
 </div>
+<nav class="site-nav-corner" aria-label="页面导航">
+  <a href="about.html" class="site-nav-corner__link" onclick="navigateToAbout(); return false;">
+    <span class="site-nav-corner__cn">对焦</span>
+    <span class="site-nav-corner__en">About me</span>
+  </a>
+  <a href="#works" class="site-nav-corner__link" onclick="return goToWorksNav(event);">
+    <span class="site-nav-corner__cn">显影</span>
+    <span class="site-nav-corner__en">Portfolio</span>
+  </a>
+  <a href="#reflections" class="site-nav-corner__link" onclick="return goToReflectionsNav(event);">
+    <span class="site-nav-corner__cn">定影</span>
+    <span class="site-nav-corner__en">Reflections</span>
+  </a>
+</nav>
 <!-- ===== HERO ===== -->
 <section class="hero" id="hero">
   <div class="hero-ambient"></div>
@@ -2348,7 +2474,6 @@ body::after {
         <div class="hero-photo-frame-code">THU · AI PM</div>
       </div>
       <div class="hero-name-cn">
-        <span class="hero-name-cn-label">name</span>
         <div class="hero-name-row">
           <span class="hero-name-cn-text">严梦灿</span>
           <span class="hero-meta-school-tag">TSINGHUA</span>
@@ -2360,15 +2485,6 @@ body::after {
           <span class="hero-meta-section-label">Background</span>
           硕士：清华大学，保研，2027届毕业生<br>
           本科：北京林业大学（211），国家奖学金
-        </div>
-        <div class="hero-meta-group hero-meta-line">
-          <span class="hero-meta-tag">AI skills</span>
-          日常使用 OpenClaw 提升效率，<br>
-          深度使用 Cursor、Antigravity 等 Vibe Coding 工具搭建产品 demo。
-        </div>
-        <div class="hero-meta-group hero-meta-line">
-          <span class="hero-meta-tag">English</span>
-          IELTS 6.5，CET-6 560，具备优秀的英文阅读与沟通能力。
         </div>
       </div>
       <div class="hero-meta-group hero-signature">
@@ -2497,6 +2613,25 @@ body::after {
           <div class="film-caption-title">SpeakFlow</div>
           <div class="film-caption-desc">IELTS AI Speaking Partner<br>结构化评分 · 逐句纠错</div>
           <div class="film-caption-tag">个人项目 · Vibe Coding</div>
+        </div>
+      </div>
+
+      <div class="film-frame negative-frame" onclick="navigateToAbout()">
+        <div class="film-frame-inner">
+          <div class="film-frame-number-left">KODAK 400TX</div>
+          <div class="film-photo">
+            <div class="film-photo-bg">
+              <div class="project-icon">
+                底片<br>Neg
+              </div>
+            </div>
+          </div>
+          <div class="film-frame-number">→N  NA</div>
+        </div>
+        <div class="film-caption">
+          <div class="film-caption-title">底片 Negative</div>
+          <div class="film-caption-desc">显影前的我<br>The person behind the lens</div>
+          <div class="film-caption-tag">关于我 · About</div>
         </div>
       </div>
 
@@ -2779,6 +2914,13 @@ body::after {
             <span class="mm-hero-tag-item">4 Agent</span>
             <span class="mm-hero-tag-item">东方哲学体系</span>
             <span class="mm-hero-tag-item">400+ 饮品库</span>
+          </div>
+          <div class="mm-hero-cta-wrap">
+            <span class="mm-hero-cta-label">体验链接</span>
+            <a href="https://moodmix-brve.onrender.com/" class="mm-hero-cta" target="_blank" rel="noopener noreferrer" title="在新标签页打开，不离开本站">
+              <span class="mm-hero-cta-text">打开 MoodMix 在线体验</span>
+              <span class="mm-hero-cta-arrow" aria-hidden="true">→</span>
+            </a>
           </div>
         </div>
       </div>
@@ -3097,7 +3239,7 @@ body::after {
 </div>
 
 <!-- ===== FOOTER ===== -->
-<footer class="footer">
+<footer class="footer" id="reflections">
   <div class="footer-film-edge">▪ ▪ ▪ ▪ ▪ KODAK 5219 ▪ ▪ ▪ ▪ ▪ KODAK 5219 ▪ ▪ ▪ ▪ ▪ KODAK 5219 ▪ ▪ ▪ ▪ ▪</div>
   <p>© 2026 ELIA · SHOT ON PORTRA 400 · DEVELOPED WITH ♡</p>
 </footer>
@@ -3116,7 +3258,7 @@ if (cursorRing && cursorDot) {
     cursorDot.style.transform = `translate(${clientX}px, ${clientY}px) translate(-50%, -50%)`;
   });
 
-  document.querySelectorAll('.magnetic-hover, .film-frame, .about-link, .detail-close').forEach(el => {
+  document.querySelectorAll('.magnetic-hover, .film-frame, .about-link, .detail-close, .site-nav-corner__link').forEach(el => {
     el.addEventListener('pointerenter', () => {
       cursorRing.classList.add('cursor-hover');
     });
@@ -3159,6 +3301,33 @@ function lockScroll(e) {
 // 拦截滚轮和触摸滚动
 window.addEventListener('wheel', lockScroll, { passive: false });
 window.addEventListener('touchmove', lockScroll, { passive: false });
+
+function ensureFilmUnlocked() {
+  if (filmPulled) return;
+  filmPulled = true;
+  document.body.style.overflowY = 'auto';
+  const canister = document.getElementById('canister');
+  if (canister) {
+    canister.classList.add('pulled');
+  }
+}
+
+function goToWorksNav(e) {
+  if (!filmPulled) {
+    e.preventDefault();
+    pullFilm();
+    return false;
+  }
+  return true;
+}
+
+function goToReflectionsNav(e) {
+  ensureFilmUnlocked();
+  e.preventDefault();
+  const el = document.getElementById('reflections');
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  return false;
+}
 
 function pullFilm() {
   if (filmPulled) return;
@@ -3210,6 +3379,18 @@ function closeDetail(id) {
     overlay.style.display = 'none';
   }, 400);
   document.body.style.overflow = '';
+}
+
+function navigateToAbout() {
+  const overlay = document.createElement('div');
+  overlay.style.cssText = "position:fixed;inset:0;z-index:9999;background:#e8dcc8;mix-blend-mode:difference;opacity:0;transition:opacity 0.3s ease;pointer-events:none;";
+  document.body.appendChild(overlay);
+  requestAnimationFrame(() => {
+    overlay.style.opacity = "1";
+    setTimeout(() => {
+      window.location.href = "about.html";
+    }, 300);
+  });
 }
 
 // Close on ESC
@@ -3288,6 +3469,17 @@ function mmTab(i) {
   document.querySelectorAll('.mm-tab').forEach(function(t,x){ t.classList.toggle('on',x===i); });
   document.querySelectorAll('.mm-panel').forEach(function(p,x){ p.classList.toggle('on',x===i); });
 }
+
+(function () {
+  var cta = document.querySelector('#detail-moodmix .mm-hero-cta');
+  if (!cta) return;
+  cta.addEventListener('click', function (e) {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    e.preventDefault();
+    e.stopPropagation();
+    window.open(this.href, '_blank', 'noopener,noreferrer');
+  });
+})();
 </script>
 
 </body>
