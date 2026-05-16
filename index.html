@@ -701,6 +701,10 @@ body::after {
 }
 
 /* Project-specific colors */
+.frame-baidu .film-photo-bg {
+  background: linear-gradient(135deg, #10234e 0%, #1f58b4 42%, #f0b935 100%);
+}
+
 .frame-jianghai .film-photo-bg {
   background: linear-gradient(135deg, #0a3d2e 0%, #1a6b50 40%, #1a3040 100%);
 }
@@ -739,6 +743,11 @@ body::after {
 }
 
 /* Frame tag brand colors */
+.frame-baidu .film-caption-tag {
+  color: #f5c95c;
+  border: 1px solid rgba(245,201,92,0.28);
+}
+
 .frame-jianghai .film-caption-tag {
   color: #5dcaa5;
   border: 1px solid rgba(93,202,165,0.25);
@@ -1111,6 +1120,7 @@ body::after {
 .film-frame:nth-child(2) { animation: film-enter 0.6s ease 0.35s both; }
 .film-frame:nth-child(3) { animation: film-enter 0.6s ease 0.5s both; }
 .film-frame:nth-child(4) { animation: film-enter 0.6s ease 0.65s both; }
+.film-frame:nth-child(5) { animation: film-enter 0.6s ease 0.8s both; }
 
 /* Shutter flash + HUD */
 .shutter-flash {
@@ -1418,6 +1428,73 @@ body::after {
 .jh-film-bottom {
   margin-top: 32px; font-size: 7px; letter-spacing: 3px;
   color: rgba(255,255,255,0.07); font-family: 'DM Mono', monospace; text-align: center;
+}
+
+.detail-overlay--baidu .jh-hero-grad {
+  display: none;
+}
+
+.detail-overlay--baidu .jh-page {
+  background:
+    radial-gradient(circle at 78% 16%, rgba(47,123,232,0.28) 0%, rgba(47,123,232,0.08) 36%, transparent 58%),
+    radial-gradient(circle at 92% 72%, rgba(240,185,53,0.16) 0%, transparent 42%),
+    linear-gradient(145deg, #081425 0%, #0e2d54 46%, #10243a 100%);
+  background-attachment: local, local, local;
+  background-size: 100% 100%;
+}
+
+.detail-overlay--baidu .jh-hero-orb {
+  background: radial-gradient(circle, rgba(47,123,232,0.18) 0%, rgba(240,185,53,0.07) 48%, transparent 76%);
+}
+
+.detail-overlay--baidu .jh-infinity {
+  opacity: 0.07;
+}
+
+.detail-overlay--baidu .jh-tag,
+.detail-overlay--baidu .jh-title,
+.detail-overlay--baidu .jh-hl-green,
+.detail-overlay--baidu .jh-metric-val,
+.detail-overlay--baidu .jh-flow-arrow,
+.detail-overlay--baidu .jh-flow-gate,
+.detail-overlay--baidu .jh-flow-judge,
+.detail-overlay--baidu .jh-branch-agent {
+  color: #79b7ff;
+}
+
+.detail-overlay--baidu .jh-meta-dot {
+  background: #f5c95c;
+}
+
+.detail-overlay--baidu .jh-hl {
+  color: #f5c95c;
+}
+
+.detail-overlay--baidu .jh-metric-card {
+  background: rgba(47,123,232,0.06);
+  border-color: rgba(245,201,92,0.12);
+}
+
+.detail-overlay--baidu .jh-flow {
+  border-color: rgba(121,183,255,0.14);
+}
+
+.detail-overlay--baidu .jh-flow-entry {
+  background: rgba(47,123,232,0.12);
+  border-color: rgba(121,183,255,0.28);
+  color: #b9d8ff;
+}
+
+.detail-overlay--baidu .jh-branch-rag {
+  background: rgba(245,201,92,0.07);
+  border-color: rgba(245,201,92,0.18);
+  color: #f5c95c;
+}
+
+.detail-overlay--baidu .jh-branch-human {
+  background: rgba(93,202,165,0.06);
+  border-color: rgba(93,202,165,0.14);
+  color: #8edec5;
 }
 
 /* ===== SPEAKFLOW DETAIL PAGE ===== */
@@ -2452,9 +2529,9 @@ body::after {
     <span class="site-nav-corner__cn">对焦</span>
     <span class="site-nav-corner__en">About me</span>
   </a>
-  <a href="#works" class="site-nav-corner__link" onclick="return goToWorksNav(event);">
+  <a href="thoughts.html" class="site-nav-corner__link" onclick="navigateToThoughts(); return false;">
     <span class="site-nav-corner__cn">显影</span>
-    <span class="site-nav-corner__en">Portfolio</span>
+    <span class="site-nav-corner__en">Thoughts</span>
   </a>
   <a href="#reflections" class="site-nav-corner__link" onclick="return goToReflectionsNav(event);">
     <span class="site-nav-corner__cn">定影</span>
@@ -2536,7 +2613,27 @@ body::after {
   <div class="film-strip-container" id="filmStrip">
     <div class="film-strip">
 
-      <!-- Frame 1: 疆海AI客服 -->
+      <!-- Frame 1: 百度AIGC产品增长 -->
+      <div class="film-frame frame-baidu" onclick="openDetail('baidu')">
+        <div class="film-frame-inner">
+          <div class="film-frame-number-left">KODAK 400TX</div>
+          <div class="film-photo">
+            <div class="film-photo-bg">
+              <div class="project-icon">
+                百<br>度
+              </div>
+            </div>
+          </div>
+          <div class="film-frame-number">→1  1A</div>
+        </div>
+        <div class="film-caption">
+          <div class="film-caption-title">百度AIGC广告业务</div>
+          <div class="film-caption-desc">AI命理产品矩阵 · AI Coding投放闭环<br>广告流量向付费转化</div>
+          <div class="film-caption-tag">实习项目 · 百度文库商业投放</div>
+        </div>
+      </div>
+
+      <!-- Frame 2: 疆海AI客服 -->
       <div class="film-frame frame-jianghai" onclick="openDetail('jianghai')">
         <div class="film-frame-inner">
           <div class="film-frame-number-left">KODAK 400TX</div>
@@ -2547,32 +2644,12 @@ body::after {
               </div>
             </div>
           </div>
-          <div class="film-frame-number">→1  1A</div>
+          <div class="film-frame-number">→2  2A</div>
         </div>
         <div class="film-caption">
           <div class="film-caption-title">疆海 AI 客服系统</div>
           <div class="film-caption-desc">多语言级联调度架构<br>从FAQ缓存到Agent重链的智能路由</div>
           <div class="film-caption-tag">实习项目 · 广州疆海科技</div>
-        </div>
-      </div>
-
-      <!-- Frame 2: IdeaShu -->
-      <div class="film-frame frame-ideashu" onclick="openDetail('ideashu')">
-        <div class="film-frame-inner">
-          <div class="film-frame-number-left">KODAK 400TX</div>
-          <div class="film-photo">
-            <div class="film-photo-bg">
-              <div class="project-icon">
-                Idea<br>書
-              </div>
-            </div>
-          </div>
-          <div class="film-frame-number">→2  2A</div>
-        </div>
-        <div class="film-caption">
-          <div class="film-caption-title">IdeaShu 灵感书</div>
-          <div class="film-caption-desc">小红书AI内容创作工作台<br>5-Agent · 风格定制化</div>
-          <div class="film-caption-tag">个人项目 · Vibe Coding</div>
         </div>
       </div>
 
@@ -2596,7 +2673,27 @@ body::after {
         </div>
       </div>
 
-      <!-- Frame 4: About -->
+      <!-- Frame 4: IdeaShu -->
+      <div class="film-frame frame-ideashu" onclick="openDetail('ideashu')">
+        <div class="film-frame-inner">
+          <div class="film-frame-number-left">KODAK 400TX</div>
+          <div class="film-photo">
+            <div class="film-photo-bg">
+              <div class="project-icon">
+                Idea<br>書
+              </div>
+            </div>
+          </div>
+          <div class="film-frame-number">→4  4A</div>
+        </div>
+        <div class="film-caption">
+          <div class="film-caption-title">IdeaShu 灵感书</div>
+          <div class="film-caption-desc">小红书AI内容创作工作台<br>5-Agent · 风格定制化</div>
+          <div class="film-caption-tag">个人项目 · Vibe Coding</div>
+        </div>
+      </div>
+
+      <!-- Frame 5: SpeakFlow -->
       <div class="film-frame frame-about" onclick="openDetail('about')">
         <div class="film-frame-inner">
           <div class="film-frame-number-left">KODAK 400TX</div>
@@ -2607,7 +2704,7 @@ body::after {
               </div>
             </div>
           </div>
-          <div class="film-frame-number">→E  END</div>
+          <div class="film-frame-number">→5  5A</div>
         </div>
         <div class="film-caption">
           <div class="film-caption-title">SpeakFlow</div>
@@ -2640,6 +2737,54 @@ body::after {
 </section>
 
 <!-- ===== DETAIL OVERLAYS ===== -->
+<div class="detail-overlay detail-overlay--baidu" id="detail-baidu">
+  <div class="jh-page">
+    <div class="jh-grain"></div>
+    <div class="jh-hero-grad"></div>
+    <div class="jh-hero-orb"></div>
+    <svg class="jh-infinity" width="112" height="56" viewBox="0 0 120 60">
+      <path d="M18 42C28 16 43 10 58 31C72 51 90 45 101 18" fill="none" stroke="#79b7ff" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="31" cy="26" r="7" fill="none" stroke="#f5c95c" stroke-width="1.5"/>
+      <circle cx="58" cy="31" r="7" fill="none" stroke="#79b7ff" stroke-width="1.5"/>
+      <circle cx="88" cy="30" r="7" fill="none" stroke="#f5c95c" stroke-width="1.5"/>
+    </svg>
+    <button class="detail-close" onclick="closeDetail('baidu')" style="position:absolute;top:20px;right:24px;z-index:10;">✕ CLOSE</button>
+    <div class="jh-content">
+      <div class="jh-tag-row">
+        <span class="jh-tag">Exposure 01 — internship</span>
+        <span class="jh-film-code">KODAK 5219 ▪ EXP 01</span>
+      </div>
+      <div class="jh-meta-row">
+        <span class="jh-meta-item">百度在线网络技术（北京）有限公司</span>
+        <span class="jh-meta-dot"></span>
+        <span class="jh-meta-item">AIGC产品经理实习生</span>
+        <span class="jh-meta-dot"></span>
+        <span class="jh-meta-item">2026.01 — 2026.04</span>
+      </div>
+      <div class="jh-section-label"><span style="color:#79b7ff;">◆</span> 工作概述</div>
+      <div class="jh-body">参与百度文库商业投放侧AIGC产品增长，以AI能力驱动广告流量向付费转化，聚焦<span class="jh-hl">AI命理垂类产品矩阵</span>与<span class="jh-hl">AI Coding全链路投放自动化</span>两条业务线，负责产品0-1搭建及上线后转化优化，助力Q1会员收入同比增长<span class="jh-hl-green">30%+</span>。</div>
+      <div class="jh-section-label"><span style="color:#79b7ff;">◆</span> AI命理产品搭建与优化</div>
+      <div class="jh-body">锚定凤巢移动端日均<span class="jh-hl">80万+</span>命理类广告点击量，参与八字、星盘等命理产品从0-1上线；基于漏斗数据定位支付流失节点，设计二次挽留弹窗引导用户复购。针对八字封面图开展A/B实验，动图切换为静图后<span class="jh-hl-green">CVR提升2%</span>，推动命理垂类日均订单稳定在2900单左右，单日峰值达3074单。</div>
+      <div class="jh-section-label"><span style="color:#79b7ff;">◆</span> AI Coding投放闭环建设</div>
+      <div class="jh-flow">
+        <div class="jh-flow-row"><div class="jh-flow-node jh-flow-entry">Search Query 分析 · 识别高潜付费场景</div></div>
+        <div class="jh-flow-row"><span class="jh-flow-arrow">↓</span></div>
+        <div class="jh-flow-row"><div class="jh-flow-node jh-flow-gate">抽象产品字段 · 页面生成规则 · 投放素材结构</div></div>
+        <div class="jh-flow-row"><span class="jh-flow-arrow">↓</span></div>
+        <div class="jh-flow-branch">
+          <div class="jh-branch jh-branch-rag">文生文<small>内容工具场景</small></div>
+          <div class="jh-branch jh-branch-agent">图生图<small>视觉生成场景</small></div>
+          <div class="jh-branch jh-branch-human">文生游戏<small>互动玩法场景</small></div>
+        </div>
+        <div class="jh-flow-row" style="margin-top:8px;"><span class="jh-flow-arrow">↓</span></div>
+        <div class="jh-flow-row"><div class="jh-flow-node jh-flow-judge">订单 · 点击 · CVR 数据回流策略侧，形成投放优化闭环</div></div>
+      </div>
+      <div class="jh-body">针对投放场景上线慢、周期长的问题，参与搭建全链路自动化系统，驱动AI Coding自动产出产品方案与落地页，并将订单、点击、CVR等数据回流策略侧形成闭环。累计完成文生文、图生图、文生游戏等<span class="jh-hl-green">236个</span>多模态场景投放，贡献订单量<span class="jh-hl-green">3.06W+</span>。</div>
+      <div class="jh-film-bottom">▪ ▪ ▪ BAIDU AIGC ▪ ▪ ▪ GROWTH LOOP ▪ ▪ ▪ PROCESS C-41 ▪ ▪ ▪</div>
+    </div>
+  </div>
+</div>
+
 <div class="detail-overlay detail-overlay--jianghai" id="detail-jianghai">
   <div class="jh-page">
     <div class="jh-grain"></div>
@@ -2656,8 +2801,8 @@ body::after {
     <button class="detail-close" onclick="closeDetail('jianghai')" style="position:absolute;top:20px;right:24px;z-index:10;">✕ CLOSE</button>
     <div class="jh-content">
       <div class="jh-tag-row">
-        <span class="jh-tag">Exposure 01 — internship</span>
-        <span class="jh-film-code">KODAK 5219 ▪ EXP 01</span>
+        <span class="jh-tag">Exposure 02 — internship</span>
+        <span class="jh-film-code">KODAK 5219 ▪ EXP 02</span>
       </div>
       <div class="jh-meta-row">
         <span class="jh-meta-item">广州疆海科技有限公司</span>
@@ -2705,8 +2850,8 @@ body::after {
     <button class="detail-close" onclick="closeDetail('ideashu')" style="position:absolute;top:20px;right:24px;z-index:10;">✕ CLOSE</button>
     <div class="is-content">
       <div class="is-tag-row">
-        <span class="is-tag">Exposure 02 — personal project</span>
-        <span class="is-film-code">KODAK 5219 ▪ EXP 02</span>
+        <span class="is-tag">Exposure 04 — personal project</span>
+        <span class="is-film-code">KODAK 5219 ▪ EXP 04</span>
       </div>
       <div class="is-meta-row">
         <span class="is-meta-item">IdeaShu 灵感书</span>
@@ -3389,6 +3534,18 @@ function navigateToAbout() {
     overlay.style.opacity = "1";
     setTimeout(() => {
       window.location.href = "about.html";
+    }, 300);
+  });
+}
+
+function navigateToThoughts() {
+  const overlay = document.createElement('div');
+  overlay.style.cssText = "position:fixed;inset:0;z-index:9999;background:#f4b24f;mix-blend-mode:difference;opacity:0;transition:opacity 0.3s ease;pointer-events:none;";
+  document.body.appendChild(overlay);
+  requestAnimationFrame(() => {
+    overlay.style.opacity = "1";
+    setTimeout(() => {
+      window.location.href = "thoughts.html";
     }, 300);
   });
 }

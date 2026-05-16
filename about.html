@@ -117,17 +117,25 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 80px 40px;
+      padding: 72px 40px 84px;
       overflow: hidden;
+      background: var(--film-black);
     }
     .hero::before {
       content: "";
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(ellipse at 30% 20%, rgba(107, 91, 79, 0.15) 0%, transparent 60%),
-        radial-gradient(ellipse at 70% 80%, rgba(212, 135, 63, 0.08) 0%, transparent 50%);
+      background: none;
       pointer-events: none;
+    }
+    .hero-index-line {
+      width: min(980px, calc(100vw - 140px));
+      margin-bottom: 54px;
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      color: #6a5a3a;
+      text-transform: uppercase;
+      animation: fadeUp 1.2s ease-out both;
     }
     .frame-number {
       position: absolute;
@@ -149,7 +157,7 @@
     }
     .hero-title-group {
       text-align: center;
-      margin-bottom: 60px;
+      margin-bottom: 42px;
       animation: fadeUp 1.2s ease-out both;
     }
     .hero-label {
@@ -177,6 +185,121 @@
       color: var(--film-tan);
       letter-spacing: 2px;
       font-weight: 300;
+    }
+
+    .darkroom-desk {
+      width: min(980px, calc(100vw - 140px));
+      position: relative;
+      background: var(--film-black);
+      animation: fadeUp 1.2s ease-out 0.18s both;
+    }
+
+    .darkroom-desk-head {
+      display: block;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--film-brown);
+    }
+
+    .darkroom-kicker {
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #6a5a3a;
+      margin-bottom: 10px;
+    }
+
+    .darkroom-title {
+      font-family: "Noto Serif SC", serif;
+      font-size: clamp(1.35rem, 2.7vw, 2rem);
+      color: var(--film-white);
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .darkroom-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      padding: 28px 0 24px;
+    }
+
+    .darkroom-step {
+      position: relative;
+      min-height: 188px;
+      padding: 18px 16px 16px;
+      border: 1px solid var(--film-brown);
+      background:
+        linear-gradient(180deg, rgba(42, 37, 32, 0.72), rgba(26, 23, 20, 0.94));
+      overflow: hidden;
+    }
+
+    .darkroom-step::before {
+      content: attr(data-step);
+      position: absolute;
+      right: 14px;
+      top: 12px;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      color: rgba(160, 142, 122, 0.34);
+    }
+
+    .darkroom-step::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 3px;
+      background: var(--step-color);
+      opacity: 0.78;
+    }
+
+    .darkroom-step-word {
+      font-family: "Playfair Display", "Noto Serif SC", serif;
+      font-size: 23px;
+      line-height: 1;
+      font-style: italic;
+      color: var(--step-color);
+      margin-bottom: 14px;
+      letter-spacing: 0;
+    }
+
+    .darkroom-step-label {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      color: var(--film-warm);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .darkroom-step-text {
+      font-family: "Noto Serif SC", serif;
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--film-cream);
+    }
+
+    .darkroom-signal {
+      display: grid;
+      grid-template-columns: 92px 1fr 92px;
+      gap: 16px;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid var(--film-brown);
+      font-size: 9px;
+      letter-spacing: 0.24em;
+      color: rgba(160, 142, 122, 0.55);
+      text-transform: uppercase;
+    }
+
+    .darkroom-signal-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--kodak-yellow), transparent);
+      opacity: 0.46;
+    }
+
+    .darkroom-signal-end {
+      text-align: right;
     }
 
     /* ===== 胶卷走带 ===== */
@@ -553,91 +676,210 @@
       font-weight: 300;
     }
 
-    .philosophy-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-    }
-    .phil-card {
-      background: var(--film-dark);
-      padding: 36px 28px;
+    .thought-archive {
       position: relative;
-      transition: background 0.4s ease;
+      padding: 12px 0 6px;
     }
-    .phil-card:hover { background: var(--film-brown); }
-    .phil-card::before {
-      content: attr(data-element);
-      position: absolute;
-      top: 12px;
-      right: 16px;
-      font-size: 9px;
-      letter-spacing: 2px;
-      color: var(--film-warm);
-      opacity: 0.5;
+    .thought-intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 38px;
+      padding-bottom: 28px;
+      border-bottom: 0.5px solid #1f1a14;
     }
-    .phil-icon { font-size: 28px; margin-bottom: 16px; display: block; }
-    .phil-title {
-      font-family: "Noto Serif SC", serif;
-      font-size: 15px;
-      color: var(--film-white);
-      margin-bottom: 10px;
-      font-weight: 600;
+    .thought-kicker {
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--film-orange);
+      text-transform: uppercase;
+      margin-bottom: 12px;
     }
-    .phil-desc {
-      font-size: 11px;
-      line-height: 1.9;
+    .thought-summary {
+      max-width: 680px;
+      font-size: 12px;
+      line-height: 2;
       color: var(--film-tan);
       font-weight: 300;
     }
-
-    .motto-strip {
-      padding: 80px 40px;
+    .thought-count {
+      min-width: 130px;
+      border: 1px solid rgba(212, 160, 74, 0.32);
+      padding: 16px 18px;
       text-align: center;
-      position: relative;
-    }
-    .motto-strip::before, .motto-strip::after {
-      content: "▪ ▪ ▪ KODAK 5219 ▪ ▪ ▪ PORTRA 400 ▪ ▪ ▪ PROCESS C-41 ▪ ▪ ▪";
-      display: block;
+      color: var(--film-warm);
+      letter-spacing: 2px;
       font-size: 9px;
-      letter-spacing: 3px;
-      color: var(--film-warm);
-      opacity: 0.3;
-    }
-    .motto-strip::before { margin-bottom: 50px; }
-    .motto-strip::after { margin-top: 50px; }
-    .motto-text {
-      font-family: "Playfair Display", "Noto Serif SC", serif;
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      color: var(--film-white);
-      line-height: 1.8;
-      max-width: 760px;
-      margin: 0 auto 16px;
-      font-weight: 400;
-    }
-    .motto-text em { color: var(--kodak-yellow); font-style: italic; }
-    .motto-attr { font-size: 11px; color: var(--film-warm); letter-spacing: 2px; }
-
-    .toolkit-container { display: flex; flex-direction: column; gap: 40px; }
-    .toolkit-row { display: flex; flex-direction: column; gap: 8px; }
-    .toolkit-label {
-      font-size: 10px;
-      letter-spacing: 3px;
-      color: var(--film-warm);
       text-transform: uppercase;
-      margin-bottom: 4px;
     }
-    .toolkit-items { display: flex; flex-wrap: wrap; gap: 6px; }
-    .toolkit-tag {
+    .thought-count strong {
+      display: block;
+      font-family: "Playfair Display", serif;
+      font-size: 34px;
+      line-height: 1;
+      color: var(--film-white);
+      letter-spacing: 0;
+      margin-bottom: 6px;
+    }
+    .thought-board {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 34px 26px;
+      align-items: start;
+      padding: 8px 4px 24px;
+    }
+    .thought-card {
+      --accent: #d18a2d;
+      --frame-a: #f0a32f;
+      --frame-b: #df6f29;
+      --tilt: -1deg;
+      position: relative;
+      aspect-ratio: 54 / 86;
+      min-height: auto;
+      padding: 16px 16px 18px;
+      border-radius: 6px;
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--frame-a) 92%, white), var(--frame-b)),
+        var(--frame-a);
+      color: #241a12;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      box-shadow:
+        0 18px 38px rgba(0, 0, 0, 0.36),
+        inset 0 2px 0 rgba(255, 255, 255, 0.24),
+        inset 0 -3px 10px rgba(75, 42, 24, 0.12);
+      transform: rotate(var(--tilt)) translateY(0);
+      transform-origin: 50% 30%;
+      transition: transform 0.42s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.42s ease, filter 0.42s ease;
+      will-change: transform;
+    }
+    .thought-card::before {
+      content: attr(data-frame);
+      position: absolute;
+      right: 16px;
+      bottom: 8px;
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      color: rgba(45, 36, 26, 0.28);
+      z-index: 3;
+    }
+    .thought-card::after {
+      content: "";
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      width: 72px;
+      height: 24px;
+      background: rgba(226, 206, 164, 0.62);
+      border: 1px solid rgba(126, 98, 58, 0.18);
+      transform: translateX(-50%) rotate(calc(var(--tilt) * -0.65));
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.14);
+      pointer-events: none;
+      z-index: 4;
+    }
+    .thought-card.featured {
+      grid-column: auto;
+    }
+    .thought-card:hover {
+      transform: rotate(0deg) translateY(-9px) scale(1.018);
+      box-shadow:
+        0 28px 58px rgba(0, 0, 0, 0.46),
+        0 2px 0 rgba(255, 255, 255, 0.55) inset;
+      filter: saturate(1.05);
+      z-index: 8;
+    }
+    .thought-card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 5px;
+    }
+    .thought-card:nth-child(2n) { --tilt: 1.4deg; }
+    .thought-card:nth-child(3n) { --tilt: -1.8deg; }
+    .thought-card:nth-child(4n) { --tilt: 0.9deg; }
+    .thought-card:nth-child(5n) { --tilt: -0.6deg; }
+    .thought-card:nth-child(6n + 1) { --accent: #d18a2d; --frame-a: #f0a32f; --frame-b: #df6f29; }
+    .thought-card:nth-child(6n + 2) { --accent: #6d9a63; --frame-a: #8caf79; --frame-b: #6e925a; }
+    .thought-card:nth-child(6n + 3) { --accent: #3f9ac6; --frame-a: #5bb9dc; --frame-b: #43a3c7; }
+    .thought-card:nth-child(6n + 4) { --accent: #c8bd43; --frame-a: #e6d85a; --frame-b: #bdc957; }
+    .thought-card:nth-child(6n + 5) { --accent: #c84d63; --frame-a: #ef6d5e; --frame-b: #cf4f8d; }
+    .thought-card:nth-child(6n) { --accent: #4a5fab; --frame-a: #2e82cf; --frame-b: #4b4d9f; }
+    .thought-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      margin: 0 0 6px;
+      padding: 0;
+      order: 1;
+    }
+    .thought-date,
+    .thought-category {
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .thought-date {
+      color: #403223;
+      background: rgba(255, 249, 230, 0.7);
+      padding: 4px 7px;
+    }
+    .thought-category {
+      color: #fff7e8;
+      background: var(--accent);
+      padding: 4px 7px;
+      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+    }
+    .thought-text {
+      font-family: "Noto Serif SC", serif;
+      font-size: clamp(0.84rem, 0.94vw, 0.98rem);
+      line-height: 1.82;
+      color: #f1e5d2;
+      font-weight: 400;
+      margin: 0 0 12px;
+      min-height: auto;
+      aspect-ratio: 46 / 62;
+      padding: 34px 18px 18px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background:
+        linear-gradient(160deg, rgba(43, 34, 28, 0.94), rgba(71, 54, 44, 0.9)),
+        radial-gradient(circle at 80% 8%, color-mix(in srgb, var(--frame-a) 18%, transparent), transparent 36%);
+      border: 1px solid rgba(36, 26, 18, 0.2);
+      box-shadow:
+        inset 0 0 34px rgba(0, 0, 0, 0.24),
+        0 1px 0 rgba(255, 255, 255, 0.12);
+      order: 0;
+    }
+    .thought-card.featured .thought-text {
+      font-size: clamp(0.84rem, 0.94vw, 0.98rem);
+      line-height: 1.82;
+    }
+    .thought-scene {
+      border-top: 1px solid rgba(58, 52, 42, 0.14);
+      padding: 7px 2px 0;
+      font-family: "Noto Serif SC", serif;
+      font-size: 9.5px;
+      line-height: 1.4;
+      color: rgba(48, 39, 28, 0.72);
+      letter-spacing: 0.02em;
+      min-height: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      order: 2;
+    }
+    .thought-scene::before {
+      content: "scene";
       display: inline-block;
-      padding: 6px 14px;
-      font-size: 11px;
-      letter-spacing: 1px;
-      border: 1px solid var(--film-brown);
-      color: var(--film-cream);
-      transition: all 0.3s ease;
+      color: var(--accent);
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-right: 6px;
     }
-    .toolkit-tag:hover { border-color: var(--kodak-yellow); color: var(--kodak-yellow); }
-    .toolkit-tag.highlight { border-color: var(--film-orange); color: var(--film-orange); }
 
     .personality-grid {
       display: grid;
@@ -878,9 +1120,21 @@
       .hero { padding: 60px 24px; }
       .frame-number, .frame-counter { display: none; }
       .back-link { left: 24px; }
+      .hero-index-line { width: 100%; margin-bottom: 36px; line-height: 1.8; }
+      .darkroom-desk { width: 100%; }
+      .darkroom-desk-head { display: block; }
+      .darkroom-grid { grid-template-columns: 1fr; }
+      .darkroom-step { min-height: auto; }
+      .darkroom-signal { grid-template-columns: 1fr; gap: 10px; }
+      .darkroom-signal-end { text-align: left; }
       .origin-grid { grid-template-columns: 1fr; gap: 24px; }
       .origin-divider { display: none; }
-      .philosophy-cards { grid-template-columns: 1fr; }
+      .thought-intro { grid-template-columns: 1fr; }
+      .thought-count { width: 130px; }
+      .thought-board { grid-template-columns: 1fr; gap: 28px; padding: 8px 0 20px; }
+      .thought-card.featured { grid-column: auto; }
+      .thought-card { min-height: auto; padding: 12px 12px 18px; }
+      .thought-text { min-height: auto; padding: 34px 16px 18px; }
       .personality-grid { grid-template-columns: 1fr; gap: 30px; }
       .mbti-badge { max-width: 220px; margin: 0 auto; }
       .contact-sheet { grid-template-columns: repeat(2, 1fr); }
@@ -895,118 +1149,9 @@
   <div class="develop-overlay" id="developOverlay"></div>
 
   <div class="content">
-    <section class="hero">
-      <div class="frame-number">KODAK 5219 ▪ NEGATIVE</div>
-      <div class="frame-counter">EXP N / 36</div>
-      <div class="hero-title-group">
-        <div class="hero-label">MORE ABOUT ME</div>
-        <h1 class="hero-title">对焦：<em>显影前</em>的我</h1>
-        <div class="hero-subtitle">严梦灿 · ELIA · TSINGHUA UNIVERSITY · CLASS OF 2027</div>
-      </div>
-      <div class="strip-container">
-        <div class="perf-bar top" id="perfTop"></div>
-        <div class="frames-track" id="track"></div>
-        <div class="perf-bar bottom" id="perfBottom"></div>
-      </div>
-      <p class="hero-label strip-hint">CLICK TO ENLARGE · 点击放大</p>
-    </section>
-
     <section class="section reveal">
       <div class="section-header">
         <span class="section-code">EXP 01</span>
-        <h2 class="section-title">显影 · Origin</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="origin-grid">
-        <div class="origin-col">
-          <div class="origin-item">
-            <div class="origin-year">2020 - 2024</div>
-            <div class="origin-label">北京林业大学 · 环境工程</div>
-            <div class="origin-desc">211，本科，专业前5%。曾获国家奖学金、北京市优秀毕业生等奖项和荣誉。</div>
-          </div>
-          <div class="origin-item">
-            <div class="origin-year">2025 - 2027</div>
-            <div class="origin-label">清华大学 · 资源与环境（保研）</div>
-            <div class="origin-desc">硕士在读。研究方向为AI在环境监测领域的应用。</div>
-          </div>
-        </div>
-        <div class="origin-divider"></div>
-        <div class="origin-col">
-          <div class="origin-item">
-            <div class="origin-year">2025.07 - 2025.10</div>
-            <div class="origin-label">广州疆海科技 · AI 产品经理（实习）</div>
-            <div class="origin-desc">参与从 0 到 1 搭建出海 AI 客服系统，设计RAG + 多 Agent 协同的二级分层架构，实现黑五大促前灰度上线，人工客服单均处理时长缩短25%。</div>
-          </div>
-          <div class="origin-item">
-            <div class="origin-year">2026.4 - NOW</div>
-            <div class="origin-label">百度 · AIGC产品经理（实习）</div>
-            <div class="origin-desc">参与百度AI产品线大模型产品规划与设计，负责AI对话产品功能规划与设计，推动产品落地。</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section reveal">
-      <div class="section-header">
-        <span class="section-code">EXP 02</span>
-        <h2 class="section-title">定影 · Philosophy</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="philosophy-cards">
-        <div class="phil-card" data-element="METAL">
-          <span class="phil-icon">◈</span>
-          <div class="phil-title">体验派产品观</div>
-          <div class="phil-desc">产品价值不仅是功能可用，更是体验被理解。关注用户真实语境中的感受与决策成本。</div>
-        </div>
-        <div class="phil-card" data-element="WATER">
-          <span class="phil-icon">◉</span>
-          <div class="phil-title">东方哲学 × AI</div>
-          <div class="phil-desc">把五行、阴阳、时辰作为语义翻译层，连接抽象情绪与可执行推荐，补足纯特征工程的感性维度。</div>
-        </div>
-        <div class="phil-card" data-element="WOOD">
-          <span class="phil-icon">◇</span>
-          <div class="phil-title">技术为产品服务</div>
-          <div class="phil-desc">模型选型、缓存策略、Agent 编排都围绕产品目标做取舍，以稳定体验和交付效率为先。</div>
-        </div>
-      </div>
-    </section>
-
-    <div class="motto-strip reveal">
-      <div class="motto-text">「胶片不能后悔，每一次快门都是<em>承诺</em>。<br>产品也一样，每一次发版都是对用户的<em>交付</em>。」</div>
-      <div class="motto-attr">- ELIA · LIFE MOTTO</div>
-    </div>
-
-    <section class="section reveal">
-      <div class="section-header">
-        <span class="section-code">EXP 03</span>
-        <h2 class="section-title">药液 · Toolkit</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="toolkit-container">
-        <div class="toolkit-row">
-          <div class="toolkit-label">AI 产品设计</div>
-          <div class="toolkit-items">
-            <span class="toolkit-tag highlight">PRD</span><span class="toolkit-tag highlight">用户调研</span><span class="toolkit-tag">竞品分析</span><span class="toolkit-tag">数据分析</span><span class="toolkit-tag">A/B 测试</span>
-          </div>
-        </div>
-        <div class="toolkit-row">
-          <div class="toolkit-label">AI / LLM 技术栈</div>
-          <div class="toolkit-items">
-            <span class="toolkit-tag highlight">Prompt Engineering</span><span class="toolkit-tag highlight">RAG</span><span class="toolkit-tag highlight">Multi-Agent</span><span class="toolkit-tag">LangGraph</span><span class="toolkit-tag">CrewAI</span><span class="toolkit-tag">LLM-as-Judge</span>
-          </div>
-        </div>
-        <div class="toolkit-row">
-          <div class="toolkit-label">Vibe Coding</div>
-          <div class="toolkit-items">
-            <span class="toolkit-tag highlight">Cursor</span><span class="toolkit-tag highlight">Antigravity</span><span class="toolkit-tag">OpenClaw</span><span class="toolkit-tag">React</span><span class="toolkit-tag">Node.js</span><span class="toolkit-tag">Python</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section reveal">
-      <div class="section-header">
-        <span class="section-code">EXP 04</span>
         <h2 class="section-title">色温 · Personality</h2>
         <div class="section-line"></div>
       </div>
@@ -1017,10 +1162,10 @@
         </div>
         <div class="trait-list">
           <div class="trait-item"><span class="trait-label">产品直觉</span><div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 89%"></div></div><span class="trait-value">89</span></div>
-          <div class="trait-item"><span class="trait-label">系统思维</span><div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 86%"></div></div><span class="trait-value">86</span></div>
+          <div class="trait-item"><span class="trait-label">深度洞察</span><div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 86%"></div></div><span class="trait-value">86</span></div>
           <div class="trait-item"><span class="trait-label">技术理解</span><div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 84%"></div></div><span class="trait-value">84</span></div>
-          <div class="trait-item"><span class="trait-label">审美表达</span><div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 91%"></div></div><span class="trait-value">91</span></div>
-          <div class="trait-item"><span class="trait-label">跨界整合</span><div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 88%"></div></div><span class="trait-value">88</span></div>
+          <div class="trait-item"><span class="trait-label">审美判断</span><div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 91%"></div></div><span class="trait-value">91</span></div>
+          <div class="trait-item"><span class="trait-label">沟通表达</span><div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 88%"></div></div><span class="trait-value">88</span></div>
           <div class="trait-item"><span class="trait-label">探索欲</span><div class="trait-bar-bg"><div class="trait-bar-fill" style="width: 96%"></div></div><span class="trait-value">96</span></div>
         </div>
       </div>
@@ -1028,7 +1173,7 @@
 
     <section class="section reveal">
       <div class="section-header">
-        <span class="section-code">EXP 05</span>
+        <span class="section-code">EXP 02</span>
         <h2 class="section-title">相册 · Off-Camera</h2>
         <div class="section-line"></div>
       </div>
@@ -1042,7 +1187,7 @@
 
     <section class="section reveal">
       <div class="section-header">
-        <span class="section-code">EXP 06</span>
+        <span class="section-code">EXP 03</span>
         <h2 class="section-title">冲印 · Connect</h2>
         <div class="section-line"></div>
       </div>
@@ -1130,14 +1275,14 @@
   <script>
     (function () {
       var thoughts = [
-        { text: "为什么是AI PM？\n\n我开始认真思考自己未来想从事的职业是在读研以后，这也是为啥本科在北京却一段实习经历也没有，那时候除了学习就是出去旅行，但如果再来一次我可能还是会这样选择，很幸福很美好的一段青春时光🥹。有些扯远了，再回到为什么想做AI PM的问题上。\n\n第一点，我真的很爱很爱创造。以前有想法但没有办法实现，可现在我可以通过vibe coding把脑子里的东西做出来，真的很令人兴奋！\n\n其次，我是一个需要在人与人的链接中获得价值感来充电的人类。如果能做出一些产品体现在大家的日常生活中，让AI惠及更多的人，对我来说太有吸引力了。\n\n最后，很自信的说我觉得我就适合吃AI PM这碗饭！发现需求、设计方案、协作沟通，以及对AI能力的判断和理解，都是我擅长的———话不多说，请看作品！", date: "2026.04", scene: "在北京的春天" },
-        { text: "做AI PM这大半年来我最大的变化是：看到一个新的AI产品，不再是简单地体验，而是去思考"它想解决什么问题？有哪些好的功能和设计值得学习？"产品sense的增长，就是从体验成品，变成看得见成品背后的取舍。", date: "2024.12", scene: "疆海实习最后一天" },
-        { text: "好的 AI 产品应该像一杯温度刚好的茶，你不会注意到温度，但你会觉得舒服。不好的产品像一杯烫嘴的水，你只记得痛。", date: "2025.06", scene: "MoodMix 路演之后" },
-        { text: "INFJ 的直觉不是猜，是大量观察之后身体自动给出的答案。我不是在冒险，我只是看到了别人还没看到的东西。", date: "2025.01", scene: "深夜写产品方案" },
-        { text: "跨学科不是标签，是真的站在两个领域的交界处，看到了别人看不到的路。环境科学教我系统思维，AI 教我怎么把系统变成产品。", date: "2024.09", scene: "清华开学第一周" },
-        { text: "每次打开 Cursor 都像装上一卷新胶卷，不知道会冲出什么，但很期待。", date: "2025.04", scene: "周末在宿舍" },
-        { text: "用户不会告诉你TA要什么，但TA的沉默会。那些没有点击的按钮、提前关掉的页面、反复修改的输入框，都在说话。", date: "2025.02", scene: "读 Don Norman 的时候" },
-        { text: "写 PRD 和写诗有一个共同点：每一个字都要值得在那里。", date: "2024.11", scene: "改第三版需求文档" },
+        { text: "这段时间越用 AI 越觉得，工具的能力有多强，不只看模型参数，也看使用者的水平。能拆问题、会追问、判断结果的人，更容易把 AI 变成自己的杠杆；效率上来了，人也同时会被训练得更敏锐。", date: "2026.04", scene: "5天平地起高楼，用 Codex 写完整个开题报告", category: "认知密度" },
+        { text: "“你是 XX 领域专家”在今天的AI能力下早就不必需了。把问题讲清楚，把输出要求说到位，通常已经能拿到一份不跑偏的答案。Prompt 是入口，背后真正起作用的还是你对任务和逻辑的理解。", date: "2026.03", scene: "和Claude聊天N轮", category: "认知密度" },
+        { text: "我越来越觉得，AI 时代要练的不是“会不会用工具”这么简单，而是分得清边界：哪些事可以放心交给 AI，哪些判断必须由人来判断。", date: "2026.03", scene: "做 AI 产品方案时", category: "产品判断" },
+        { text: "做 AI 产品时，生成本身反而没那么难。难的是面对一堆可能性时，知道哪一个值得留下、哪一个可以删掉；这个收敛的过程，才是 PM 真正要负责的部分。", date: "2026.03", scene: "做 AIGC 创意投放方案", category: "产品判断" },
+        { text: "AI 很像一面认知镜子。你问得笼统，它就只能泛泛回答；你自己先想具体，它才更可能给出具体、有用的回应。", date: "2026.01", scene: "整理 Prompt 提示词", category: "认知密度" },
+        { text: "Vibe coding 最让我兴奋的，不是代码一行行自动出现的那一刻，而是我意识到：非技术人员的奇思妙想也能够自己实现。", date: "2026.01", scene: "做个人网站的时候", category: "创造路径" },
+        { text: "我不觉得转向 AI 产品是一场突然的跳跃。更像是把过去练出来的系统感、观察力和表达欲，放进了一个更加开阔的空间里，继续生长。", date: "2025.12", scene: "重新梳理职业方向", category: "创造路径" },
+        { text: "以前很多想法只是在脑子里飘着，现在我能把它们一点点落到页面、按钮和流程里。看到一个东西从没有到能被点开、被使用，这是我喜欢 AI 产品的原因。", date: "2025.10", scene: "跑通第一个 Demo", category: "创造路径" },
       ];
 
       function buildFrames() {
@@ -1169,6 +1314,61 @@
           frame.addEventListener("click", function () {
             openLightbox(parseInt(frame.getAttribute("data-idx"), 10));
           });
+        });
+      }
+
+      function buildThoughtBoard() {
+        var board = document.getElementById("thoughtBoard");
+        var count = document.getElementById("thoughtCount");
+        if (count) count.textContent = thoughts.length;
+        if (!board) return;
+        var categoryClass = {
+          "认知密度": "cat-cognition",
+          "产品判断": "cat-judgment",
+          "用户洞察": "cat-insight",
+          "创造路径": "cat-creation"
+        };
+        board.innerHTML = "";
+        thoughts.forEach(function (item, idx) {
+          var card = document.createElement("article");
+          card.className = "thought-card " + (categoryClass[item.category] || "cat-cognition") + (idx === 0 ? " featured" : "");
+          card.setAttribute("data-frame", "FRAME " + String(idx + 1).padStart(2, "0"));
+          card.setAttribute("tabindex", "0");
+          card.setAttribute("role", "button");
+          card.setAttribute("aria-label", "查看第 " + String(idx + 1) + " 条语录");
+
+          var meta = document.createElement("div");
+          meta.className = "thought-meta";
+          var date = document.createElement("span");
+          date.className = "thought-date";
+          date.textContent = item.date;
+          var category = document.createElement("span");
+          category.className = "thought-category";
+          category.textContent = item.category || "THOUGHT";
+          meta.appendChild(date);
+          meta.appendChild(category);
+
+          var text = document.createElement("p");
+          text.className = "thought-text";
+          text.textContent = item.text;
+
+          var scene = document.createElement("div");
+          scene.className = "thought-scene";
+          scene.textContent = item.scene || "";
+
+          card.appendChild(meta);
+          card.appendChild(text);
+          card.appendChild(scene);
+          card.addEventListener("click", function () {
+            openLightbox(idx);
+          });
+          card.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              openLightbox(idx);
+            }
+          });
+          board.appendChild(card);
         });
       }
 
@@ -1268,6 +1468,7 @@
       });
 
       buildFrames();
+      buildThoughtBoard();
       buildPerfs("perfTop");
       buildPerfs("perfBottom");
       buildLbPerfs("lbPerfsTop");
