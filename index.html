@@ -1479,10 +1479,35 @@ body::after {
   border-color: rgba(121,183,255,0.14);
 }
 
+.detail-overlay--baidu .jh-flow-branch {
+  width: min(540px, 100%);
+  margin: 4px auto 0;
+  gap: 10px;
+}
+
+.detail-overlay--baidu .jh-branch {
+  width: 100%;
+  min-width: 0;
+  flex: 1 1 0;
+  padding: 9px 8px;
+  font-size: 10px;
+  box-shadow: 0 0 18px rgba(121,183,255,0.04);
+}
+
+.detail-overlay--baidu .jh-branch small {
+  color: rgba(185,216,255,0.46);
+}
+
 .detail-overlay--baidu .jh-flow-entry {
   background: rgba(47,123,232,0.12);
   border-color: rgba(121,183,255,0.28);
   color: #b9d8ff;
+}
+
+.detail-overlay--baidu .jh-branch-test {
+  background: rgba(245,201,92,0.07);
+  border: 1px solid rgba(245,201,92,0.18);
+  color: #f0c86a;
 }
 
 .detail-overlay--baidu .jh-branch-rag {
@@ -2763,15 +2788,16 @@ body::after {
       </div>
       <div class="jh-section-label"><span style="color:#79b7ff;">◆</span> 工作概述</div>
       <div class="jh-body">参与百度文库商业投放侧AIGC产品增长，以AI能力驱动广告流量向付费转化，聚焦<span class="jh-hl">AI命理垂类产品矩阵</span>与<span class="jh-hl">AI Coding全链路投放自动化</span>两条业务线，负责产品0-1搭建及上线后转化优化，助力Q1会员收入同比增长<span class="jh-hl-green">30%+</span>。</div>
-      <div class="jh-section-label"><span style="color:#79b7ff;">◆</span> AI命理产品搭建与优化</div>
-      <div class="jh-body">锚定凤巢移动端日均<span class="jh-hl">80万+</span>命理类广告点击量，参与八字、星盘等命理产品从0-1上线；基于漏斗数据定位支付流失节点，设计二次挽留弹窗引导用户复购。针对八字封面图开展A/B实验，动图切换为静图后<span class="jh-hl-green">CVR提升2%</span>，推动命理垂类日均订单稳定在2900单左右，单日峰值达3074单。</div>
+      <div class="jh-section-label"><span style="color:#79b7ff;">◆</span> AI创新垂类产品矩阵搭建</div>
+      <div class="jh-body">结合搜索流量与Query意图拆解产品机会，探索多垂类产品0-1搭建及转化优化。命理方向基于漏斗数据定位八字星盘等产品的用户流失节点，优化落地页排版与付费承接链路；美学方向强化上传图片即得个性化方案的即时反馈；儿童益智场景将小游戏包装为逻辑、语言等思维训练模块，提升产品价值感，三个方向累计订单<span class="jh-hl-green">60w+</span>。</div>
       <div class="jh-section-label"><span style="color:#79b7ff;">◆</span> AI Coding投放闭环建设</div>
       <div class="jh-flow">
         <div class="jh-flow-row"><div class="jh-flow-node jh-flow-entry">Search Query 分析 · 识别高潜付费场景</div></div>
         <div class="jh-flow-row"><span class="jh-flow-arrow">↓</span></div>
-        <div class="jh-flow-row"><div class="jh-flow-node jh-flow-gate">抽象产品字段 · 页面生成规则 · 投放素材结构</div></div>
+        <div class="jh-flow-row"><div class="jh-flow-node jh-flow-gate">抽象产品字段 · 页面生成规则 · 闭环链路设计</div></div>
         <div class="jh-flow-row"><span class="jh-flow-arrow">↓</span></div>
         <div class="jh-flow-branch">
+          <div class="jh-branch jh-branch-test">测试题<small>测试报告场景</small></div>
           <div class="jh-branch jh-branch-rag">文生文<small>内容工具场景</small></div>
           <div class="jh-branch jh-branch-agent">图生图<small>视觉生成场景</small></div>
           <div class="jh-branch jh-branch-human">文生游戏<small>互动玩法场景</small></div>
@@ -2779,7 +2805,7 @@ body::after {
         <div class="jh-flow-row" style="margin-top:8px;"><span class="jh-flow-arrow">↓</span></div>
         <div class="jh-flow-row"><div class="jh-flow-node jh-flow-judge">订单 · 点击 · CVR 数据回流策略侧，形成投放优化闭环</div></div>
       </div>
-      <div class="jh-body">针对投放场景上线慢、周期长的问题，参与搭建全链路自动化系统，驱动AI Coding自动产出产品方案与落地页，并将订单、点击、CVR等数据回流策略侧形成闭环。累计完成文生文、图生图、文生游戏等<span class="jh-hl-green">236个</span>多模态场景投放，贡献订单量<span class="jh-hl-green">3.06W+</span>。</div>
+      <div class="jh-body">针对测试题、AI内容生成类产品链路相似，但单点开发成本高、上线周期长的问题，搭建自动化生产链路：沉淀测试题类产品标准化框架，将新产品上线周期压缩至天级；基于搜索Query分析识别高潜付费场景，抽象页面结构与生成规则，打通方案生成、页面搭建与数据回流，累计完成<span class="jh-hl-green">300+</span>个多模态场景投放，订单量<span class="jh-hl-green">4W+</span>。</div>
       <div class="jh-film-bottom">▪ ▪ ▪ BAIDU AIGC ▪ ▪ ▪ GROWTH LOOP ▪ ▪ ▪ PROCESS C-41 ▪ ▪ ▪</div>
     </div>
   </div>
