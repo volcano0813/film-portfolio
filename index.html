@@ -2625,6 +2625,7 @@ body::after { opacity: 0.018; pointer-events: none; }
   align-items: center;
   padding: 120px clamp(24px, 6vw, 92px) 72px;
   background: var(--day-yellow);
+  border-radius: 0 0 clamp(30px, 4vw, 64px) clamp(30px, 4vw, 64px);
   isolation: isolate;
 }
 
@@ -2722,23 +2723,30 @@ html[data-theme="darkroom"] .day-hero {
 .film-section {
   min-height: 96svh;
   padding: 108px 0 96px;
-  background: var(--day-yellow);
-  color: var(--day-ink);
+  background:
+    radial-gradient(ellipse 72% 24% at 18% 0%, rgba(255, 210, 63, .36), transparent 72%),
+    linear-gradient(180deg, #fff1b5 0%, var(--surface) 24%, var(--surface) 100%);
+  color: var(--ink);
   border-radius: clamp(30px, 4vw, 64px);
   overflow: hidden;
 }
 .film-section-header { width: min(1240px, calc(100% - 48px)); margin: 0 auto 42px; display: flex; align-items: end; justify-content: space-between; }
-.film-section-header h2 { color: var(--day-ink); font: 400 clamp(56px, 8vw, 118px)/.9 "Archivo Black", sans-serif; letter-spacing: -.065em; }
-.film-section-header p { color: var(--day-ink); opacity: .75; font: 500 11px/1.5 "DM Mono", monospace; letter-spacing: .1em; }
-.scroll-hint { color: var(--day-ink); opacity: .6; }
+.film-section-header h2 { color: var(--ink); font: 400 clamp(56px, 8vw, 118px)/.9 "Archivo Black", sans-serif; letter-spacing: -.065em; }
+.film-section-header p { color: var(--ink); opacity: .68; font: 500 11px/1.5 "DM Mono", monospace; letter-spacing: .1em; }
+.scroll-hint { color: var(--ink); opacity: .6; }
 .film-strip-container { outline: none; cursor: grab; scroll-snap-type: x proximity; scrollbar-color: var(--day-ink) transparent; }
 .film-strip-container:active { cursor: grabbing; }
 .film-frame { scroll-snap-align: center; }
 .film-frame:focus-visible { outline: 4px solid var(--day-blue); outline-offset: 8px; }
-.film-caption-title, .film-caption-desc { color: var(--day-ink); }
+.film-caption-title, .film-caption-desc { color: var(--ink); }
 .film-caption-desc { opacity: .78; }
-.film-progress { width: min(720px, calc(100% - 48px)); height: 7px; margin: 30px auto 0; border: 1px solid var(--day-ink); border-radius: 999px; overflow: hidden; }
+.film-progress { width: min(720px, calc(100% - 48px)); height: 7px; margin: 30px auto 0; border: 1px solid var(--ink); border-radius: 999px; overflow: hidden; }
 .film-progress__bar { display: block; width: 0; height: 100%; background: var(--day-blue); transition: width .15s linear; }
+html[data-theme="darkroom"] .film-section {
+  background:
+    radial-gradient(ellipse 70% 22% at 18% 0%, rgba(255, 210, 63, .09), transparent 72%),
+    linear-gradient(180deg, #171522 0%, var(--surface) 26%, var(--surface) 100%);
+}
 
 .thoughts-chapter {
   min-height: 94svh;
