@@ -2646,8 +2646,8 @@ html[data-theme="darkroom"] .day-hero {
 }
 .hero-flow { position: absolute; z-index: -2; inset: -7%; width: 114%; height: 114%; pointer-events: none; overflow: visible; }
 .hero-flow__ribbon { fill: none; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; will-change: transform; }
-.hero-flow__ribbon--cream { stroke: var(--flow-cream); stroke-width: 280; animation: flowCream 18s cubic-bezier(.45,.05,.55,.95) infinite alternate; }
-.hero-flow__ribbon--orange { stroke: var(--flow-orange); stroke-width: 180; animation: flowOrange 15s cubic-bezier(.45,.05,.55,.95) infinite alternate; }
+.hero-flow__ribbon--cream { fill: var(--flow-cream); stroke: none; animation: flowCream 18s cubic-bezier(.45,.05,.55,.95) infinite alternate; }
+.hero-flow__ribbon--orange { fill: var(--flow-orange); stroke: none; animation: flowOrange 15s cubic-bezier(.45,.05,.55,.95) infinite alternate; }
 .hero-flow__ribbon--blue { stroke: var(--flow-blue); stroke-width: 210; animation: flowBlue 20s ease-in-out infinite alternate; }
 .hero-flow__ribbon--cyan { stroke: var(--flow-cyan); stroke-width: 150; animation: flowCyan 14s ease-in-out infinite alternate; }
 @keyframes flowCream { from { transform: translate3d(-2.5%, 2%, 0) scale(1.02) rotate(-.6deg); } to { transform: translate3d(2.5%, -2%, 0) scale(1.07) rotate(1deg); } }
@@ -2919,8 +2919,8 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
 <!-- ===== HERO ===== -->
 <section class="day-hero chapter" id="opening">
   <svg class="hero-flow" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
-    <path class="hero-flow__ribbon hero-flow__ribbon--cream" d="M-170 965 C 115 690 420 945 638 655 S 804 112 1015 278 S 1208 730 1580 228"></path>
-    <path class="hero-flow__ribbon hero-flow__ribbon--orange" d="M470 1060 C 610 745 748 1085 900 875 S 1090 725 1285 1030"></path>
+    <path class="hero-flow__ribbon hero-flow__ribbon--cream" d="M-220 900 C 80 650 380 810 590 540 C 790 280 860 -20 1090 95 C 1280 190 1370 430 1640 120 L1640 410 C 1410 650 1270 470 1080 360 C 930 275 850 500 720 690 C 450 1080 120 900 -220 1180 Z"></path>
+    <path class="hero-flow__ribbon hero-flow__ribbon--orange" d="M360 1120 C 520 790 660 760 800 950 C 930 1125 1050 1110 1150 900 C 1250 700 1410 780 1600 1050 L1600 1250 L360 1250 Z"></path>
     <path class="hero-flow__ribbon hero-flow__ribbon--blue" d="M-210 835 C 75 650 178 1035 505 910"></path>
     <path class="hero-flow__ribbon hero-flow__ribbon--cyan" d="M-180 118 C 92 -82 294 238 520 -96"></path>
   </svg>
