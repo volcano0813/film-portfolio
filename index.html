@@ -2614,13 +2614,17 @@ body::after { opacity: 0.018; pointer-events: none; }
 .theme-toggle__orb { width: 12px; height: 12px; border-radius: 50%; background: var(--day-yellow); box-shadow: inset -3px -2px 0 rgba(23,21,18,.35); }
 
 .day-hero {
+  --flow-cream: #fff1a8;
+  --flow-orange: #ff9f1c;
+  --flow-blue: #2453d4;
+  --flow-cyan: #35cfc7;
   min-height: 100svh;
   position: relative;
   overflow: hidden;
   display: grid;
   align-items: center;
   padding: 120px clamp(24px, 6vw, 92px) 72px;
-  background: var(--surface);
+  background: var(--day-yellow);
   isolation: isolate;
 }
 
@@ -2631,8 +2635,24 @@ body::after { opacity: 0.018; pointer-events: none; }
   border-radius: 48% 52% 63% 37% / 44% 36% 64% 56%;
   transition: background-color 0.35s ease;
 }
-.day-hero::before { width: 62vw; height: 78vh; right: -18vw; top: -20vh; background: var(--day-yellow); transform: rotate(-12deg); }
-.day-hero::after { width: 48vw; height: 56vh; left: -20vw; bottom: -40vh; background: var(--day-blue); transform: rotate(16deg); }
+.day-hero::before, .day-hero::after { display: none; }
+html[data-theme="darkroom"] .day-hero {
+  --flow-cream: #171620;
+  --flow-orange: #5f2f18;
+  --flow-blue: #172759;
+  --flow-cyan: #165b5d;
+  background: #090a11;
+}
+.hero-flow { position: absolute; z-index: -2; inset: -7%; width: 114%; height: 114%; pointer-events: none; overflow: visible; }
+.hero-flow__ribbon { fill: none; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; will-change: transform; }
+.hero-flow__ribbon--cream { stroke: var(--flow-cream); stroke-width: 280; animation: flowCream 18s cubic-bezier(.45,.05,.55,.95) infinite alternate; }
+.hero-flow__ribbon--orange { stroke: var(--flow-orange); stroke-width: 180; animation: flowOrange 15s cubic-bezier(.45,.05,.55,.95) infinite alternate; }
+.hero-flow__ribbon--blue { stroke: var(--flow-blue); stroke-width: 210; animation: flowBlue 20s ease-in-out infinite alternate; }
+.hero-flow__ribbon--cyan { stroke: var(--flow-cyan); stroke-width: 150; animation: flowCyan 14s ease-in-out infinite alternate; }
+@keyframes flowCream { from { transform: translate3d(-2.5%, 2%, 0) scale(1.02) rotate(-.6deg); } to { transform: translate3d(2.5%, -2%, 0) scale(1.07) rotate(1deg); } }
+@keyframes flowOrange { from { transform: translate3d(-1%, 5%, 0) scaleX(1.02); } to { transform: translate3d(4%, -1%, 0) scaleX(1.1); } }
+@keyframes flowBlue { from { transform: translate3d(-4%, 2%, 0) rotate(-2deg); } to { transform: translate3d(2%, -2%, 0) rotate(1deg); } }
+@keyframes flowCyan { from { transform: translate3d(-2%, -3%, 0) rotate(1deg); } to { transform: translate3d(4%, 3%, 0) rotate(-1.5deg); } }
 
 .hero-ribbon {
   position: absolute;
@@ -2866,6 +2886,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
   .day-nav a, .theme-toggle { flex: 0 0 auto; min-height: 38px; padding-inline: 13px; }
   .day-nav a span:first-child { display: none; }
   .day-hero { min-height: auto; padding: 122px 22px 100px; }
+  .hero-flow { inset: -10% -32%; width: 164%; height: 120%; }
   .hero-ribbon { top: 82px; right: 22px; }
   .day-hero h1 { max-width: none; font-size: clamp(54px, 18vw, 82px); }
   .day-hero h1 em { display: block; }
@@ -2915,6 +2936,12 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
 </nav>
 <!-- ===== HERO ===== -->
 <section class="day-hero chapter" id="opening">
+  <svg class="hero-flow" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
+    <path class="hero-flow__ribbon hero-flow__ribbon--cream" d="M-170 965 C 115 690 420 945 638 655 S 804 112 1015 278 S 1208 730 1580 228"></path>
+    <path class="hero-flow__ribbon hero-flow__ribbon--orange" d="M470 1060 C 610 745 748 1085 900 875 S 1090 725 1285 1030"></path>
+    <path class="hero-flow__ribbon hero-flow__ribbon--blue" d="M-210 835 C 75 650 178 1035 505 910"></path>
+    <path class="hero-flow__ribbon hero-flow__ribbon--cyan" d="M-180 118 C 92 -82 294 238 520 -96"></path>
+  </svg>
   <div class="hero-ribbon">ELIA · AI PRODUCT · 2026</div>
   <div class="day-hero__content">
     <div class="day-hero__eyebrow">A daylight contact sheet by Elia</div>
