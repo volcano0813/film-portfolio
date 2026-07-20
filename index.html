@@ -2777,15 +2777,32 @@ body::after { opacity: 0.018; pointer-events: none; }
 .featured-thought:nth-child(4) { --frame: linear-gradient(165deg, #b19ce8 0%, #d9c8ef 48%, #79ced2 100%); --rotate: 7deg; --offset: 4px; }
 .featured-thought:hover, .featured-thought:focus-visible { position: relative; z-index: 5; transform: translateY(-18px) rotate(0deg) scale(1.025); box-shadow: 9px 14px 24px rgba(49,37,43,.32); outline: none; }
 .featured-thought:focus-visible { outline: 3px solid var(--day-blue); outline-offset: 5px; }
+.featured-thought:active { transform: translateY(-8px) rotate(calc(var(--rotate) * .35)) scale(.975); }
+.featured-thoughts.is-selecting .featured-thought {
+  pointer-events: none;
+  transition: transform .66s cubic-bezier(.16, 1.32, .3, 1), box-shadow .46s ease, filter .4s ease, opacity .4s ease;
+}
+.featured-thoughts.is-selecting .featured-thought.is-picked {
+  z-index: 12;
+  transform: translate3d(0, -30px, 0) rotate(0deg) scale(1.075);
+  box-shadow: 12px 20px 30px rgba(49,37,43,.34);
+  filter: saturate(1.08);
+}
+.featured-thoughts.is-selecting .featured-thought.is-receding {
+  transform: translate3d(var(--scatter-x), calc(var(--offset, 0px) + 13px), 0) rotate(var(--scatter-rotate)) scale(.96);
+  filter: saturate(.82) brightness(.98);
+  opacity: .9;
+}
 .featured-thought__num { position: relative; display: block; margin-bottom: 28px; font: 500 10px/1 "DM Mono", monospace; letter-spacing: .13em; }
 .featured-thought__text { position: relative; font-family: "Noto Serif SC", serif; font-size: clamp(16px, 1.25vw, 20px); font-weight: 700; line-height: 1.62; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
 html[data-theme="darkroom"] .featured-thought { color: var(--day-ink); }
 .thoughts-more { position: relative; z-index: 2; display: flex; justify-content: center; }
 .thoughts-more a { display: inline-flex; align-items: center; gap: 14px; padding: 17px 24px; border: 2px solid var(--day-ink); border-radius: 999px; background: var(--day-pink); color: var(--day-ink); box-shadow: 5px 5px 0 var(--day-ink); font: 700 12px/1 "DM Mono", monospace; text-decoration: none; }
 
-.thought-preview { position: fixed; inset: 0; z-index: 9000; display: none; place-items: center; padding: 24px; background: rgba(23,21,18,.5); backdrop-filter: blur(12px); }
-.thought-preview.is-open { display: grid; }
-.thought-preview__card { width: min(660px, 100%); padding: clamp(28px, 5vw, 58px); border: 3px solid var(--day-ink); border-radius: 32px; background: var(--preview-color, var(--day-cyan)); color: var(--day-ink); box-shadow: 14px 16px 0 var(--day-ink); transform: rotate(-1deg); }
+.thought-preview { position: fixed; inset: 0; z-index: 9000; display: grid; place-items: center; padding: 24px; background: rgba(23,21,18,.5); backdrop-filter: blur(12px); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .28s ease, visibility 0s linear .28s; }
+.thought-preview.is-open { opacity: 1; visibility: visible; pointer-events: auto; transition-delay: 0s; }
+.thought-preview__card { width: min(660px, 100%); padding: clamp(28px, 5vw, 58px); border: 3px solid var(--day-ink); border-radius: 32px; background: var(--preview-color, var(--day-cyan)); color: var(--day-ink); box-shadow: 14px 16px 0 var(--day-ink); opacity: 0; transform: translateY(34px) rotate(-2deg) scale(.94); transition: transform .5s cubic-bezier(.16, 1.18, .3, 1), opacity .28s ease; }
+.thought-preview.is-open .thought-preview__card { opacity: 1; transform: translateY(0) rotate(-1deg) scale(1); transition-delay: .04s; }
 .thought-preview__close { float: right; width: 42px; height: 42px; border: 2px solid currentColor; border-radius: 50%; background: transparent; color: inherit; cursor: pointer; font-size: 20px; }
 .thought-preview__text { clear: both; padding-top: 22px; font-family: "Noto Serif SC", serif; font-size: clamp(20px, 3vw, 32px); font-weight: 700; line-height: 1.65; }
 .thought-preview__meta { display: flex; justify-content: space-between; gap: 16px; margin-top: 30px; font: 500 11px/1.5 "DM Mono", monospace; }
@@ -3890,6 +3907,7 @@ const featuredThoughts = (window.ELIA_THOUGHTS || []).filter((item) => item.feat
 const featuredThoughtsRoot = document.getElementById('featuredThoughts');
 const thoughtPreview = document.getElementById('thoughtPreview');
 let thoughtPreviewTrigger = null;
+let thoughtOpeningTimer = null;
 
 if (featuredThoughtsRoot) {
   featuredThoughtsRoot.innerHTML = featuredThoughts.map((item, index) => `
@@ -3906,7 +3924,49 @@ if (featuredThoughtsRoot) {
   `).join('');
   featuredThoughtsRoot.addEventListener('click', (event) => {
     const card = event.target.closest('[data-thought-index]');
-    if (card) openThoughtPreview(Number(card.dataset.thoughtIndex), card);
+    if (card) stageThoughtPreview(Number(card.dataset.thoughtIndex), card);
+  });
+}
+
+function stageThoughtPreview(index, card) {
+  if (!card || thoughtOpeningTimer) return;
+  thoughtPreviewTrigger = card;
+  const cards = [...featuredThoughtsRoot.querySelectorAll('.featured-thought')];
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  featuredThoughtsRoot.classList.add('is-selecting');
+  cards.forEach((item, itemIndex) => {
+    const distance = Math.abs(itemIndex - index);
+    const direction = itemIndex < index ? -1 : 1;
+    item.classList.toggle('is-picked', item === card);
+    item.classList.toggle('is-receding', item !== card);
+    if (item !== card) {
+      item.style.setProperty('--scatter-x', `${direction * (28 + distance * 16)}px`);
+      item.style.setProperty('--scatter-rotate', `${direction * (6 + distance * 2)}deg`);
+    }
+  });
+
+  if (reduceMotion) {
+    openThoughtPreview(index, card);
+    return;
+  }
+  thoughtOpeningTimer = window.setTimeout(() => {
+    thoughtOpeningTimer = null;
+    openThoughtPreview(index, card);
+  }, 460);
+}
+
+function resetThoughtStack() {
+  if (thoughtOpeningTimer) {
+    window.clearTimeout(thoughtOpeningTimer);
+    thoughtOpeningTimer = null;
+  }
+  if (!featuredThoughtsRoot) return;
+  featuredThoughtsRoot.classList.remove('is-selecting');
+  featuredThoughtsRoot.querySelectorAll('.featured-thought').forEach((card) => {
+    card.classList.remove('is-picked', 'is-receding');
+    card.style.removeProperty('--scatter-x');
+    card.style.removeProperty('--scatter-rotate');
   });
 }
 
@@ -3925,6 +3985,7 @@ function openThoughtPreview(index, trigger) {
 }
 
 function closeThoughtPreview() {
+  resetThoughtStack();
   if (!thoughtPreview || !thoughtPreview.classList.contains('is-open')) return;
   thoughtPreview.classList.remove('is-open');
   thoughtPreview.setAttribute('aria-hidden', 'true');
