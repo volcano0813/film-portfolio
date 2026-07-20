@@ -2616,6 +2616,7 @@ body::after { opacity: 0.018; pointer-events: none; }
 .day-hero {
   --flow-cream: #fff1a8;
   --flow-orange: #ff9f1c;
+  --flow-coral: #ff7058;
   --flow-blue: #2453d4;
   --flow-cyan: #35cfc7;
   min-height: 100svh;
@@ -2640,6 +2641,7 @@ body::after { opacity: 0.018; pointer-events: none; }
 html[data-theme="darkroom"] .day-hero {
   --flow-cream: #171620;
   --flow-orange: #5f2f18;
+  --flow-coral: #6f2534;
   --flow-blue: #172759;
   --flow-cyan: #165b5d;
   background: #090a11;
@@ -2648,10 +2650,12 @@ html[data-theme="darkroom"] .day-hero {
 .hero-flow__ribbon { fill: none; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; will-change: transform; }
 .hero-flow__ribbon--cream { fill: var(--flow-cream); stroke: none; animation: flowCream 18s cubic-bezier(.45,.05,.55,.95) infinite alternate; }
 .hero-flow__ribbon--orange { fill: var(--flow-orange); stroke: none; animation: flowOrange 15s cubic-bezier(.45,.05,.55,.95) infinite alternate; }
+.hero-flow__ribbon--coral { fill: var(--flow-coral); stroke: none; animation: flowCoral 17s cubic-bezier(.45,.05,.55,.95) infinite alternate; }
 .hero-flow__ribbon--blue { stroke: var(--flow-blue); stroke-width: 210; animation: flowBlue 20s ease-in-out infinite alternate; }
 .hero-flow__ribbon--cyan { stroke: var(--flow-cyan); stroke-width: 150; animation: flowCyan 14s ease-in-out infinite alternate; }
 @keyframes flowCream { from { transform: translate3d(-2.5%, 2%, 0) scale(1.02) rotate(-.6deg); } to { transform: translate3d(2.5%, -2%, 0) scale(1.07) rotate(1deg); } }
 @keyframes flowOrange { from { transform: translate3d(-1%, 5%, 0) scaleX(1.02); } to { transform: translate3d(4%, -1%, 0) scaleX(1.1); } }
+@keyframes flowCoral { from { transform: translate3d(-3%, 3%, 0) scaleX(1.03) rotate(-.4deg); } to { transform: translate3d(3%, -1%, 0) scaleX(1.08) rotate(.7deg); } }
 @keyframes flowBlue { from { transform: translate3d(-4%, 2%, 0) rotate(-2deg); } to { transform: translate3d(2%, -2%, 0) rotate(1deg); } }
 @keyframes flowCyan { from { transform: translate3d(-2%, -3%, 0) rotate(1deg); } to { transform: translate3d(4%, 3%, 0) rotate(-1.5deg); } }
 
@@ -2920,6 +2924,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
 <section class="day-hero chapter" id="opening">
   <svg class="hero-flow" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
     <path class="hero-flow__ribbon hero-flow__ribbon--cream" d="M-220 900 C 80 650 380 810 590 540 C 790 280 860 -20 1090 95 C 1280 190 1370 430 1640 120 L1640 410 C 1410 650 1270 470 1080 360 C 930 275 850 500 720 690 C 450 1080 120 900 -220 1180 Z"></path>
+    <path class="hero-flow__ribbon hero-flow__ribbon--coral" d="M-180 980 C 120 760 360 1020 610 780 C 760 640 900 650 1040 820 C 1200 1010 1380 820 1620 640 L1640 900 C 1380 1080 1170 1150 990 960 C 850 810 760 800 650 940 C 380 1200 100 960 -220 1190 Z"></path>
     <path class="hero-flow__ribbon hero-flow__ribbon--orange" d="M360 1120 C 520 790 660 760 800 950 C 930 1125 1050 1110 1150 900 C 1250 700 1410 780 1600 1050 L1600 1250 L360 1250 Z"></path>
     <path class="hero-flow__ribbon hero-flow__ribbon--blue" d="M-210 835 C 75 650 178 1035 505 910"></path>
     <path class="hero-flow__ribbon hero-flow__ribbon--cyan" d="M-180 118 C 92 -82 294 238 520 -96"></path>
