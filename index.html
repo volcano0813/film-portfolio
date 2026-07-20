@@ -704,23 +704,38 @@ body::after {
 
 /* Project-specific colors */
 .frame-baidu .film-photo-bg {
-  background: linear-gradient(135deg, #10234e 0%, #1f58b4 42%, #f0b935 100%);
+  background:
+    radial-gradient(circle at 82% 78%, rgba(240,190,92,.92) 0%, rgba(240,190,92,.3) 27%, transparent 51%),
+    radial-gradient(circle at 18% 12%, rgba(72,132,199,.82) 0%, transparent 46%),
+    linear-gradient(138deg, #101b34 0%, #294e79 48%, #9a765c 100%);
 }
 
 .frame-jianghai .film-photo-bg {
-  background: linear-gradient(135deg, #0a3d2e 0%, #1a6b50 40%, #1a3040 100%);
+  background:
+    radial-gradient(circle at 84% 18%, rgba(211,174,112,.72) 0%, transparent 42%),
+    radial-gradient(circle at 16% 82%, rgba(73,143,132,.72) 0%, transparent 48%),
+    linear-gradient(140deg, #10262d 0%, #326d68 48%, #8a715f 100%);
 }
 
 .frame-ideashu .film-photo-bg {
-  background: linear-gradient(135deg, #2a0e12 0%, #4a1520 40%, #301a20 100%);
+  background:
+    radial-gradient(circle at 82% 76%, rgba(232,161,92,.86) 0%, transparent 43%),
+    radial-gradient(circle at 18% 12%, rgba(190,84,72,.7) 0%, transparent 45%),
+    linear-gradient(140deg, #29161b 0%, #743b38 50%, #a66a55 100%);
 }
 
 .frame-moodmix .film-photo-bg {
-  background: linear-gradient(135deg, #2a1525 0%, #3a1830 40%, #4a2040 100%);
+  background:
+    radial-gradient(circle at 84% 78%, rgba(210,141,118,.82) 0%, transparent 44%),
+    radial-gradient(circle at 15% 16%, rgba(151,114,166,.76) 0%, transparent 46%),
+    linear-gradient(140deg, #24182b 0%, #66465f 50%, #966c76 100%);
 }
 
 .frame-about .film-photo-bg {
-  background: linear-gradient(135deg, #1a1420 0%, #2a1838 40%, #3d2060 100%);
+  background:
+    radial-gradient(circle at 82% 18%, rgba(100,164,181,.76) 0%, transparent 44%),
+    radial-gradient(circle at 14% 82%, rgba(151,132,176,.72) 0%, transparent 48%),
+    linear-gradient(140deg, #151b32 0%, #3d536f 49%, #796d88 100%);
 }
 
 .negative-frame .film-photo-bg {
@@ -770,27 +785,35 @@ body::after {
 /* Project icon/illustration inside frame */
 .project-icon {
   font-size: 48px;
-  opacity: 0.3;
+  opacity: 0.56;
   color: var(--cream);
   font-family: 'Playfair Display', serif;
   text-align: center;
   line-height: 1.2;
+  position: relative;
+  z-index: 3;
+  text-shadow: 0 1px 18px rgba(255,240,210,.12);
 }
 
-/* Light leak overlay */
-.film-photo::after {
+/* Fine scan grain + warm light leak inside each exposure */
+.film-photo::before {
   content: '';
   position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    120deg,
-    transparent 30%,
-    rgba(245,197,24,0.08) 50%,
-    rgba(212,56,44,0.05) 70%,
-    transparent 90%
-  );
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: .12;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='.62'/%3E%3C/svg%3E");
+}
+.film-photo::after {
+  content: '';
+  position: absolute; inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(ellipse at 105% 78%, rgba(255,183,104,.34), transparent 46%),
+    linear-gradient(118deg, transparent 28%, rgba(255,238,197,.08) 50%, rgba(225,111,81,.12) 72%, transparent 92%);
+  mix-blend-mode: screen;
   pointer-events: none;
 }
 
@@ -2867,6 +2890,48 @@ html[data-theme="darkroom"] .featured-thought { color: var(--day-ink); }
 html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
 .detail-overlay .jh-page { box-shadow: 0 30px 80px rgba(23,21,18,.28); }
 
+/* Each expanded exposure keeps the same dye bias as its frame. */
+.detail-overlay--baidu { --exp-deep: #091427; --exp-mid: #17395b; --exp-glow: #d4a45f; --exp-accent: #82acd4; }
+.detail-overlay--jianghai { --exp-deep: #0b1c22; --exp-mid: #244d4b; --exp-glow: #b5905f; --exp-accent: #72b4a6; }
+.detail-overlay--moodmix { --exp-deep: #19131d; --exp-mid: #4c3348; --exp-glow: #ad736a; --exp-accent: #c99abb; }
+.detail-overlay--ideashu { --exp-deep: #1c1115; --exp-mid: #57302f; --exp-glow: #c98a58; --exp-accent: #df7465; }
+.detail-overlay--speakflow { --exp-deep: #111526; --exp-mid: #33465d; --exp-glow: #786c8c; --exp-accent: #8eb7c4; }
+.detail-overlay :is(.jh-page, .is-page, .mm-page, .sf-page) {
+  background:
+    radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--exp-glow) 34%, transparent) 0%, transparent 38%),
+    radial-gradient(circle at 8% 88%, color-mix(in srgb, var(--exp-accent) 16%, transparent) 0%, transparent 46%),
+    linear-gradient(145deg, var(--exp-deep) 0%, var(--exp-mid) 54%, color-mix(in srgb, var(--exp-mid) 72%, var(--exp-glow)) 100%);
+  box-shadow: 0 30px 80px rgba(23,21,18,.28), inset 0 0 90px rgba(255,220,170,.025);
+}
+.detail-overlay :is(.jh-hero-grad, .is-hero-grad, .mm-hero-grad, .sf-hero-grad) {
+  display: block;
+  background: linear-gradient(135deg, var(--exp-mid), var(--exp-glow));
+  opacity: .08;
+}
+.detail-overlay :is(.jh-hero-orb, .is-orb, .mm-orb1, .mm-orb2, .sf-orb) {
+  background: radial-gradient(circle, color-mix(in srgb, var(--exp-glow) 28%, transparent), transparent 68%);
+}
+.detail-overlay :is(
+  .jh-tag, .jh-title, .jh-hl-green, .jh-metric-val, .jh-flow-arrow, .jh-flow-gate, .jh-flow-judge, .jh-branch-agent,
+  .is-tag, .is-tab.on, .is-sl span, .is-hlr, .is-card-t, .is-agent-num, .is-agent-name, .is-diff-label, .is-diff-title, .is-func-icon, .is-func-name, .is-metric-val, .is-tag-item,
+  .mm-tag, .mm-tab.on, .mm-sl span, .mm-hlg, .mm-card-t-accent, .mm-hero-tag-item, .mm-hero-cta-label,
+  .sf-tag, .sf-tab.on, .sf-sl span, .sf-hlp, .sf-card-t, .sf-scene-num, .sf-scene-name, .sf-func-icon, .sf-func-name, .sf-tag-item
+) { color: var(--exp-accent); }
+.detail-overlay :is(.jh-hl, .mm-hero-quote, .mm-hero-cta-arrow) { color: var(--exp-glow); }
+.detail-overlay :is(.jh-meta-dot, .is-meta-dot, .sf-meta-dot) { background: var(--exp-glow); }
+.detail-overlay .detail-close {
+  color: rgba(255,248,232,.72);
+  border-color: rgba(255,248,232,.26);
+  background: rgba(6,8,12,.16);
+  backdrop-filter: blur(8px);
+}
+.detail-overlay .detail-close:hover { color: #fff8e8; border-color: rgba(255,248,232,.68); }
+.frame-baidu .film-caption-tag { color: #356aa4; border-color: rgba(53,106,164,.34); }
+.frame-jianghai .film-caption-tag { color: #2d8178; border-color: rgba(45,129,120,.32); }
+.frame-moodmix .film-caption-tag { color: #8a5f82; border-color: rgba(138,95,130,.3); }
+.frame-ideashu .film-caption-tag { color: #b65045; border-color: rgba(182,80,69,.3); }
+.frame-about .film-caption-tag { color: #536b94; border-color: rgba(83,107,148,.3); }
+
 @media (max-width: 760px) {
   .day-nav { width: calc(100% - 24px); top: 10px; overflow-x: auto; justify-content: flex-start; }
   .day-nav a, .theme-toggle { flex: 0 0 auto; min-height: 38px; padding-inline: 13px; }
@@ -2959,7 +3024,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
       <!-- Frame 1: 百度AIGC产品增长 -->
       <div class="film-frame frame-baidu" onclick="openDetail('baidu')">
         <div class="film-frame-inner">
-          <div class="film-frame-number-left">KODAK 400TX</div>
+          <div class="film-frame-number-left">KODAK PORTRA 400</div>
           <div class="film-photo">
             <div class="film-photo-bg">
               <div class="project-icon">
@@ -2979,7 +3044,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
       <!-- Frame 2: 疆海AI客服 -->
       <div class="film-frame frame-jianghai" onclick="openDetail('jianghai')">
         <div class="film-frame-inner">
-          <div class="film-frame-number-left">KODAK 400TX</div>
+          <div class="film-frame-number-left">KODAK PORTRA 400</div>
           <div class="film-photo">
             <div class="film-photo-bg">
               <div class="project-icon">
@@ -2999,7 +3064,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
       <!-- Frame 3: MoodMix -->
       <div class="film-frame frame-moodmix" onclick="openDetail('moodmix')">
         <div class="film-frame-inner">
-          <div class="film-frame-number-left">KODAK 400TX</div>
+          <div class="film-frame-number-left">KODAK PORTRA 400</div>
           <div class="film-photo">
             <div class="film-photo-bg">
               <div class="project-icon">
@@ -3019,7 +3084,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
       <!-- Frame 4: IdeaShu -->
       <div class="film-frame frame-ideashu" onclick="openDetail('ideashu')">
         <div class="film-frame-inner">
-          <div class="film-frame-number-left">KODAK 400TX</div>
+          <div class="film-frame-number-left">KODAK PORTRA 400</div>
           <div class="film-photo">
             <div class="film-photo-bg">
               <div class="project-icon">
@@ -3039,7 +3104,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
       <!-- Frame 5: SpeakFlow -->
       <div class="film-frame frame-about" onclick="openDetail('about')">
         <div class="film-frame-inner">
-          <div class="film-frame-number-left">KODAK 400TX</div>
+          <div class="film-frame-number-left">KODAK PORTRA 400</div>
           <div class="film-photo">
             <div class="film-photo-bg">
               <div class="project-icon">
@@ -3058,7 +3123,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
 
       <div class="film-frame negative-frame" onclick="navigateToAbout()">
         <div class="film-frame-inner">
-          <div class="film-frame-number-left">KODAK 400TX</div>
+          <div class="film-frame-number-left">KODAK PORTRA 400</div>
           <div class="film-photo">
             <div class="film-photo-bg">
               <div class="project-icon">
