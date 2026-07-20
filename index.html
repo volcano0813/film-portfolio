@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Elia's Film Roll — AI Works</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script src="assets/theme.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #050712;
@@ -2532,6 +2534,245 @@ body::after {
   margin-top: 28px; font-size: 7px; letter-spacing: 3px;
   color: rgba(255,255,255,0.06); font-family: 'DM Mono', monospace; text-align: center;
 }
+/* ===== DAYLIGHT EDITORIAL SHELL ===== */
+:root {
+  --day-paper: #fff8e8;
+  --day-ink: #171512;
+  --day-yellow: #ffd23f;
+  --day-blue: #2453d4;
+  --day-coral: #ff7058;
+  --day-pink: #ff4f9a;
+  --day-cyan: #35cfc7;
+  --day-lilac: #a990e8;
+  --surface: #fff8e8;
+  --surface-soft: #fffdf6;
+  --ink: #171512;
+  --ink-soft: #524d45;
+  --line: rgba(23, 21, 18, 0.18);
+}
+
+html[data-theme="darkroom"] {
+  --surface: #080b16;
+  --surface-soft: #111522;
+  --ink: #f8f1df;
+  --ink-soft: #bdb5a6;
+  --line: rgba(255, 248, 232, 0.18);
+}
+
+body {
+  background: var(--surface);
+  color: var(--ink);
+  cursor: auto;
+  overflow-y: auto !important;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+body::after { opacity: 0.018; pointer-events: none; }
+.camera-hud, .site-nav-corner, .cursor-ring, .cursor-dot { display: none !important; }
+
+.day-nav {
+  position: fixed;
+  z-index: 8000;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-soft) 88%, transparent);
+  box-shadow: 0 12px 35px rgba(23, 21, 18, 0.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.day-nav a, .theme-toggle {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.day-nav a:hover, .day-nav a:focus-visible { background: var(--day-yellow); color: var(--day-ink); transform: translateY(-1px); }
+.theme-toggle { background: var(--day-ink); color: var(--day-paper); }
+.theme-toggle:hover, .theme-toggle:focus-visible { background: var(--day-blue); transform: translateY(-1px); }
+.theme-toggle__orb { width: 12px; height: 12px; border-radius: 50%; background: var(--day-yellow); box-shadow: inset -3px -2px 0 rgba(23,21,18,.35); }
+
+.day-hero {
+  min-height: 100svh;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  align-items: center;
+  padding: 120px clamp(24px, 6vw, 92px) 72px;
+  background: var(--surface);
+  isolation: isolate;
+}
+
+.day-hero::before, .day-hero::after {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  border-radius: 48% 52% 63% 37% / 44% 36% 64% 56%;
+  transition: background-color 0.35s ease;
+}
+.day-hero::before { width: 62vw; height: 78vh; right: -18vw; top: -20vh; background: var(--day-yellow); transform: rotate(-12deg); }
+.day-hero::after { width: 48vw; height: 56vh; left: -20vw; bottom: -25vh; background: var(--day-blue); transform: rotate(16deg); }
+
+.hero-ribbon {
+  position: absolute;
+  top: 112px;
+  right: clamp(24px, 5vw, 80px);
+  padding: 9px 14px;
+  border: 1px solid var(--day-ink);
+  border-radius: 999px;
+  color: var(--day-ink);
+  background: rgba(255,248,232,.75);
+  font: 500 10px/1 "DM Mono", monospace;
+  letter-spacing: .13em;
+}
+
+.day-hero__content { width: min(1120px, 100%); position: relative; z-index: 2; }
+.day-hero__eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; font: 500 11px/1 "DM Mono", monospace; letter-spacing: .18em; text-transform: uppercase; }
+.day-hero__eyebrow::before { content: ""; width: 54px; height: 8px; background: var(--day-coral); border-radius: 999px; }
+.day-hero h1 { max-width: 1000px; color: var(--ink); font: 400 clamp(58px, 9.6vw, 148px)/.82 "Archivo Black", sans-serif; letter-spacing: -.075em; text-wrap: balance; }
+.day-hero h1 em { color: var(--day-blue); font-family: "Playfair Display", serif; font-weight: 600; }
+.day-hero__bottom { width: min(980px, 100%); display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; margin-top: 48px; }
+.day-hero__intro { max-width: 470px; color: var(--ink-soft); font-family: "Noto Serif SC", serif; font-size: clamp(15px, 1.4vw, 20px); line-height: 1.8; }
+.day-hero__cta { display: inline-flex; align-items: center; gap: 16px; padding: 16px 22px; border-radius: 999px; border: 2px solid var(--day-ink); background: var(--day-pink); color: var(--day-ink); font: 700 12px/1 "DM Mono", monospace; text-decoration: none; box-shadow: 5px 5px 0 var(--day-ink); transition: transform .2s ease, box-shadow .2s ease; }
+.day-hero__cta:hover { transform: translate(3px, 3px); box-shadow: 2px 2px 0 var(--day-ink); }
+
+.day-canister {
+  position: absolute;
+  right: clamp(25px, 8vw, 130px);
+  bottom: 68px;
+  width: clamp(118px, 12vw, 190px);
+  aspect-ratio: .72;
+  border: 3px solid var(--day-ink);
+  border-radius: 18px;
+  background: var(--day-ink);
+  transform: rotate(8deg);
+  box-shadow: 16px 18px 0 var(--day-cyan);
+  transition: transform .2s linear;
+}
+.day-canister::before { content: ""; position: absolute; inset: 18% 10% 12%; border-radius: 8px; background: var(--day-yellow); border: 2px solid var(--day-ink); }
+.day-canister::after { content: "ELIA · AI WORKS\A 36 EXP · 2026"; white-space: pre; position: absolute; inset: 33% 18% auto; color: var(--day-ink); font: 500 clamp(8px, .75vw, 12px)/1.4 "DM Mono", monospace; letter-spacing: .08em; }
+.day-canister__film { position: absolute; top: 42%; left: -190px; width: 200px; height: 52px; border-block: 7px dotted var(--day-paper); background: var(--day-ink); transform-origin: right center; transform: scaleX(var(--film-progress, .15)); }
+
+.chapter { scroll-margin-top: 84px; }
+.film-section {
+  min-height: 96svh;
+  padding: 108px 0 96px;
+  background: var(--day-yellow);
+  color: var(--day-ink);
+  border-radius: clamp(30px, 4vw, 64px);
+  overflow: hidden;
+}
+.film-section-header { width: min(1240px, calc(100% - 48px)); margin: 0 auto 42px; display: flex; align-items: end; justify-content: space-between; }
+.film-section-header h2 { color: var(--day-ink); font: 400 clamp(56px, 8vw, 118px)/.9 "Archivo Black", sans-serif; letter-spacing: -.065em; }
+.film-section-header p { color: var(--day-ink); opacity: .75; font: 500 11px/1.5 "DM Mono", monospace; letter-spacing: .1em; }
+.scroll-hint { color: var(--day-ink); opacity: .6; }
+.film-strip-container { outline: none; cursor: grab; scroll-snap-type: x proximity; scrollbar-color: var(--day-ink) transparent; }
+.film-strip-container:active { cursor: grabbing; }
+.film-frame { scroll-snap-align: center; }
+.film-frame:focus-visible { outline: 4px solid var(--day-blue); outline-offset: 8px; }
+.film-caption-title, .film-caption-desc { color: var(--day-ink); }
+.film-caption-desc { opacity: .78; }
+.film-progress { width: min(720px, calc(100% - 48px)); height: 7px; margin: 30px auto 0; border: 1px solid var(--day-ink); border-radius: 999px; overflow: hidden; }
+.film-progress__bar { display: block; width: 0; height: 100%; background: var(--day-blue); transition: width .15s linear; }
+
+.thoughts-chapter {
+  min-height: 94svh;
+  margin-top: 28px;
+  padding: 112px clamp(24px, 6vw, 88px) 92px;
+  border-radius: clamp(30px, 4vw, 64px);
+  background: #f7d9f4;
+  color: var(--day-ink);
+  position: relative;
+  overflow: hidden;
+}
+.thoughts-chapter::before { content: ""; position: absolute; width: 65vw; height: 54vh; left: -12vw; bottom: -28vh; border-radius: 50%; background: rgba(255,248,232,.62); }
+.chapter-head { position: relative; z-index: 2; display: flex; align-items: end; justify-content: space-between; gap: 30px; }
+.chapter-head h2 { max-width: 800px; font: 400 clamp(56px, 8vw, 112px)/.88 "Archivo Black", sans-serif; letter-spacing: -.065em; }
+.chapter-head p { max-width: 340px; font: 500 12px/1.7 "DM Mono", monospace; }
+.featured-thoughts { position: relative; z-index: 2; display: flex; justify-content: center; align-items: flex-start; min-height: 470px; margin: 70px auto 24px; }
+.featured-thought {
+  --rotate: -5deg;
+  width: min(330px, 25vw);
+  min-height: 410px;
+  margin-left: -45px;
+  padding: 32px 28px 25px;
+  border: 2px solid var(--day-ink);
+  border-radius: 28px;
+  color: var(--day-ink);
+  background: var(--card);
+  box-shadow: 8px 10px 0 var(--day-ink);
+  text-align: left;
+  transform: translateY(var(--offset, 0)) rotate(var(--rotate));
+  cursor: pointer;
+  transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s ease;
+}
+.featured-thought:first-child { margin-left: 0; }
+.featured-thought:nth-child(1) { --card: var(--day-cyan); --rotate: -7deg; --offset: 20px; }
+.featured-thought:nth-child(2) { --card: #f044da; --rotate: -2deg; }
+.featured-thought:nth-child(3) { --card: var(--day-yellow); --rotate: 3deg; --offset: 26px; }
+.featured-thought:nth-child(4) { --card: var(--day-lilac); --rotate: 7deg; --offset: 4px; }
+.featured-thought:hover, .featured-thought:focus-visible { position: relative; z-index: 5; transform: translateY(-18px) rotate(0deg) scale(1.025); box-shadow: 13px 15px 0 var(--day-ink); outline: none; }
+.featured-thought__num { display: block; margin-bottom: 34px; font: 500 11px/1 "DM Mono", monospace; letter-spacing: .13em; }
+.featured-thought__text { font-family: "Noto Serif SC", serif; font-size: clamp(17px, 1.4vw, 22px); font-weight: 700; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden; }
+.featured-thought__meta { display: flex; justify-content: space-between; gap: 12px; margin-top: 28px; font: 500 10px/1.4 "DM Mono", monospace; }
+.thoughts-more { position: relative; z-index: 2; display: flex; justify-content: center; }
+.thoughts-more a { display: inline-flex; align-items: center; gap: 14px; padding: 17px 24px; border: 2px solid var(--day-ink); border-radius: 999px; background: var(--day-pink); color: var(--day-ink); box-shadow: 5px 5px 0 var(--day-ink); font: 700 12px/1 "DM Mono", monospace; text-decoration: none; }
+
+.thought-preview { position: fixed; inset: 0; z-index: 9000; display: none; place-items: center; padding: 24px; background: rgba(23,21,18,.5); backdrop-filter: blur(12px); }
+.thought-preview.is-open { display: grid; }
+.thought-preview__card { width: min(660px, 100%); padding: clamp(28px, 5vw, 58px); border: 3px solid var(--day-ink); border-radius: 32px; background: var(--preview-color, var(--day-cyan)); color: var(--day-ink); box-shadow: 14px 16px 0 var(--day-ink); transform: rotate(-1deg); }
+.thought-preview__close { float: right; width: 42px; height: 42px; border: 2px solid currentColor; border-radius: 50%; background: transparent; color: inherit; cursor: pointer; font-size: 20px; }
+.thought-preview__text { clear: both; padding-top: 22px; font-family: "Noto Serif SC", serif; font-size: clamp(20px, 3vw, 32px); font-weight: 700; line-height: 1.65; }
+.thought-preview__meta { display: flex; justify-content: space-between; gap: 16px; margin-top: 30px; font: 500 11px/1.5 "DM Mono", monospace; }
+
+.footer { background: var(--surface); color: var(--ink); border-color: var(--line); }
+.detail-overlay { background: rgba(255,248,232,.92); backdrop-filter: blur(16px); }
+html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
+.detail-overlay .jh-page { box-shadow: 0 30px 80px rgba(23,21,18,.28); }
+
+@media (max-width: 760px) {
+  .day-nav { width: calc(100% - 24px); top: 10px; overflow-x: auto; justify-content: flex-start; }
+  .day-nav a, .theme-toggle { flex: 0 0 auto; min-height: 38px; padding-inline: 13px; }
+  .day-nav a span:first-child { display: none; }
+  .day-hero { min-height: auto; padding: 122px 22px 100px; }
+  .hero-ribbon { top: 82px; right: 22px; }
+  .day-hero h1 { font-size: clamp(54px, 18vw, 82px); }
+  .day-hero__bottom { align-items: flex-start; flex-direction: column; }
+  .day-canister { position: relative; right: auto; bottom: auto; width: 120px; margin: 50px 25px 0 auto; }
+  .film-section { min-height: auto; padding: 92px 0 72px; }
+  .film-section-header { align-items: flex-start; flex-direction: column; }
+  .featured-thoughts { justify-content: flex-start; overflow-x: auto; min-height: 450px; padding: 18px 20px 32px; scroll-snap-type: x mandatory; }
+  .featured-thought { flex: 0 0 min(78vw, 320px); width: auto; margin-left: -18px; scroll-snap-align: center; }
+  .chapter-head { align-items: flex-start; flex-direction: column; }
+  .thoughts-chapter { padding-inline: 0; }
+  .chapter-head { padding-inline: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .featured-thought { transform: none; }
+}
 </style>
 </head>
 <body>
@@ -2549,93 +2790,40 @@ body::after {
     <div class="camera-hud-line">REC ●</div>
   </div>
 </div>
-<nav class="site-nav-corner" aria-label="页面导航">
-  <a href="about.html" class="site-nav-corner__link" onclick="navigateToAbout(); return false;">
-    <span class="site-nav-corner__cn">对焦</span>
-    <span class="site-nav-corner__en">About me</span>
-  </a>
-  <a href="thoughts.html" class="site-nav-corner__link" onclick="navigateToThoughts(); return false;">
-    <span class="site-nav-corner__cn">显影</span>
-    <span class="site-nav-corner__en">Thoughts</span>
-  </a>
-  <a href="#reflections" class="site-nav-corner__link" onclick="return goToReflectionsNav(event);">
-    <span class="site-nav-corner__cn">定影</span>
-    <span class="site-nav-corner__en">Reflections</span>
-  </a>
+<nav class="day-nav" aria-label="主要导航">
+  <a href="#opening"><span>01</span> Opening</a>
+  <a href="#works"><span>02</span> Projects</a>
+  <a href="#thoughts"><span>03</span> Thoughts</a>
+  <a href="about.html"><span>04</span> About</a>
+  <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
+    <span class="theme-toggle__orb" aria-hidden="true"></span>
+    <span data-theme-label>DARKROOM</span>
+  </button>
 </nav>
 <!-- ===== HERO ===== -->
-<section class="hero" id="hero">
-  <div class="hero-ambient"></div>
-
-  <div class="hero-layout">
-    <div class="hero-profile">
-      <div class="hero-photo-shell">
-        <div class="hero-photo-glow"></div>
-        <!-- TODO: 替换为你的真实照片链接 -->
-        <img src="elia-photo.jpg" alt="Elia">
-        <div class="hero-photo-frame-code">THU · AI PM</div>
-      </div>
-      <div class="hero-name-cn">
-        <div class="hero-name-row">
-          <span class="hero-name-cn-text">严梦灿</span>
-          <span class="hero-meta-school-tag">TSINGHUA</span>
-        </div>
-        <div class="hero-profile-line">一个充满探索欲的人生体验派玩家🧩</div>
-      </div>
-      <div class="hero-meta">
-        <div class="hero-meta-group hero-edu">
-          <span class="hero-meta-section-label">Background</span>
-          硕士：清华大学，保研，2027届毕业生<br>
-          本科：北京林业大学（211），国家奖学金
-        </div>
-      </div>
-      <div class="hero-meta-group hero-signature">
-        <div class="hero-signature-label">signature</div>
-        <span class="hero-signature-text" id="heroSignatureText" data-full-text="AI是工具🛠️但不能替我们想象和表达。"></span>
-      </div>
-    </div>
-
-    <div class="hero-right">
-      <div class="hero-cta">↓ 点击胶片盒 · 拉出胶卷</div>
-      <div class="canister-group magnetic-hover" id="canister" onclick="pullFilm()">
-        <div class="canister-cap"></div>
-        <div class="canister-body">
-          <div class="canister-label">
-            <div>
-              <div class="canister-label-brand">Elia · Portfolio</div>
-              <div class="canister-label-name">AI Works</div>
-              <div class="canister-label-sub">PROFESSIONAL AI PRODUCT COLLECTION</div>
-            </div>
-            <div class="canister-label-bottom">
-              <div>
-                <div class="canister-label-iso">36</div>
-                <div class="canister-label-type">EXP 36 · 135</div>
-              </div>
-              <div class="canister-label-type">2024—25</div>
-            </div>
-          </div>
-        </div>
-        <div class="film-tail" id="filmTail"></div>
-      </div>
-
-      <div class="hero-title">
-        <h1>Elia's <em>Film Roll</em></h1>
-        <div class="hero-subtitle">AI 产品作品集 · 用胶片的方式讲故事</div>
-      </div>
+<section class="day-hero chapter" id="opening">
+  <div class="hero-ribbon">ELIA · AI PRODUCT · 2026</div>
+  <div class="day-hero__content">
+    <div class="day-hero__eyebrow">A daylight contact sheet by Elia</div>
+    <h1>Ideas deserve to become <em>real.</em></h1>
+    <div class="day-hero__bottom">
+      <p class="day-hero__intro">把复杂问题拆开，把 AI 变成可被理解、使用和喜欢的产品。这里记录我从商业增长到个人创造的五次曝光。</p>
+      <a class="day-hero__cta" href="#works">ROLL THE FILM <span aria-hidden="true">↓</span></a>
     </div>
   </div>
+  <div class="day-canister" id="dayCanister" aria-hidden="true"><span class="day-canister__film"></span></div>
 </section>
 
 <!-- ===== FILM STRIP ===== -->
-<section class="film-section" id="works">
+<section class="film-section chapter" id="works">
   <div class="film-section-header">
-    <h2>Exposures</h2>
-    <p>← 横向滚动浏览胶卷 →</p>
+    <h2>Selected<br>Exposures</h2>
+    <p>DRAG / SCROLL / USE ARROW KEYS<br>点击胶片查看完整项目</p>
   </div>
 
   <div class="scroll-hint">KODAK PORTRA 400 · 135 FILM · 36 EXP</div>
 
-  <div class="film-strip-container" id="filmStrip">
+  <div class="film-strip-container" id="filmStrip" tabindex="0" role="region" aria-label="横向项目胶卷">
     <div class="film-strip">
 
       <!-- Frame 1: 百度AIGC产品增长 -->
@@ -2759,7 +2947,29 @@ body::after {
 
     </div>
   </div>
+  <div class="film-progress" aria-hidden="true"><span class="film-progress__bar" id="filmProgressBar"></span></div>
 </section>
+
+<!-- ===== FEATURED THOUGHTS ===== -->
+<section class="thoughts-chapter chapter" id="thoughts" aria-labelledby="thoughtsTitle">
+  <div class="chapter-head">
+    <h2 id="thoughtsTitle">Notes from<br>the darkroom</h2>
+    <p>一些在做 AI 产品时留下的显影痕迹。点击卡片读完整想法，或进入完整 Contact Sheet。</p>
+  </div>
+  <div class="featured-thoughts" id="featuredThoughts" aria-label="精选思考"></div>
+  <div class="thoughts-more"><a href="thoughts.html">VIEW ALL THOUGHTS <span aria-hidden="true">→</span></a></div>
+</section>
+
+<div class="thought-preview" id="thoughtPreview" aria-hidden="true">
+  <article class="thought-preview__card" role="dialog" aria-modal="true" aria-labelledby="thoughtPreviewText">
+    <button class="thought-preview__close" type="button" aria-label="关闭思考预览">×</button>
+    <p class="thought-preview__text" id="thoughtPreviewText"></p>
+    <div class="thought-preview__meta">
+      <span id="thoughtPreviewCategory"></span>
+      <span id="thoughtPreviewDate"></span>
+    </div>
+  </article>
+</div>
 
 <!-- ===== DETAIL OVERLAYS ===== -->
 <div class="detail-overlay detail-overlay--baidu" id="detail-baidu">
@@ -3415,6 +3625,7 @@ body::after {
   <p>© 2026 ELIA · SHOT ON PORTRA 400 · DEVELOPED WITH ♡</p>
 </footer>
 
+<script src="assets/thoughts-data.js"></script>
 <script>
 // Custom cursor: viewfinder style
 const cursorRing = document.getElementById('cursorRing');
@@ -3455,101 +3666,48 @@ if (signatureEl) {
   setTimeout(typeNext, 900);
 }
 
-// Pull film interaction & scroll lock
-let filmPulled = false;
+// The canister is a scroll-reactive object, never a gate.
+const dayCanister = document.getElementById('dayCanister');
+function updateCanister() {
+  if (!dayCanister) return;
+  const progress = Math.min(1, window.scrollY / Math.max(1, window.innerHeight * 0.72));
+  dayCanister.style.setProperty('--film-progress', String(0.15 + progress * 0.85));
+  dayCanister.style.transform = `rotate(${8 - progress * 11}deg) translateY(${progress * 18}px)`;
+}
+window.addEventListener('scroll', updateCanister, { passive: true });
+updateCanister();
 
-// 初始锁定：回到顶部并禁止纵向滚动
-window.scrollTo(0, 0);
-document.body.style.overflowY = 'hidden';
-
-function lockScroll(e) {
-  if (!filmPulled) {
-    e.preventDefault();
-    e.stopPropagation();
-  }
+// Detail overlay with focus restoration and keyboard containment.
+let activeDialog = null;
+let detailTrigger = null;
+function dialogFocusables(container) {
+  return Array.from(container.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'));
 }
 
-// 拦截滚轮和触摸滚动
-window.addEventListener('wheel', lockScroll, { passive: false });
-window.addEventListener('touchmove', lockScroll, { passive: false });
-
-function ensureFilmUnlocked() {
-  if (filmPulled) return;
-  filmPulled = true;
-  document.body.style.overflowY = 'auto';
-  const canister = document.getElementById('canister');
-  if (canister) {
-    canister.classList.add('pulled');
-  }
-}
-
-function goToWorksNav(e) {
-  if (!filmPulled) {
-    e.preventDefault();
-    pullFilm();
-    return false;
-  }
-  return true;
-}
-
-function goToReflectionsNav(e) {
-  ensureFilmUnlocked();
-  e.preventDefault();
-  const el = document.getElementById('reflections');
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  return false;
-}
-
-function pullFilm() {
-  if (filmPulled) return;
-  
-  const canister = document.getElementById('canister');
-  const filmTail = document.getElementById('filmTail');
-  const shutter = document.getElementById('shutterFlash');
-  const hud = document.getElementById('cameraHud');
-  
-  canister.classList.add('pulling');
-  if (shutter) {
-    shutter.classList.add('active');
-    setTimeout(() => shutter.classList.remove('active'), 240);
-  }
-  if (hud) {
-    hud.classList.add('active');
-    setTimeout(() => hud.classList.remove('active'), 1200);
-  }
-  
-  setTimeout(() => {
-    canister.classList.add('pulled');
-    filmPulled = true;
-    // 允许纵向滚动
-    document.body.style.overflowY = 'auto';
-    
-    setTimeout(() => {
-      document.getElementById('works').scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }, 400);
-  }, 800);
-}
-
-// Detail overlay
 function openDetail(id) {
   const overlay = document.getElementById('detail-' + id);
+  if (!overlay) return;
+  detailTrigger = document.activeElement;
+  activeDialog = overlay;
   overlay.style.display = 'flex';
-  requestAnimationFrame(() => {
-    overlay.classList.add('active');
-  });
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-hidden', 'false');
+  requestAnimationFrame(() => overlay.classList.add('active'));
   document.body.style.overflow = 'hidden';
+  const focusables = dialogFocusables(overlay);
+  if (focusables[0]) focusables[0].focus({ preventScroll: true });
 }
 
 function closeDetail(id) {
   const overlay = document.getElementById('detail-' + id);
+  if (!overlay) return;
   overlay.classList.remove('active');
-  setTimeout(() => {
-    overlay.style.display = 'none';
-  }, 400);
+  overlay.setAttribute('aria-hidden', 'true');
+  setTimeout(() => { overlay.style.display = 'none'; }, 400);
   document.body.style.overflow = '';
+  activeDialog = null;
+  if (detailTrigger && typeof detailTrigger.focus === 'function') detailTrigger.focus({ preventScroll: true });
 }
 
 function navigateToAbout() {
@@ -3579,10 +3737,19 @@ function navigateToThoughts() {
 // Close on ESC
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
+    closeThoughtPreview();
     document.querySelectorAll('.detail-overlay.active').forEach(el => {
       const id = el.id.replace('detail-', '');
       closeDetail(id);
     });
+  }
+  if (e.key === 'Tab' && activeDialog) {
+    const focusables = dialogFocusables(activeDialog);
+    if (!focusables.length) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   }
 });
 
@@ -3599,6 +3766,13 @@ document.querySelectorAll('.detail-overlay').forEach(overlay => {
 // Horizontal scroll with mouse wheel + parallax tilt + glitch
 const stripContainer = document.getElementById('filmStrip');
 const frames = document.querySelectorAll('.film-frame');
+const filmProgressBar = document.getElementById('filmProgressBar');
+
+function updateFilmProgress() {
+  if (!stripContainer || !filmProgressBar) return;
+  const max = stripContainer.scrollWidth - stripContainer.clientWidth;
+  filmProgressBar.style.width = `${max > 0 ? (stripContainer.scrollLeft / max) * 100 : 100}%`;
+}
 
 if (stripContainer) {
   stripContainer.addEventListener('wheel', (e) => {
@@ -3608,6 +3782,30 @@ if (stripContainer) {
       applyParallaxTilt();
     }
   }, { passive: false });
+  stripContainer.addEventListener('scroll', updateFilmProgress, { passive: true });
+  stripContainer.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      stripContainer.scrollBy({ left: (e.key === 'ArrowRight' ? 1 : -1) * Math.min(420, stripContainer.clientWidth * .75), behavior: 'smooth' });
+    }
+  });
+
+  let dragging = false;
+  let dragStartX = 0;
+  let dragStartScroll = 0;
+  stripContainer.addEventListener('pointerdown', (e) => {
+    dragging = true;
+    dragStartX = e.clientX;
+    dragStartScroll = stripContainer.scrollLeft;
+  });
+  stripContainer.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    stripContainer.scrollLeft = dragStartScroll - (e.clientX - dragStartX);
+  });
+  stripContainer.addEventListener('pointerup', () => { dragging = false; });
+  stripContainer.addEventListener('pointercancel', () => { dragging = false; });
+  window.addEventListener('pointerup', () => { dragging = false; });
+  updateFilmProgress();
 }
 
 function applyParallaxTilt() {
@@ -3625,6 +3823,14 @@ function applyParallaxTilt() {
 }
 
 frames.forEach(frame => {
+  frame.setAttribute('tabindex', '0');
+  frame.setAttribute('role', 'button');
+  frame.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      frame.click();
+    }
+  });
   frame.addEventListener('mouseenter', () => {
     frame.classList.add('glitch-hover-active');
   });
@@ -3633,6 +3839,54 @@ frames.forEach(frame => {
     frame.style.transform = '';
   });
 });
+
+// Featured thoughts share their source of truth with thoughts.html.
+const thoughtColors = ['#35cfc7', '#f044da', '#ffd23f', '#a990e8'];
+const featuredThoughts = (window.ELIA_THOUGHTS || []).filter((item) => item.featured).slice(0, 4);
+const featuredThoughtsRoot = document.getElementById('featuredThoughts');
+const thoughtPreview = document.getElementById('thoughtPreview');
+let thoughtPreviewTrigger = null;
+
+if (featuredThoughtsRoot) {
+  featuredThoughtsRoot.innerHTML = featuredThoughts.map((item, index) => `
+    <button class="featured-thought" type="button" data-thought-index="${index}" aria-label="打开精选思考 ${index + 1}">
+      <span class="featured-thought__num">THOUGHT / ${String(index + 1).padStart(2, '0')}</span>
+      <span class="featured-thought__text">${item.text}</span>
+      <span class="featured-thought__meta"><span>${item.category}</span><span>${item.date}</span></span>
+    </button>
+  `).join('');
+  featuredThoughtsRoot.addEventListener('click', (event) => {
+    const card = event.target.closest('[data-thought-index]');
+    if (card) openThoughtPreview(Number(card.dataset.thoughtIndex), card);
+  });
+}
+
+function openThoughtPreview(index, trigger) {
+  const item = featuredThoughts[index];
+  if (!item || !thoughtPreview) return;
+  thoughtPreviewTrigger = trigger || document.activeElement;
+  thoughtPreview.style.setProperty('--preview-color', thoughtColors[index % thoughtColors.length]);
+  document.getElementById('thoughtPreviewText').textContent = item.text;
+  document.getElementById('thoughtPreviewCategory').textContent = `${item.category} · ${item.scene}`;
+  document.getElementById('thoughtPreviewDate').textContent = item.date;
+  thoughtPreview.classList.add('is-open');
+  thoughtPreview.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  thoughtPreview.querySelector('.thought-preview__close').focus();
+}
+
+function closeThoughtPreview() {
+  if (!thoughtPreview || !thoughtPreview.classList.contains('is-open')) return;
+  thoughtPreview.classList.remove('is-open');
+  thoughtPreview.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  if (thoughtPreviewTrigger) thoughtPreviewTrigger.focus({ preventScroll: true });
+}
+
+if (thoughtPreview) {
+  thoughtPreview.querySelector('.thought-preview__close').addEventListener('click', closeThoughtPreview);
+  thoughtPreview.addEventListener('click', (event) => { if (event.target === thoughtPreview) closeThoughtPreview(); });
+}
 
 function sfTab(i) {
   document.querySelectorAll('.sf-tab').forEach(function(t, x) {
