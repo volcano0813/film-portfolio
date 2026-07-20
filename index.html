@@ -2632,7 +2632,7 @@ body::after { opacity: 0.018; pointer-events: none; }
   transition: background-color 0.35s ease;
 }
 .day-hero::before { width: 62vw; height: 78vh; right: -18vw; top: -20vh; background: var(--day-yellow); transform: rotate(-12deg); }
-.day-hero::after { width: 48vw; height: 56vh; left: -20vw; bottom: -25vh; background: var(--day-blue); transform: rotate(16deg); }
+.day-hero::after { width: 48vw; height: 56vh; left: -20vw; bottom: -40vh; background: var(--day-blue); transform: rotate(16deg); }
 
 .hero-ribbon {
   position: absolute;
@@ -2647,32 +2647,81 @@ body::after { opacity: 0.018; pointer-events: none; }
   letter-spacing: .13em;
 }
 
-.day-hero__content { width: min(1120px, 100%); position: relative; z-index: 2; }
+.day-hero__content { width: min(1120px, 100%); position: relative; z-index: 3; }
 .day-hero__eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; font: 500 11px/1 "DM Mono", monospace; letter-spacing: .18em; text-transform: uppercase; }
 .day-hero__eyebrow::before { content: ""; width: 54px; height: 8px; background: var(--day-coral); border-radius: 999px; }
-.day-hero h1 { max-width: 1000px; color: var(--ink); font: 400 clamp(58px, 9.6vw, 148px)/.82 "Archivo Black", sans-serif; letter-spacing: -.075em; text-wrap: balance; }
+.day-hero h1 { max-width: min(850px, 64vw); color: var(--ink); font: 400 clamp(58px, 9.6vw, 148px)/.82 "Archivo Black", sans-serif; letter-spacing: -.075em; text-wrap: balance; }
 .day-hero h1 em { color: var(--day-blue); font-family: "Playfair Display", serif; font-weight: 600; }
-.day-hero__bottom { width: min(980px, 100%); display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; margin-top: 48px; }
+.day-hero__bottom { width: min(700px, 58vw); display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; margin-top: 48px; }
 .day-hero__intro { max-width: 470px; color: var(--ink-soft); font-family: "Noto Serif SC", serif; font-size: clamp(15px, 1.4vw, 20px); line-height: 1.8; }
 .day-hero__cta { display: inline-flex; align-items: center; gap: 16px; padding: 16px 22px; border-radius: 999px; border: 2px solid var(--day-ink); background: var(--day-pink); color: var(--day-ink); font: 700 12px/1 "DM Mono", monospace; text-decoration: none; box-shadow: 5px 5px 0 var(--day-ink); transition: transform .2s ease, box-shadow .2s ease; }
 .day-hero__cta:hover { transform: translate(3px, 3px); box-shadow: 2px 2px 0 var(--day-ink); }
 
-.day-canister {
+.hero-camera {
   position: absolute;
-  right: clamp(25px, 8vw, 130px);
-  bottom: 68px;
-  width: clamp(118px, 12vw, 190px);
-  aspect-ratio: .72;
-  border: 3px solid var(--day-ink);
-  border-radius: 18px;
-  background: var(--day-ink);
-  transform: rotate(8deg);
-  box-shadow: 16px 18px 0 var(--day-cyan);
-  transition: transform .2s linear;
+  z-index: 2;
+  right: clamp(-72px, 1vw, 18px);
+  bottom: clamp(38px, 7vh, 74px);
+  width: clamp(380px, 43vw, 660px);
+  aspect-ratio: 1.55;
+  display: grid;
+  place-items: center;
+  transform: translate3d(var(--camera-x, 0), var(--camera-y, 0), 0) rotate(var(--camera-rotate, -5deg));
+  transform-origin: 52% 70%;
+  transition: transform .15s linear;
 }
-.day-canister::before { content: ""; position: absolute; inset: 18% 10% 12%; border-radius: 8px; background: var(--day-yellow); border: 2px solid var(--day-ink); }
-.day-canister::after { content: "ELIA · AI WORKS\A 36 EXP · 2026"; white-space: pre; position: absolute; inset: 33% 18% auto; color: var(--day-ink); font: 500 clamp(8px, .75vw, 12px)/1.4 "DM Mono", monospace; letter-spacing: .08em; }
-.day-canister__film { position: absolute; top: 42%; left: -190px; width: 200px; height: 52px; border-block: 7px dotted var(--day-paper); background: var(--day-ink); transform-origin: right center; transform: scaleX(var(--film-progress, .15)); }
+.hero-camera::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  width: 92%;
+  height: 78%;
+  right: 2%;
+  bottom: 1%;
+  border: 2px solid var(--day-ink);
+  border-radius: 46% 54% 48% 52% / 57% 41% 59% 43%;
+  background: var(--day-cyan);
+  transform: rotate(7deg);
+  box-shadow: 14px 16px 0 var(--day-blue);
+}
+.hero-camera::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 32%;
+  aspect-ratio: 1;
+  top: -2%;
+  right: 2%;
+  border-radius: 50%;
+  background: var(--day-pink);
+}
+.hero-camera__image {
+  width: 94%;
+  height: auto;
+  display: block;
+  transform: rotate(-1.5deg);
+  filter: saturate(1.04) contrast(1.03) drop-shadow(0 18px 15px rgba(23,21,18,.22));
+  animation: cameraFloat 5.8s ease-in-out infinite;
+}
+.hero-camera__tag {
+  position: absolute;
+  z-index: 3;
+  left: 1%;
+  bottom: 1%;
+  padding: 10px 14px;
+  border: 2px solid var(--day-ink);
+  border-radius: 999px;
+  background: var(--day-coral);
+  color: var(--day-ink);
+  box-shadow: 4px 4px 0 var(--day-ink);
+  font: 700 clamp(8px, .72vw, 11px)/1 "DM Mono", monospace;
+  letter-spacing: .1em;
+  transform: rotate(-5deg);
+}
+.hero-camera__spark { position: absolute; z-index: 4; color: var(--day-ink); font: 700 clamp(22px, 2.4vw, 38px)/1 "DM Mono", monospace; }
+.hero-camera__spark--one { top: 8%; left: 4%; transform: rotate(-14deg); }
+.hero-camera__spark--two { right: 5%; bottom: 14%; transform: rotate(18deg); }
+@keyframes cameraFloat { 0%,100% { transform: translateY(0) rotate(-1.5deg); } 50% { transform: translateY(-10px) rotate(.5deg); } }
 
 .chapter { scroll-margin-top: 84px; }
 .film-section {
@@ -2818,9 +2867,12 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
   .day-nav a span:first-child { display: none; }
   .day-hero { min-height: auto; padding: 122px 22px 100px; }
   .hero-ribbon { top: 82px; right: 22px; }
-  .day-hero h1 { font-size: clamp(54px, 18vw, 82px); }
-  .day-hero__bottom { align-items: flex-start; flex-direction: column; }
-  .day-canister { position: relative; right: auto; bottom: auto; width: 120px; margin: 50px 25px 0 auto; }
+  .day-hero h1 { max-width: none; font-size: clamp(54px, 18vw, 82px); }
+  .day-hero h1 em { display: block; }
+  .day-hero__bottom { width: 100%; align-items: flex-start; flex-direction: column; }
+  .day-hero__intro { width: calc(100vw - 44px); max-width: calc(100vw - 44px); overflow-wrap: anywhere; }
+  .hero-camera { position: relative; right: auto; bottom: auto; width: min(500px, 118vw); margin: 54px -48px -58px auto; }
+  .hero-camera__tag { left: 8%; bottom: -2%; }
   .film-section { min-height: auto; padding: 92px 0 72px; }
   .film-section-header { align-items: flex-start; flex-direction: column; }
   .featured-thoughts { justify-content: flex-start; overflow-x: auto; min-height: 470px; padding: 18px 20px 36px; scroll-snap-type: x mandatory; }
@@ -2872,7 +2924,12 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
       <a class="day-hero__cta" href="#works">ROLL THE FILM <span aria-hidden="true">↓</span></a>
     </div>
   </div>
-  <div class="day-canister" id="dayCanister" aria-hidden="true"><span class="day-canister__film"></span></div>
+  <div class="hero-camera" id="dayCanister" aria-hidden="true">
+    <img class="hero-camera__image" src="assets/kodak-camera-hero.webp" alt="" width="1182" height="615" decoding="async" fetchpriority="high">
+    <span class="hero-camera__tag">POINT · SHOOT · MAKE</span>
+    <span class="hero-camera__spark hero-camera__spark--one">✦</span>
+    <span class="hero-camera__spark hero-camera__spark--two">＋</span>
+  </div>
 </section>
 
 <!-- ===== FILM STRIP ===== -->
@@ -3732,8 +3789,9 @@ const dayCanister = document.getElementById('dayCanister');
 function updateCanister() {
   if (!dayCanister) return;
   const progress = Math.min(1, window.scrollY / Math.max(1, window.innerHeight * 0.72));
-  dayCanister.style.setProperty('--film-progress', String(0.15 + progress * 0.85));
-  dayCanister.style.transform = `rotate(${8 - progress * 11}deg) translateY(${progress * 18}px)`;
+  dayCanister.style.setProperty('--camera-rotate', `${-5 + progress * 3}deg`);
+  dayCanister.style.setProperty('--camera-y', `${progress * 24}px`);
+  dayCanister.style.setProperty('--camera-x', `${progress * 12}px`);
 }
 window.addEventListener('scroll', updateCanister, { passive: true });
 updateCanister();
