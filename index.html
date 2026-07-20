@@ -2669,12 +2669,11 @@ html[data-theme="darkroom"] .day-hero {
 }
 
 .day-hero__content { width: min(1120px, 100%); position: relative; z-index: 3; }
-.day-hero__eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; font: 500 11px/1 "DM Mono", monospace; letter-spacing: .18em; text-transform: uppercase; }
-.day-hero__eyebrow::before { content: ""; width: 54px; height: 8px; background: var(--day-coral); border-radius: 999px; }
-.day-hero h1 { max-width: min(850px, 64vw); color: var(--ink); font: 400 clamp(58px, 9.6vw, 148px)/.82 "Archivo Black", sans-serif; letter-spacing: -.075em; text-wrap: balance; }
+.day-hero h1 { max-width: min(980px, 68vw); color: var(--ink); font: 400 clamp(58px, 9.6vw, 148px)/.82 "Archivo Black", sans-serif; letter-spacing: -.075em; }
+.day-hero h1 > span { display: block; }
+.day-hero h1 .hero-title__line--final { white-space: nowrap; }
 .day-hero h1 em { color: var(--day-blue); font-family: "Playfair Display", serif; font-weight: 600; }
-.day-hero__bottom { width: min(700px, 58vw); display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; margin-top: 48px; }
-.day-hero__intro { max-width: 470px; color: var(--ink-soft); font-family: "Noto Serif SC", serif; font-size: clamp(15px, 1.4vw, 20px); line-height: 1.8; }
+.day-hero__bottom { display: flex; align-items: center; margin-top: 44px; }
 .day-hero__cta { display: inline-flex; align-items: center; gap: 16px; padding: 16px 22px; border-radius: 999px; border: 1.5px solid var(--day-ink); background: var(--day-pink); color: var(--day-ink); font: 700 12px/1 "DM Mono", monospace; text-decoration: none; box-shadow: 0 5px 13px rgba(23,21,18,.2); transition: transform .2s ease, box-shadow .2s ease; }
 .day-hero__cta:hover { transform: translateY(1px); box-shadow: 0 3px 9px rgba(23,21,18,.17); }
 
@@ -2871,10 +2870,10 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
   .day-hero { min-height: auto; padding: 122px 22px 100px; }
   .hero-flow { inset: -10% -32%; width: 164%; height: 120%; }
   .hero-ribbon { top: 82px; right: 22px; }
-  .day-hero h1 { max-width: none; font-size: clamp(54px, 18vw, 82px); }
+  .day-hero h1 { max-width: none; font-size: clamp(52px, 17vw, 76px); }
   .day-hero h1 em { display: block; }
-  .day-hero__bottom { width: 100%; align-items: flex-start; flex-direction: column; }
-  .day-hero__intro { width: calc(100vw - 44px); max-width: calc(100vw - 44px); overflow-wrap: anywhere; }
+  .day-hero h1 .hero-title__line--final { white-space: normal; }
+  .day-hero__bottom { align-items: flex-start; }
   .hero-camera { position: relative; right: auto; bottom: auto; width: min(350px, 88vw); margin: 58px 0 -24px auto; }
   .hero-camera__tag { left: 8%; bottom: -2%; }
   .film-section { min-height: auto; padding: 92px 0 72px; }
@@ -2927,10 +2926,8 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
   </svg>
   <div class="hero-ribbon">ELIA · AI PRODUCT · 2026</div>
   <div class="day-hero__content">
-    <div class="day-hero__eyebrow">A daylight contact sheet by Elia</div>
-    <h1>Ideas deserve to become <em>real.</em></h1>
+    <h1><span>Ideas</span><span>deserve to</span><span class="hero-title__line--final">become <em>real.</em></span></h1>
     <div class="day-hero__bottom">
-      <p class="day-hero__intro">把复杂问题拆开，把 AI 变成可被理解、使用和喜欢的产品。这里记录我从商业增长到个人创造的五次曝光。</p>
       <a class="day-hero__cta" href="#works">ROLL THE FILM <span aria-hidden="true">↓</span></a>
     </div>
   </div>
