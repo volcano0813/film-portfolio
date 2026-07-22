@@ -2682,19 +2682,6 @@ html[data-theme="darkroom"] .day-hero {
 @keyframes flowBlue { from { transform: translate3d(-4%, 2%, 0) rotate(-2deg); } to { transform: translate3d(2%, -2%, 0) rotate(1deg); } }
 @keyframes flowCyan { from { transform: translate3d(-2%, -3%, 0) rotate(1deg); } to { transform: translate3d(4%, 3%, 0) rotate(-1.5deg); } }
 
-.hero-ribbon {
-  position: absolute;
-  top: 112px;
-  right: clamp(24px, 5vw, 80px);
-  padding: 9px 14px;
-  border: 1px solid var(--day-ink);
-  border-radius: 999px;
-  color: var(--day-ink);
-  background: rgba(255,248,232,.75);
-  font: 500 10px/1 "DM Mono", monospace;
-  letter-spacing: .13em;
-}
-
 .day-hero__content { width: min(1120px, 100%); position: relative; z-index: 3; }
 .day-hero h1 { max-width: min(980px, 68vw); color: var(--ink); font: 400 clamp(58px, 9.6vw, 148px)/.82 "Archivo Black", sans-serif; letter-spacing: -.075em; }
 .day-hero h1 > span { display: block; }
@@ -2728,8 +2715,8 @@ html[data-theme="darkroom"] .day-hero {
 .hero-camera__tag {
   position: absolute;
   z-index: 3;
-  left: 2%;
-  bottom: -3%;
+  top: clamp(-56px, -12%, -40px);
+  right: 5%;
   padding: 10px 14px;
   border: 1.5px solid var(--day-ink);
   border-radius: 999px;
@@ -2738,7 +2725,9 @@ html[data-theme="darkroom"] .day-hero {
   box-shadow: 0 4px 10px rgba(23,21,18,.2);
   font: 700 clamp(8px, .72vw, 11px)/1 "DM Mono", monospace;
   letter-spacing: .1em;
-  transform: rotate(-5deg);
+  transform-origin: center;
+  animation: cameraFloat 5.8s ease-in-out infinite;
+  will-change: transform;
 }
 .hero-camera__spark { position: absolute; z-index: 4; color: var(--day-ink); font: 700 clamp(22px, 2.4vw, 38px)/1 "DM Mono", monospace; }
 .hero-camera__spark--one { top: 8%; left: 4%; transform: rotate(-14deg); }
@@ -2938,13 +2927,12 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
   .day-nav a span:first-child { display: none; }
   .day-hero { min-height: auto; padding: 122px 22px 100px; }
   .hero-flow { inset: -10% -32%; width: 164%; height: 120%; }
-  .hero-ribbon { top: 82px; right: 22px; }
   .day-hero h1 { max-width: none; font-size: clamp(52px, 17vw, 76px); }
   .day-hero h1 em { display: block; }
   .day-hero h1 .hero-title__line--final { white-space: normal; }
   .day-hero__bottom { align-items: flex-start; }
   .hero-camera { position: relative; right: auto; bottom: auto; width: min(350px, 88vw); margin: 58px 0 -24px auto; }
-  .hero-camera__tag { left: 8%; bottom: -2%; }
+  .hero-camera__tag { top: clamp(-50px, -12%, -38px); right: 5%; }
   .film-section { min-height: auto; padding: 92px 0 72px; }
   .film-section-header { align-items: flex-start; flex-direction: column; }
   .featured-thoughts { justify-content: flex-start; overflow-x: auto; min-height: 470px; padding: 18px 20px 36px; scroll-snap-type: x mandatory; }
@@ -2994,7 +2982,6 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
     <path class="hero-flow__ribbon hero-flow__ribbon--blue" d="M-210 835 C 75 650 178 1035 505 910"></path>
     <path class="hero-flow__ribbon hero-flow__ribbon--cyan" d="M-180 118 C 92 -82 294 238 520 -96"></path>
   </svg>
-  <div class="hero-ribbon">ELIA · AI PRODUCT · 2026</div>
   <div class="day-hero__content">
     <h1><span>Ideas</span><span>deserve to</span><span class="hero-title__line--final">become <em>real.</em></span></h1>
     <div class="day-hero__bottom">
@@ -3013,7 +3000,6 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
 <section class="film-section chapter" id="works">
   <div class="film-section-header">
     <h2>Selected<br>Exposures</h2>
-    <p>DRAG / SCROLL / USE ARROW KEYS<br>点击胶片查看完整项目</p>
   </div>
 
   <div class="scroll-hint">KODAK PORTRA 400 · 135 FILM · 36 EXP</div>
@@ -3035,7 +3021,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
           <div class="film-frame-number">→1  1A</div>
         </div>
         <div class="film-caption">
-          <div class="film-caption-title">百度AIGC广告业务</div>
+          <div class="film-caption-title">百度PSIG商业投放</div>
           <div class="film-caption-desc">AI命理产品矩阵 · AI Coding投放闭环<br>广告流量向付费转化</div>
           <div class="film-caption-tag">实习项目 · 百度文库商业投放</div>
         </div>
@@ -3149,7 +3135,6 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
 <section class="thoughts-chapter chapter" id="thoughts" aria-labelledby="thoughtsTitle">
   <div class="chapter-head">
     <h2 id="thoughtsTitle">Notes from<br>the darkroom</h2>
-    <p>一些在做 AI 产品时留下的显影痕迹。点击卡片读完整想法，或进入完整 Contact Sheet。</p>
   </div>
   <div class="featured-thoughts" id="featuredThoughts" aria-label="精选思考"></div>
   <div class="thoughts-more"><a href="thoughts.html">VIEW ALL THOUGHTS <span aria-hidden="true">→</span></a></div>
