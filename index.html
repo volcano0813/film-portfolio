@@ -8,6 +8,13 @@
 <script src="assets/theme.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
 <style>
+@font-face {
+  font-family: "Aa MeiYu JianCha";
+  src: url("assets/fonts/AaMeiYuJianCha-web.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
 :root {
   --bg: #050712;
   --film-black: #111110;
@@ -2866,13 +2873,136 @@ html[data-theme="darkroom"] .featured-thought { color: var(--day-ink); }
 .thoughts-more { position: relative; z-index: 2; display: flex; justify-content: center; }
 .thoughts-more a { display: inline-flex; align-items: center; gap: 14px; padding: 17px 24px; border: 2px solid var(--day-ink); border-radius: 999px; background: var(--day-pink); color: var(--day-ink); box-shadow: 5px 5px 0 var(--day-ink); font: 700 12px/1 "DM Mono", monospace; text-decoration: none; }
 
-.thought-preview { position: fixed; inset: 0; z-index: 9000; display: grid; place-items: center; padding: 24px; background: rgba(23,21,18,.5); backdrop-filter: blur(12px); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .28s ease, visibility 0s linear .28s; }
+.thought-preview { position: fixed; inset: 0; z-index: 9000; display: grid; place-items: center; padding: 24px; background: rgba(23,21,18,.54); backdrop-filter: blur(12px); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .28s ease, visibility 0s linear .28s; }
 .thought-preview.is-open { opacity: 1; visibility: visible; pointer-events: auto; transition-delay: 0s; }
-.thought-preview__card { width: min(660px, 100%); padding: clamp(28px, 5vw, 58px); border: 3px solid var(--day-ink); border-radius: 32px; background: var(--preview-color, var(--day-cyan)); color: var(--day-ink); box-shadow: 14px 16px 0 var(--day-ink); opacity: 0; transform: translateY(34px) rotate(-2deg) scale(.94); transition: transform .5s cubic-bezier(.16, 1.18, .3, 1), opacity .28s ease; }
-.thought-preview.is-open .thought-preview__card { opacity: 1; transform: translateY(0) rotate(-1deg) scale(1); transition-delay: .04s; }
-.thought-preview__close { float: right; width: 42px; height: 42px; border: 2px solid currentColor; border-radius: 50%; background: transparent; color: inherit; cursor: pointer; font-size: 20px; }
-.thought-preview__text { clear: both; padding-top: 22px; font-family: "Noto Serif SC", serif; font-size: clamp(20px, 3vw, 32px); font-weight: 700; line-height: 1.65; }
-.thought-preview__meta { display: flex; justify-content: space-between; gap: 16px; margin-top: 30px; font: 500 11px/1.5 "DM Mono", monospace; }
+html.is-thought-preview-open,
+body.is-thought-preview-open { overflow: hidden !important; overscroll-behavior: none; }
+.thought-preview__card {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  width: min(440px, calc(100vw - 32px), calc((100dvh - 48px) * .6279));
+  aspect-ratio: 54 / 86;
+  padding: 14px 14px 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(23,21,18,.35);
+  border-radius: 3px;
+  background: var(--preview-frame, linear-gradient(165deg, #a990e8, #7fd1d4 54%, #35a783));
+  color: var(--day-ink);
+  box-shadow: 18px 24px 34px rgba(23,21,18,.42);
+  opacity: 0;
+  transform: translateY(34px) rotate(-2.2deg) scale(.94);
+  transition: transform .5s cubic-bezier(.16, 1.18, .3, 1), opacity .28s ease;
+}
+.thought-preview.is-open .thought-preview__card { opacity: 1; transform: translateY(0) rotate(-1.1deg) scale(1); transition-delay: .04s; }
+.thought-preview__photo-shell {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 46 / 62;
+  min-height: 0;
+}
+.thought-preview__photo {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: clamp(40px, 5vw, 48px) clamp(26px, 4vw, 34px);
+  align-items: flex-start;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scrollbar-width: none;
+  background: #fffefa;
+  border: 1px solid rgba(23,21,18,.12);
+}
+.thought-preview__photo::-webkit-scrollbar { display: none; }
+.thought-preview__scrollbar {
+  position: absolute;
+  top: 62px;
+  right: 10px;
+  bottom: 20px;
+  z-index: 3;
+  width: 7px;
+  overflow: hidden;
+  border: 1px solid rgba(23,21,18,.28);
+  border-radius: 999px;
+  background: rgba(23,21,18,.08);
+  box-shadow: inset 0 0 0 2px rgba(255,254,250,.7);
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+.thought-preview__scrollbar.is-scrollable { opacity: 1; }
+.thought-preview__scrollbar-thumb {
+  display: block;
+  width: 100%;
+  min-height: 34px;
+  border: 1px solid #fffefa;
+  border-radius: inherit;
+  background: rgba(23,21,18,.72);
+  transform: translateY(0);
+  will-change: transform;
+}
+.thought-preview__photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255,255,255,.72), transparent 40%, rgba(23,21,18,.025));
+}
+.thought-preview__close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 2;
+  display: grid;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  place-items: center;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  background: rgba(255,254,250,.86);
+  color: inherit;
+  box-shadow: 3px 3px 0 rgba(23,21,18,.9);
+  cursor: pointer;
+  font: 400 22px/1 "DM Mono", monospace;
+}
+.thought-preview__close:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 rgba(23,21,18,.9); }
+.thought-preview__close:focus-visible { outline: 3px solid #2258d5; outline-offset: 3px; }
+.thought-preview__text {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: "Aa MeiYu JianCha", "Kaiti SC", "KaiTi", "STKaiti", serif;
+  font-size: clamp(18px, 2.8vw, 24px);
+  font-weight: 400;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+.thought-preview__meta {
+  display: flex;
+  min-height: 76px;
+  padding: 18px 8px 16px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: "Aa MeiYu JianCha", "Kaiti SC", "KaiTi", "STKaiti", serif;
+  font-size: clamp(17px, 2.5vw, 21px);
+  font-weight: 400;
+  line-height: 1;
+}
+@media (max-width: 480px) {
+  .thought-preview { padding: 16px; }
+  .thought-preview__card { width: min(calc(100vw - 32px), calc((100dvh - 32px) * .6279)); padding: 10px 10px 0; }
+  .thought-preview__photo { padding: 24px 30px 24px 22px; }
+  .thought-preview__scrollbar { top: 54px; right: 7px; bottom: 16px; width: 6px; }
+  .thought-preview__close { top: 18px; right: 18px; width: 36px; height: 36px; font-size: 19px; }
+  .thought-preview__text { font-size: clamp(17px, 4.6vw, 19px); }
+  .thought-preview__meta { min-height: 60px; padding: 12px 5px; font-size: 17px; }
+}
 
 .footer { background: var(--surface); color: var(--ink); border-color: var(--line); }
 .detail-overlay { background: rgba(255,248,232,.92); backdrop-filter: blur(16px); }
@@ -2940,6 +3070,88 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
   .chapter-head { align-items: flex-start; flex-direction: column; }
   .thoughts-chapter { padding-inline: 0; }
   .chapter-head { padding-inline: 24px; }
+}
+
+/* Keep the homepage contact sheet in sync with thoughts.html. */
+.featured-thoughts {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 30px 22px;
+  align-items: start;
+  min-height: 0;
+  margin: 52px auto 34px;
+}
+.featured-thought {
+  --rotate: -1.4deg;
+  display: flex;
+  width: auto;
+  aspect-ratio: 54 / 86;
+  margin: 0;
+  padding: 10px 10px 0;
+  flex-direction: column;
+  transform: rotate(var(--rotate));
+  box-shadow: 8px 12px 20px rgba(49,37,43,.28);
+}
+.featured-thought:first-child { margin-left: 0; }
+.featured-thought:nth-child(1) { --frame: linear-gradient(165deg, #a990e8 0%, #7fd1d4 54%, #35a783 100%); --rotate: -1.4deg; --offset: 0px; }
+.featured-thought:nth-child(2) { --frame: linear-gradient(165deg, #df7788 0%, #e294b7 48%, #8f76c7 100%); --rotate: 1.2deg; --offset: 0px; }
+.featured-thought:nth-child(3) { --frame: linear-gradient(165deg, #79d5df 0%, #f2c6db 58%, #f49bae 100%); --rotate: -1deg; --offset: 0px; }
+.featured-thought:nth-child(4) { --frame: linear-gradient(165deg, #b19ce8 0%, #d9c8ef 48%, #79ced2 100%); --rotate: 1.5deg; --offset: 0px; }
+.featured-thought:nth-child(5) { --frame: linear-gradient(165deg, #efb06f 0%, #f4d88f 48%, #e9867b 100%); --rotate: -1.3deg; --offset: 0px; }
+.featured-thought:nth-child(6) { --frame: linear-gradient(165deg, #8fd267 0%, #b7ddb3 52%, #62b7b8 100%); --rotate: .8deg; --offset: 0px; }
+.featured-thought__photo {
+  width: 100%;
+  aspect-ratio: 46 / 62;
+  min-height: 0;
+  padding: 20px 16px;
+  flex: 0 1 auto;
+}
+.featured-thought__text {
+  font-family: "Aa MeiYu JianCha", "Kaiti SC", "KaiTi", "STKaiti", serif;
+  font-size: clamp(15px, 1.15vw, 18px);
+  font-weight: 400;
+  line-height: 1.62;
+  white-space: pre-line;
+  -webkit-line-clamp: 9;
+}
+.featured-thought__caption {
+  min-height: 58px;
+  padding: 11px 5px 10px;
+}
+.featured-thought__caption strong,
+.featured-thought__caption small {
+  font-family: "Aa MeiYu JianCha", "Kaiti SC", "KaiTi", "STKaiti", serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: normal;
+}
+@media (max-width: 1200px) {
+  .featured-thoughts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .featured-thought__text { font-size: 17px; }
+}
+@media (max-width: 900px) {
+  .featured-thoughts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 620px) {
+  .featured-thoughts {
+    display: flex;
+    gap: 20px;
+    min-height: 0;
+    padding: 18px 20px 34px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .featured-thoughts::-webkit-scrollbar { display: none; }
+  .featured-thought {
+    flex: 0 0 min(78vw, 260px);
+    width: auto;
+    margin: 0;
+    scroll-snap-align: center;
+  }
+  .featured-thought__text { font-size: 18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -3143,7 +3355,12 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
 <div class="thought-preview" id="thoughtPreview" aria-hidden="true">
   <article class="thought-preview__card" role="dialog" aria-modal="true" aria-labelledby="thoughtPreviewText">
     <button class="thought-preview__close" type="button" aria-label="关闭思考预览">×</button>
-    <p class="thought-preview__text" id="thoughtPreviewText"></p>
+    <div class="thought-preview__photo-shell">
+      <div class="thought-preview__photo" tabindex="0" aria-label="完整思考内容，可上下滚动">
+        <p class="thought-preview__text" id="thoughtPreviewText"></p>
+      </div>
+      <span class="thought-preview__scrollbar" aria-hidden="true"><span class="thought-preview__scrollbar-thumb"></span></span>
+    </div>
     <div class="thought-preview__meta">
       <span id="thoughtPreviewCategory"></span>
       <span id="thoughtPreviewDate"></span>
@@ -4022,26 +4239,101 @@ frames.forEach(frame => {
 });
 
 // Featured thoughts share their source of truth with thoughts.html.
-const thoughtColors = ['#35cfc7', '#f044da', '#ffd23f', '#a990e8'];
-const featuredThoughts = (window.ELIA_THOUGHTS || []).filter((item) => item.featured).slice(0, 4);
+const thoughtFrames = [
+  'linear-gradient(165deg, #a990e8 0%, #7fd1d4 54%, #35a783 100%)',
+  'linear-gradient(165deg, #df7788 0%, #e294b7 48%, #8f76c7 100%)',
+  'linear-gradient(165deg, #79d5df 0%, #f2c6db 58%, #f49bae 100%)',
+  'linear-gradient(165deg, #b19ce8 0%, #d9c8ef 48%, #79ced2 100%)',
+  'linear-gradient(165deg, #efb06f 0%, #f4d88f 48%, #e9867b 100%)',
+  'linear-gradient(165deg, #8fd267 0%, #b7ddb3 52%, #62b7b8 100%)'
+];
+const allThoughts = window.ELIA_THOUGHTS || [];
+const prioritizedThoughts = [
+  ...allThoughts.filter((item) => item.featured),
+  ...allThoughts.filter((item) => !item.featured)
+].slice(0, 6);
+const featuredThoughtSet = new Set(prioritizedThoughts);
+const featuredThoughts = allThoughts.filter((item) => featuredThoughtSet.has(item));
 const featuredThoughtsRoot = document.getElementById('featuredThoughts');
 const thoughtPreview = document.getElementById('thoughtPreview');
+const thoughtPreviewPhoto = thoughtPreview?.querySelector('.thought-preview__photo');
+const thoughtPreviewScrollbar = thoughtPreview?.querySelector('.thought-preview__scrollbar');
+const thoughtPreviewScrollbarThumb = thoughtPreview?.querySelector('.thought-preview__scrollbar-thumb');
 let thoughtPreviewTrigger = null;
 let thoughtOpeningTimer = null;
+let thoughtPreviewBodyOverflow = '';
+
+function updateThoughtPreviewScrollbar() {
+  if (!thoughtPreviewPhoto || !thoughtPreviewScrollbar || !thoughtPreviewScrollbarThumb) return;
+  const maxScroll = thoughtPreviewPhoto.scrollHeight - thoughtPreviewPhoto.clientHeight;
+  const trackHeight = thoughtPreviewScrollbar.clientHeight;
+  const scrollable = maxScroll > 1 && trackHeight > 0;
+  thoughtPreviewScrollbar.classList.toggle('is-scrollable', scrollable);
+  if (!scrollable) {
+    thoughtPreviewScrollbarThumb.style.height = '100%';
+    thoughtPreviewScrollbarThumb.style.transform = 'translateY(0)';
+    return;
+  }
+  const thumbHeight = Math.max(34, trackHeight * (thoughtPreviewPhoto.clientHeight / thoughtPreviewPhoto.scrollHeight));
+  const travel = Math.max(0, trackHeight - thumbHeight);
+  const thumbOffset = travel * (thoughtPreviewPhoto.scrollTop / maxScroll);
+  thoughtPreviewScrollbarThumb.style.height = `${thumbHeight}px`;
+  thoughtPreviewScrollbarThumb.style.transform = `translateY(${thumbOffset}px)`;
+}
+
+thoughtPreviewPhoto?.addEventListener('scroll', updateThoughtPreviewScrollbar, { passive: true });
+window.addEventListener('resize', updateThoughtPreviewScrollbar, { passive: true });
 
 if (featuredThoughtsRoot) {
   featuredThoughtsRoot.innerHTML = featuredThoughts.map((item, index) => `
     <button class="featured-thought" type="button" data-thought-index="${index}" aria-label="打开精选思考 ${index + 1}">
       <span class="featured-thought__photo">
-        <span class="featured-thought__num">EXPOSURE / ${String(index + 1).padStart(2, '0')}</span>
         <span class="featured-thought__text">${item.text}</span>
       </span>
       <span class="featured-thought__caption">
         <strong>${item.category}</strong>
-        <small>${item.date}<br>ELIA'S DARKROOM</small>
+        <small>${item.date}</small>
       </span>
     </button>
   `).join('');
+
+  const fitFeaturedExcerpt = (element, fullText) => {
+    element.textContent = fullText;
+    if (element.scrollHeight <= element.clientHeight + 1) return;
+
+    let start = 0;
+    let end = fullText.length;
+    while (start < end) {
+      const middle = Math.ceil((start + end) / 2);
+      element.textContent = `${fullText.slice(0, middle).trimEnd()}…`;
+      if (element.scrollHeight <= element.clientHeight + 1) start = middle;
+      else end = middle - 1;
+    }
+
+    const excerpt = fullText
+      .slice(0, start)
+      .trimEnd()
+      .replace(/[，。；：！？、,.!?;:]+$/u, '');
+    element.textContent = `${excerpt}…`;
+  };
+
+  const fitFeaturedExcerpts = () => {
+    featuredThoughtsRoot.querySelectorAll('.featured-thought__text').forEach((element, index) => {
+      fitFeaturedExcerpt(element, featuredThoughts[index].text);
+    });
+  };
+
+  requestAnimationFrame(fitFeaturedExcerpts);
+  document.fonts?.ready.then(fitFeaturedExcerpts);
+  let featuredThoughtsWidth = 0;
+  const featuredThoughtsObserver = new ResizeObserver(([entry]) => {
+    const nextWidth = Math.round(entry.contentRect.width);
+    if (nextWidth === featuredThoughtsWidth) return;
+    featuredThoughtsWidth = nextWidth;
+    requestAnimationFrame(fitFeaturedExcerpts);
+  });
+  featuredThoughtsObserver.observe(featuredThoughtsRoot);
+
   featuredThoughtsRoot.addEventListener('click', (event) => {
     const card = event.target.closest('[data-thought-index]');
     if (card) stageThoughtPreview(Number(card.dataset.thoughtIndex), card);
@@ -4094,13 +4386,18 @@ function openThoughtPreview(index, trigger) {
   const item = featuredThoughts[index];
   if (!item || !thoughtPreview) return;
   thoughtPreviewTrigger = trigger || document.activeElement;
-  thoughtPreview.style.setProperty('--preview-color', thoughtColors[index % thoughtColors.length]);
+  thoughtPreview.style.setProperty('--preview-frame', thoughtFrames[index % thoughtFrames.length]);
   document.getElementById('thoughtPreviewText').textContent = item.text;
-  document.getElementById('thoughtPreviewCategory').textContent = `${item.category} · ${item.scene}`;
+  thoughtPreviewPhoto.scrollTop = 0;
+  document.getElementById('thoughtPreviewCategory').textContent = item.category;
   document.getElementById('thoughtPreviewDate').textContent = item.date;
   thoughtPreview.classList.add('is-open');
   thoughtPreview.setAttribute('aria-hidden', 'false');
+  thoughtPreviewBodyOverflow = document.body.style.overflow;
+  document.documentElement.classList.add('is-thought-preview-open');
+  document.body.classList.add('is-thought-preview-open');
   document.body.style.overflow = 'hidden';
+  requestAnimationFrame(() => requestAnimationFrame(updateThoughtPreviewScrollbar));
   thoughtPreview.querySelector('.thought-preview__close').focus();
 }
 
@@ -4109,7 +4406,9 @@ function closeThoughtPreview() {
   if (!thoughtPreview || !thoughtPreview.classList.contains('is-open')) return;
   thoughtPreview.classList.remove('is-open');
   thoughtPreview.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
+  document.documentElement.classList.remove('is-thought-preview-open');
+  document.body.classList.remove('is-thought-preview-open');
+  document.body.style.overflow = thoughtPreviewBodyOverflow;
   if (thoughtPreviewTrigger) thoughtPreviewTrigger.focus({ preventScroll: true });
 }
 
