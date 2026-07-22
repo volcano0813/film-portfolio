@@ -1,0 +1,5 @@
+__pycache__/
+*.py[cod]
+.vercel/
+assets/douban/**/*.part
+assets/douban/*.tmp
