@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" role="img" aria-labelledby="title desc">
+  <title id="title">电影封面占位图</title><desc id="desc">蓝色与珊瑚色的胶片图形</desc>
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#2453d4"/><stop offset="1" stop-color="#ff7058"/></linearGradient></defs>
+  <rect width="400" height="600" fill="#0b0e18"/><path d="M0 70h400v460H0z" fill="url(#g)"/>
+  <g fill="#fff8e8"><path d="M0 18h32v34H0zm58 0h32v34H58zm58 0h32v34h-32zm58 0h32v34h-32zm58 0h32v34h-32zm58 0h32v34h-32zm58 0h32v34h-32zM0 548h32v34H0zm58 0h32v34H58zm58 0h32v34h-32zm58 0h32v34h-32zm58 0h32v34h-32zm58 0h32v34h-32zm58 0h32v34h-32z"/><circle cx="200" cy="286" r="72" fill="none" stroke="#fff8e8" stroke-width="15"/><circle cx="200" cy="286" r="18"/></g>
+  <text x="200" y="408" text-anchor="middle" fill="#171512" font-family="monospace" font-size="24" font-weight="700">FRAME NOT FOUND</text>
+</svg>
