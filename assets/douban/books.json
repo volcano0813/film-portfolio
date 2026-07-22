@@ -1,0 +1,213 @@
+{
+  "generatedAt": "2026-07-22T05:46:00Z",
+  "total": 23,
+  "books": [
+    {
+      "id": "36457094",
+      "title": "明亮的夜晚",
+      "cover": "assets/douban/book-covers/36457094.webp",
+      "rating": 4,
+      "readAt": "2025-05-12",
+      "comment": "女性之间的心心相惜永远让我动容",
+      "publication": "[韩]崔恩荣 / 叶蕾 / 台海出版社 / 2023-8 / 52"
+    },
+    {
+      "id": "36096287",
+      "title": "东京八平米 : Tokyo's Downsized Dwelling",
+      "cover": "assets/douban/book-covers/36096287.webp",
+      "rating": 4,
+      "readAt": "2025-05-01",
+      "comment": "永远会被充满热爱与温暖的文字打动。“你的‘小‘不成问题，因为外面的世界足够大”。我总是因为一个人而不愿出门，看完这本书，很想一个人出去走走",
+      "publication": "[日]吉井忍 / 上海三联书店 / 2022-11 / 79.00元"
+    },
+    {
+      "id": "35534519",
+      "title": "素食者",
+      "cover": "assets/douban/book-covers/35534519.webp",
+      "rating": 3,
+      "readAt": "2025-04-26",
+      "comment": "在偏执和近乎疯狂成魔的故事里，是英惠同生活的抗争，她想成为一棵树，重新生长发芽；也是姐姐在一连串的经历中不断审视自己，理解妹妹。",
+      "publication": "[韩] 韩江 / 胡椒筒 / 四川文艺出版社 / 2021-9 / 48"
+    },
+    {
+      "id": "34799583",
+      "title": "马可瓦尔多",
+      "cover": "assets/douban/book-covers/34799583.webp",
+      "rating": 5,
+      "readAt": "2025-04-12",
+      "comment": "做一个爱自然爱生活的大人",
+      "publication": "[意] 伊塔洛·卡尔维诺 / 马小漠 / 译林出版社 / 2020-1 / 42.00元"
+    },
+    {
+      "id": "3006581",
+      "title": "无人生还",
+      "cover": "assets/douban/book-covers/3006581.webp",
+      "rating": 4,
+      "readAt": "2025-03-26",
+      "comment": "在法律的灰色地带，是生是死，一念之间。",
+      "publication": "[英] 阿加莎·克里斯蒂 / 祁阿红 / 人民文学出版社 / 2008-3 / 19.00"
+    },
+    {
+      "id": "26878124",
+      "title": "我的天才女友 : 那不勒斯四部曲1",
+      "cover": "assets/douban/book-covers/26878124.webp",
+      "rating": 5,
+      "readAt": "2024-03-24",
+      "comment": "被莉拉这个女孩的个性深深吸引",
+      "publication": "[意] 埃莱娜·费兰特 / 陈英 / 人民文学出版社 / 2017-1 / 42.00元"
+    },
+    {
+      "id": "4071859",
+      "title": "我在伊朗长大",
+      "cover": "assets/douban/book-covers/4071859.webp",
+      "rating": 5,
+      "readAt": "2024-03-24",
+      "comment": "“人可以原谅，但绝不应该忘记。”玛赞从小就是个敢于反抗、有思想的女孩，也得益于父母和外婆给她提供的开明的成长环境。",
+      "publication": "玛赞·莎塔碧 / 马爱农、左涛 / 生活·读书·新知三联书店 / 2010-1 / 39.00元"
+    },
+    {
+      "id": "36593622",
+      "title": "世上为什么要有图书馆",
+      "cover": "assets/douban/book-covers/36593622.webp",
+      "rating": 5,
+      "readAt": "2024-03-03",
+      "comment": "很喜欢这本书，虽然自己还是学生，但能在书中找到更多共鸣，杨老师的文字和她一样温柔知性，娓娓道来中满是真诚和思考，书中的很多语句都很喜欢！",
+      "publication": "杨素秋 / 上海译文出版社 / 2024-1-1 / 58.00元"
+    },
+    {
+      "id": "30125030",
+      "title": "天生有罪 : 特雷弗·诺亚的变色人生",
+      "cover": "assets/douban/book-covers/30125030.webp",
+      "rating": 5,
+      "readAt": "2024-02-23",
+      "comment": "特雷弗和妈妈不是时代的顺应者，是自己人生的掌控者。",
+      "publication": "[南非] 特雷弗·诺亚 / 董帅 / 北京联合出版公司 / 2018-2-1 / 58.00"
+    },
+    {
+      "id": "5337248",
+      "title": "台北人",
+      "cover": "assets/douban/book-covers/5337248.webp",
+      "rating": 4,
+      "readAt": "2024-01-29",
+      "comment": "",
+      "publication": "白先勇 / 广西师范大学出版社 / 2010-10 / 38.00元"
+    },
+    {
+      "id": "2158161",
+      "title": "世界尽头与冷酷仙境",
+      "cover": "assets/douban/book-covers/2158161.webp",
+      "rating": 3,
+      "readAt": "2024-01-29",
+      "comment": "",
+      "publication": "村上春树 / 林少华 / 上海译文出版社 / 2007-7 / 25.00元"
+    },
+    {
+      "id": "3674537",
+      "title": "明朝那些事儿（1-9） : 限量版",
+      "cover": "assets/douban/book-covers/3674537.webp",
+      "rating": 5,
+      "readAt": "2024-01-26",
+      "comment": "",
+      "publication": "当年明月 / 中国海关出版社 / 2009-4 / 358.20元"
+    },
+    {
+      "id": "34998019",
+      "title": "秋园",
+      "cover": "assets/douban/book-covers/34998019.webp",
+      "rating": 5,
+      "readAt": "2024-01-12",
+      "comment": "在秋园和之骅身上，我看到了那个年代女性的艰难不易，但更多的是她们的坚韧，是她们虽屡屡受挫却依然对生活充满爱与希望。",
+      "publication": "杨本芬 / 北京联合出版公司 / 2020-6 / 38.00元"
+    },
+    {
+      "id": "1209899",
+      "title": "我与地坛 : 史铁生代表作",
+      "cover": "assets/douban/book-covers/1209899.webp",
+      "rating": 5,
+      "readAt": "2024-01-12",
+      "comment": "",
+      "publication": "史铁生 / 春风文艺出版社 / 2002-5 / 25.00元"
+    },
+    {
+      "id": "1060068",
+      "title": "撒哈拉的故事",
+      "cover": "assets/douban/book-covers/1060068.webp",
+      "rating": 5,
+      "readAt": "2024-01-12",
+      "comment": "",
+      "publication": "三毛 / 哈尔滨出版社 / 2003-8 / 15.80元"
+    },
+    {
+      "id": "3326892",
+      "title": "圣诞忆旧集",
+      "cover": "assets/douban/book-covers/3326892.webp",
+      "rating": 4,
+      "readAt": "2023-12-19",
+      "comment": "",
+      "publication": "[美] 杜鲁门·卡坡蒂 / 潘帕 / 译林出版社 / 2009-1 / 24.50"
+    },
+    {
+      "id": "30187222",
+      "title": "夜航西飞",
+      "cover": "assets/douban/book-covers/30187222.webp",
+      "rating": 5,
+      "readAt": "2023-12-19",
+      "comment": "做了一场关于非洲、赛马和飞行的梦",
+      "publication": "[英]柏瑞尔·马卡姆 / 陶立夏 / 人民文学出版社 / 2018-9 / 59.00元"
+    },
+    {
+      "id": "35193035",
+      "title": "认知觉醒 : 开启自我改变的原动力",
+      "cover": "assets/douban/book-covers/35193035.webp",
+      "rating": 4,
+      "readAt": "2023-12-19",
+      "comment": "",
+      "publication": "周岭 / 人民邮电出版社 / 2020-10 / 59.8"
+    },
+    {
+      "id": "3211779",
+      "title": "嫌疑人X的献身",
+      "cover": "assets/douban/book-covers/3211779.webp",
+      "rating": 5,
+      "readAt": "2023-07-27",
+      "comment": "",
+      "publication": "[日] 东野圭吾 / 刘子倩 / 南海出版公司 / 2008-9 / 28.00"
+    },
+    {
+      "id": "4760224",
+      "title": "许三观卖血记",
+      "cover": "assets/douban/book-covers/4760224.webp",
+      "rating": 4,
+      "readAt": "2023-07-27",
+      "comment": "",
+      "publication": "余华 / 作家出版社 / 2012-9 / 24.00元"
+    },
+    {
+      "id": "1770782",
+      "title": "追风筝的人",
+      "cover": "assets/douban/book-covers/1770782.webp",
+      "rating": 5,
+      "readAt": "2020-08-09",
+      "comment": "",
+      "publication": "[美] 卡勒德·胡赛尼 / 李继宏 / 上海人民出版社 / 2006-5 / 29.00元"
+    },
+    {
+      "id": "10554308",
+      "title": "白夜行",
+      "cover": "assets/douban/book-covers/10554308.webp",
+      "rating": 5,
+      "readAt": "2020-08-09",
+      "comment": "",
+      "publication": "[日] 东野圭吾 / 刘姿君 / 南海出版公司 / 2013-1-1 / 39.50元"
+    },
+    {
+      "id": "4913064",
+      "title": "活着",
+      "cover": "assets/douban/book-covers/4913064.webp",
+      "rating": 5,
+      "readAt": "2020-08-09",
+      "comment": "",
+      "publication": "余华 / 作家出版社 / 2012-8 / 28.00元"
+    }
+  ]
+}
