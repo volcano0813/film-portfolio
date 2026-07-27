@@ -106,13 +106,15 @@ body::after {
   position: fixed;
   top: 0;
   left: 0;
-  width: 56px;
-  height: 56px;
+  width: 32px;
+  height: 32px;
+  color: var(--ink, #171512);
   pointer-events: none;
   transform: translate(-50%, -50%);
-  z-index: 1100;
-  transition: transform 0.08s ease-out, width 0.18s ease, height 0.18s ease, opacity 0.18s ease;
-  opacity: 0.9;
+  z-index: 10001;
+  transition: width 0.16s ease, height 0.16s ease, color 0.2s ease, opacity 0.16s ease;
+  opacity: 0;
+  will-change: transform;
 }
 
 .cursor-ring::before,
@@ -122,17 +124,17 @@ body::after {
   inset: 0;
   background:
     /* 左上角 */
-    linear-gradient(to right, var(--kodak-yellow), var(--kodak-yellow)) left 8px top 10px / 14px 2px no-repeat,
-    linear-gradient(to bottom, var(--kodak-yellow), var(--kodak-yellow)) left 10px top 8px / 2px 14px no-repeat,
+    linear-gradient(to right, currentColor, currentColor) left top / 9px 1.5px no-repeat,
+    linear-gradient(to bottom, currentColor, currentColor) left top / 1.5px 9px no-repeat,
     /* 右上角 */
-    linear-gradient(to left, var(--kodak-yellow), var(--kodak-yellow)) right 8px top 10px / 14px 2px no-repeat,
-    linear-gradient(to bottom, var(--kodak-yellow), var(--kodak-yellow)) right 10px top 8px / 2px 14px no-repeat,
+    linear-gradient(to left, currentColor, currentColor) right top / 9px 1.5px no-repeat,
+    linear-gradient(to bottom, currentColor, currentColor) right top / 1.5px 9px no-repeat,
     /* 左下角 */
-    linear-gradient(to right, var(--kodak-yellow), var(--kodak-yellow)) left 8px bottom 10px / 14px 2px no-repeat,
-    linear-gradient(to top, var(--kodak-yellow), var(--kodak-yellow)) left 10px bottom 8px / 2px 14px no-repeat,
+    linear-gradient(to right, currentColor, currentColor) left bottom / 9px 1.5px no-repeat,
+    linear-gradient(to top, currentColor, currentColor) left bottom / 1.5px 9px no-repeat,
     /* 右下角 */
-    linear-gradient(to left, var(--kodak-yellow), var(--kodak-yellow)) right 8px bottom 10px / 14px 2px no-repeat,
-    linear-gradient(to top, var(--kodak-yellow), var(--kodak-yellow)) right 10px bottom 8px / 2px 14px no-repeat;
+    linear-gradient(to left, currentColor, currentColor) right bottom / 9px 1.5px no-repeat,
+    linear-gradient(to top, currentColor, currentColor) right bottom / 1.5px 9px no-repeat;
 }
 
 .cursor-ring::before {
@@ -143,10 +145,28 @@ body::after {
   opacity: 0.4;
 }
 
-.cursor-ring.cursor-hover {
-  width: 42px;
-  height: 42px;
-  opacity: 1;
+.cursor-ring.is-visible { opacity: 0.92; }
+.cursor-ring.is-action { width: 24px; height: 24px; color: var(--day-pink, #ff4f9a); }
+.cursor-ring.has-label { width: 52px; height: 52px; }
+.cursor-ring.is-shooting { animation: cursor-shutter 150ms cubic-bezier(.2,.8,.2,1); }
+
+.cursor-label {
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  color: currentColor;
+  font: 700 9px/1 'DM Mono', monospace;
+  letter-spacing: .12em;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity .12s ease, transform .16s ease;
+}
+.cursor-ring.has-label .cursor-label { opacity: 1; transform: translate(2px, -50%); }
+
+@keyframes cursor-shutter {
+  0%, 100% { width: 32px; height: 32px; }
+  45% { width: 13px; height: 13px; }
 }
 
 .cursor-dot {
@@ -155,15 +175,17 @@ body::after {
   left: 0;
   width: 2px;
   height: 2px;
-  background: var(--kodak-yellow);
+  background: var(--day-pink, #ff4f9a);
   pointer-events: none;
   transform: translate(-50%, -50%);
-  z-index: 1101;
-  box-shadow:
-    0 0 8px rgba(245, 197, 24, 0.9),
-    0 0 16px rgba(245, 197, 24, 0.5);
-  transition: transform 0.08s ease-out;
+  z-index: 10002;
+  box-shadow: 0 0 0 1px rgba(255,248,232,.42);
+  opacity: 0;
+  transition: width .14s ease, height .14s ease, opacity .14s ease;
+  will-change: transform;
 }
+.cursor-dot.is-visible { opacity: 1; }
+.cursor-dot.is-action { width: 4px; height: 4px; }
 
 @media (hover: none), (pointer: coarse) {
   body {
@@ -2592,13 +2614,15 @@ html[data-theme="darkroom"] {
 body {
   background: var(--surface);
   color: var(--ink);
-  cursor: auto;
+  cursor: none;
   overflow-y: auto !important;
   transition: background-color 0.35s ease, color 0.35s ease;
 }
 
 body::after { opacity: 0.018; pointer-events: none; }
-.camera-hud, .site-nav-corner, .cursor-ring, .cursor-dot { display: none !important; }
+.camera-hud, .site-nav-corner { display: none !important; }
+html:not([data-theme="darkroom"]) .cursor-ring:not(.is-action) { color: #171512; }
+html[data-theme="darkroom"] .cursor-ring:not(.is-action) { color: #f8f1df; }
 
 .day-nav {
   position: fixed;
@@ -2756,8 +2780,8 @@ html[data-theme="darkroom"] .day-hero {
 .film-section-header h2 { color: var(--ink); font: 400 clamp(56px, 8vw, 118px)/.9 "Archivo Black", sans-serif; letter-spacing: -.065em; }
 .film-section-header p { color: var(--ink); opacity: .68; font: 500 11px/1.5 "DM Mono", monospace; letter-spacing: .1em; }
 .scroll-hint { color: var(--ink); opacity: .6; }
-.film-strip-container { outline: none; cursor: grab; scroll-snap-type: x proximity; scrollbar-color: var(--day-ink) transparent; }
-.film-strip-container:active { cursor: grabbing; }
+.film-strip-container { outline: none; cursor: none; scroll-snap-type: x proximity; scrollbar-color: var(--day-ink) transparent; }
+.film-strip-container:active { cursor: none; }
 .film-frame { scroll-snap-align: center; }
 .film-frame:focus-visible { outline: 4px solid var(--day-blue); outline-offset: 8px; }
 .film-caption-title, .film-caption-desc { color: var(--ink); }
@@ -3157,11 +3181,115 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .featured-thought { transform: none; }
+  .cursor-ring { transition: none; }
+}
+
+@media (hover: none), (pointer: coarse) {
+  body, .film-strip-container, .film-strip-container:active { cursor: auto; }
+  .cursor-ring, .cursor-dot { display: none !important; }
+}
+
+/* ===== SCROLL CHOREOGRAPHY · CONTENT DEVELOPING ===== */
+
+.motion-ready .chapter:not(.day-hero) {
+  opacity: .32;
+  transform: translate3d(0, 72px, 0) scale(.985);
+  clip-path: inset(7% 0 0 round clamp(30px, 4vw, 64px));
+  transition:
+    opacity .78s ease,
+    transform 1.05s cubic-bezier(.16, 1, .3, 1),
+    clip-path 1.05s cubic-bezier(.16, 1, .3, 1);
+  will-change: transform, clip-path, opacity;
+}
+.motion-ready .chapter.is-inview {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  clip-path: inset(0 round clamp(30px, 4vw, 64px));
+}
+
+.motion-ready .film-section-header h2,
+.motion-ready .chapter-head h2 {
+  opacity: 0;
+  transform: translate3d(0, 105%, 0) rotate(1.5deg);
+  clip-path: inset(0 0 100% 0);
+  transition:
+    opacity .2s ease,
+    transform .9s cubic-bezier(.16, 1, .3, 1),
+    clip-path .9s cubic-bezier(.16, 1, .3, 1);
+}
+.motion-ready .is-inview .film-section-header h2,
+.motion-ready .is-inview .chapter-head h2 {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) rotate(0);
+  clip-path: inset(0);
+  transition-delay: .12s;
+}
+
+.motion-ready .film-frame { animation: none !important; }
+.motion-ready .film-frame-inner,
+.motion-ready .film-caption {
+  opacity: 0;
+  transform: translate3d(0, 52px, 0) rotate(var(--reveal-tilt, -1.5deg));
+  transition:
+    opacity .58s ease,
+    transform .86s cubic-bezier(.16, 1, .3, 1);
+}
+.motion-ready .film-section.is-inview .film-frame-inner,
+.motion-ready .film-section.is-inview .film-caption {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) rotate(0);
+}
+.motion-ready .film-section.is-inview .film-frame:nth-child(1) :is(.film-frame-inner, .film-caption) { transition-delay: .20s; }
+.motion-ready .film-section.is-inview .film-frame:nth-child(2) :is(.film-frame-inner, .film-caption) { transition-delay: .27s; }
+.motion-ready .film-section.is-inview .film-frame:nth-child(3) :is(.film-frame-inner, .film-caption) { transition-delay: .34s; }
+.motion-ready .film-section.is-inview .film-frame:nth-child(4) :is(.film-frame-inner, .film-caption) { transition-delay: .41s; }
+.motion-ready .film-section.is-inview .film-frame:nth-child(5) :is(.film-frame-inner, .film-caption) { transition-delay: .48s; }
+.motion-ready .film-section.is-inview .film-frame:nth-child(6) :is(.film-frame-inner, .film-caption) { transition-delay: .55s; }
+
+.motion-ready .featured-thought {
+  opacity: 0;
+  transform: translate3d(0, 96px, 0) rotate(calc(var(--rotate) * 1.8)) scale(.9);
+  transition:
+    opacity .58s ease,
+    transform .94s cubic-bezier(.16, 1, .3, 1),
+    box-shadow .28s ease;
+}
+.motion-ready .thoughts-chapter.is-inview .featured-thought {
+  opacity: 1;
+  transform: translate3d(0, var(--offset, 0), 0) rotate(var(--rotate)) scale(1);
+}
+.motion-ready .thoughts-chapter.is-inview .featured-thought:nth-child(1) { transition-delay: .18s; }
+.motion-ready .thoughts-chapter.is-inview .featured-thought:nth-child(2) { transition-delay: .27s; }
+.motion-ready .thoughts-chapter.is-inview .featured-thought:nth-child(3) { transition-delay: .36s; }
+.motion-ready .thoughts-chapter.is-inview .featured-thought:nth-child(4) { transition-delay: .45s; }
+.motion-ready .thoughts-chapter.is-inview .featured-thought:hover,
+.motion-ready .thoughts-chapter.is-inview .featured-thought:focus-visible {
+  transition-delay: 0s;
+  transform: translateY(-18px) rotate(0deg) scale(1.025);
+}
+
+@media (max-width: 760px) {
+  .motion-ready .chapter:not(.day-hero) { transform: translate3d(0, 42px, 0) scale(.99); clip-path: inset(4% 0 0 round 28px); }
+  .motion-ready .chapter.is-inview { transform: none; clip-path: inset(0 round 28px); }
+  .motion-ready .film-frame:nth-child(n) :is(.film-frame-inner, .film-caption) { transition-delay: .16s; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-ready .chapter:not(.day-hero),
+  .motion-ready .film-section-header h2,
+  .motion-ready .chapter-head h2,
+  .motion-ready .film-frame-inner,
+  .motion-ready .film-caption,
+  .motion-ready .featured-thought {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
 }
 </style>
 </head>
 <body>
-<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"><span class="cursor-label" id="cursorLabel"></span></div>
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="shutter-flash" id="shutterFlash"></div>
 <div class="camera-hud" id="cameraHud">
@@ -4027,24 +4155,55 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
 // Custom cursor: viewfinder style
 const cursorRing = document.getElementById('cursorRing');
 const cursorDot = document.getElementById('cursorDot');
+const cursorLabel = document.getElementById('cursorLabel');
 let cursorLocked = false;
 
-if (cursorRing && cursorDot) {
+if (cursorRing && cursorDot && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let pointerX = -100;
+  let pointerY = -100;
+  let ringX = pointerX;
+  let ringY = pointerY;
+
+  const renderCursor = () => {
+    const ease = reducedMotion ? 1 : 0.24;
+    ringX += (pointerX - ringX) * ease;
+    ringY += (pointerY - ringY) * ease;
+    cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+    requestAnimationFrame(renderCursor);
+  };
+  renderCursor();
+
   window.addEventListener('pointermove', (e) => {
     if (cursorLocked) return;
     const { clientX, clientY } = e;
-    cursorRing.style.transform = `translate(${clientX}px, ${clientY}px) translate(-50%, -50%)`;
+    pointerX = clientX;
+    pointerY = clientY;
     cursorDot.style.transform = `translate(${clientX}px, ${clientY}px) translate(-50%, -50%)`;
+    cursorRing.classList.add('is-visible');
+    cursorDot.classList.add('is-visible');
+
+    const frame = e.target.closest('.film-frame');
+    const strip = e.target.closest('.film-strip-container');
+    const action = e.target.closest('a, button, [onclick], .magnetic-hover, .about-link, .detail-close');
+    const label = frame ? 'VIEW' : (strip ? 'DRAG' : '');
+    cursorLabel.textContent = label;
+    cursorRing.classList.toggle('has-label', Boolean(label));
+    cursorRing.classList.toggle('is-action', Boolean(action) && !label);
+    cursorDot.classList.toggle('is-action', Boolean(action) || Boolean(label));
   });
 
-  document.querySelectorAll('.magnetic-hover, .film-frame, .about-link, .detail-close, .site-nav-corner__link').forEach(el => {
-    el.addEventListener('pointerenter', () => {
-      cursorRing.classList.add('cursor-hover');
-    });
-    el.addEventListener('pointerleave', () => {
-      cursorRing.classList.remove('cursor-hover');
-    });
+  document.documentElement.addEventListener('mouseleave', () => {
+    cursorRing.classList.remove('is-visible');
+    cursorDot.classList.remove('is-visible');
   });
+
+  window.addEventListener('pointerdown', () => {
+    cursorRing.classList.remove('is-shooting');
+    void cursorRing.offsetWidth;
+    cursorRing.classList.add('is-shooting');
+  });
+  cursorRing.addEventListener('animationend', () => cursorRing.classList.remove('is-shooting'));
 }
 
 // Signature typing effect
@@ -4074,6 +4233,23 @@ function updateCanister() {
 }
 window.addEventListener('scroll', updateCanister, { passive: true });
 updateCanister();
+
+// Chapter motion: layered photographic reveals while preserving native scrolling.
+const motionChapters = Array.from(document.querySelectorAll('.chapter'));
+
+if (motionChapters.length) {
+  document.documentElement.classList.add('motion-ready');
+  document.getElementById('opening')?.classList.add('is-inview');
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-inview');
+      revealObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  motionChapters.forEach((chapter) => revealObserver.observe(chapter));
+}
 
 // Detail overlay with focus restoration and keyboard containment.
 let activeDialog = null;
