@@ -739,6 +739,24 @@ body::after {
     linear-gradient(138deg, #101b34 0%, #294e79 48%, #9a765c 100%);
 }
 
+/* 携程：取自品牌蓝、雾白天蓝与橙色高光，保留胶片的低饱和颗粒感 */
+.frame-ctrip .film-photo-bg {
+  background:
+    radial-gradient(circle at 88% 14%, rgba(255,255,255,.7) 0%, rgba(255,255,255,.2) 24%, transparent 48%),
+    radial-gradient(circle at 12% 88%, rgba(71,182,239,.56) 0%, transparent 48%),
+    linear-gradient(142deg, #1677d8 0%, #319be2 38%, #8ac8ee 68%, #e7f4f8 100%);
+}
+.frame-ctrip .film-photo::after {
+  background:
+    radial-gradient(ellipse at 105% 78%, rgba(255,171,45,.46), transparent 46%),
+    linear-gradient(118deg, transparent 28%, rgba(255,255,255,.12) 50%, rgba(255,205,105,.1) 72%, transparent 92%);
+}
+.frame-ctrip .project-icon {
+  color: #f7fcff;
+  opacity: .8;
+  text-shadow: 0 1px 18px rgba(8,84,157,.3);
+}
+
 .frame-jianghai .film-photo-bg {
   background:
     radial-gradient(circle at 84% 18%, rgba(211,174,112,.72) 0%, transparent 42%),
@@ -792,6 +810,10 @@ body::after {
 .frame-baidu .film-caption-tag {
   color: #f5c95c;
   border: 1px solid rgba(245,201,92,0.28);
+}
+.frame-ctrip .film-caption-tag {
+  color: #0d70c8;
+  border-color: rgba(13,112,200,.34);
 }
 
 .frame-jianghai .film-caption-tag {
@@ -1484,11 +1506,11 @@ body::after {
   color: rgba(255,255,255,0.07); font-family: 'DM Mono', monospace; text-align: center;
 }
 
-.detail-overlay--baidu .jh-hero-grad {
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-hero-grad {
   display: none;
 }
 
-.detail-overlay--baidu .jh-page {
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-page {
   background:
     radial-gradient(circle at 78% 16%, rgba(47,123,232,0.28) 0%, rgba(47,123,232,0.08) 36%, transparent 58%),
     radial-gradient(circle at 92% 72%, rgba(240,185,53,0.16) 0%, transparent 42%),
@@ -1497,49 +1519,49 @@ body::after {
   background-size: 100% 100%;
 }
 
-.detail-overlay--baidu .jh-hero-orb {
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-hero-orb {
   background: radial-gradient(circle, rgba(47,123,232,0.18) 0%, rgba(240,185,53,0.07) 48%, transparent 76%);
 }
 
-.detail-overlay--baidu .jh-infinity {
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-infinity {
   opacity: 0.07;
 }
 
-.detail-overlay--baidu .jh-tag,
-.detail-overlay--baidu .jh-title,
-.detail-overlay--baidu .jh-hl-green,
-.detail-overlay--baidu .jh-metric-val,
-.detail-overlay--baidu .jh-flow-arrow,
-.detail-overlay--baidu .jh-flow-gate,
-.detail-overlay--baidu .jh-flow-judge,
-.detail-overlay--baidu .jh-branch-agent {
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-tag,
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-title,
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-hl-green,
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-metric-val,
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-flow-arrow,
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-flow-gate,
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-flow-judge,
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-branch-agent {
   color: #79b7ff;
 }
 
-.detail-overlay--baidu .jh-meta-dot {
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-meta-dot {
   background: #f5c95c;
 }
 
-.detail-overlay--baidu .jh-hl {
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-hl {
   color: #f5c95c;
 }
 
-.detail-overlay--baidu .jh-metric-card {
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-metric-card {
   background: rgba(47,123,232,0.06);
   border-color: rgba(245,201,92,0.12);
 }
 
-.detail-overlay--baidu .jh-flow {
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-flow {
   border-color: rgba(121,183,255,0.14);
 }
 
-.detail-overlay--baidu .jh-flow-branch {
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-flow-branch {
   width: min(540px, 100%);
   margin: 4px auto 0;
   gap: 10px;
 }
 
-.detail-overlay--baidu .jh-branch {
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-branch {
   width: 100%;
   min-width: 0;
   flex: 1 1 0;
@@ -1548,32 +1570,76 @@ body::after {
   box-shadow: 0 0 18px rgba(121,183,255,0.04);
 }
 
-.detail-overlay--baidu .jh-branch small {
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-branch small {
   color: rgba(185,216,255,0.46);
 }
 
-.detail-overlay--baidu .jh-flow-entry {
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-flow-entry {
   background: rgba(47,123,232,0.12);
   border-color: rgba(121,183,255,0.28);
   color: #b9d8ff;
 }
 
-.detail-overlay--baidu .jh-branch-test {
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-branch-test {
   background: rgba(245,201,92,0.07);
   border: 1px solid rgba(245,201,92,0.18);
   color: #f0c86a;
 }
 
-.detail-overlay--baidu .jh-branch-rag {
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-branch-rag {
   background: rgba(245,201,92,0.07);
   border-color: rgba(245,201,92,0.18);
   color: #f5c95c;
 }
 
-.detail-overlay--baidu .jh-branch-human {
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) .jh-branch-human {
   background: rgba(93,202,165,0.06);
   border-color: rgba(93,202,165,0.14);
   color: #8edec5;
+}
+
+.detail-overlay--ctrip .jh-hero-orb {
+  right: 0;
+  width: min(460px, 100%);
+}
+
+.detail-overlay--ctrip .jh-flow-branch {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.detail-overlay--ctrip .jh-flow-node {
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.detail-overlay--ctrip .jh-branch {
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.detail-overlay--ctrip .jh-branch small {
+  font-size: 11px;
+  color: #b0aaa0;
+  line-height: 1.9;
+}
+
+.detail-overlay--ctrip .jh-branch-agent,
+.detail-overlay--ctrip .jh-flow-judge {
+  background: rgba(47,123,232,0.08);
+  border-color: rgba(121,183,255,0.2);
+}
+
+.detail-overlay--ctrip .ctrip-flow-note {
+  margin: 14px 0 0;
+  font-size: 11px;
+}
+
+@media (max-width: 600px) {
+  .detail-overlay--ctrip .jh-flow { padding: 14px; }
+  .detail-overlay--ctrip .jh-flow-branch { grid-template-columns: 1fr; }
 }
 
 /* ===== SPEAKFLOW DETAIL PAGE ===== */
@@ -3034,7 +3100,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
 .detail-overlay .jh-page { box-shadow: 0 30px 80px rgba(23,21,18,.28); }
 
 /* Each expanded exposure keeps the same dye bias as its frame. */
-.detail-overlay--baidu { --exp-deep: #091427; --exp-mid: #17395b; --exp-glow: #d4a45f; --exp-accent: #82acd4; }
+:is(.detail-overlay--baidu, .detail-overlay--ctrip) { --exp-deep: #091427; --exp-mid: #17395b; --exp-glow: #d4a45f; --exp-accent: #82acd4; }
 .detail-overlay--jianghai { --exp-deep: #0b1c22; --exp-mid: #244d4b; --exp-glow: #b5905f; --exp-accent: #72b4a6; }
 .detail-overlay--moodmix { --exp-deep: #19131d; --exp-mid: #4c3348; --exp-glow: #ad736a; --exp-accent: #c99abb; }
 .detail-overlay--ideashu { --exp-deep: #1c1115; --exp-mid: #57302f; --exp-glow: #c98a58; --exp-accent: #df7465; }
@@ -3070,6 +3136,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
 }
 .detail-overlay .detail-close:hover { color: #fff8e8; border-color: rgba(255,248,232,.68); }
 .frame-baidu .film-caption-tag { color: #356aa4; border-color: rgba(53,106,164,.34); }
+.frame-ctrip .film-caption-tag { color: #0d70c8; border-color: rgba(13,112,200,.34); }
 .frame-jianghai .film-caption-tag { color: #2d8178; border-color: rgba(45,129,120,.32); }
 .frame-moodmix .film-caption-tag { color: #8a5f82; border-color: rgba(138,95,130,.3); }
 .frame-ideashu .film-caption-tag { color: #b65045; border-color: rgba(182,80,69,.3); }
@@ -3347,7 +3414,27 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
   <div class="film-strip-container" id="filmStrip" tabindex="0" role="region" aria-label="横向项目胶卷">
     <div class="film-strip">
 
-      <!-- Frame 1: 百度AIGC产品增长 -->
+      <!-- Frame 1: 携程 Trip Planner -->
+      <div class="film-frame frame-ctrip" onclick="openDetail('ctrip')">
+        <div class="film-frame-inner">
+          <div class="film-frame-number-left">KODAK PORTRA 400</div>
+          <div class="film-photo">
+            <div class="film-photo-bg">
+              <div class="project-icon">
+                携<br>程
+              </div>
+            </div>
+          </div>
+          <div class="film-frame-number">→1  1A</div>
+        </div>
+        <div class="film-caption">
+          <div class="film-caption-title">携程 Trip Planner</div>
+          <div class="film-caption-desc">AI 行程规划 Agent · 个性化 POI 推荐<br>复杂需求理解与可编辑行程承接</div>
+          <div class="film-caption-tag">实习项目 · 携程·内容产品部</div>
+        </div>
+      </div>
+
+      <!-- Frame 2: 百度AIGC产品增长 -->
       <div class="film-frame frame-baidu" onclick="openDetail('baidu')">
         <div class="film-frame-inner">
           <div class="film-frame-number-left">KODAK PORTRA 400</div>
@@ -3358,16 +3445,16 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
               </div>
             </div>
           </div>
-          <div class="film-frame-number">→1  1A</div>
+          <div class="film-frame-number">→2  2A</div>
         </div>
         <div class="film-caption">
           <div class="film-caption-title">百度PSIG商业投放</div>
           <div class="film-caption-desc">AI命理产品矩阵 · AI Coding投放闭环<br>广告流量向付费转化</div>
-          <div class="film-caption-tag">实习项目 · 百度文库商业投放</div>
+          <div class="film-caption-tag">实习项目 · 百度·PSIG商业投放组</div>
         </div>
       </div>
 
-      <!-- Frame 2: 疆海AI客服 -->
+      <!-- Frame 3: 疆海AI客服 -->
       <div class="film-frame frame-jianghai" onclick="openDetail('jianghai')">
         <div class="film-frame-inner">
           <div class="film-frame-number-left">KODAK PORTRA 400</div>
@@ -3378,7 +3465,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
               </div>
             </div>
           </div>
-          <div class="film-frame-number">→2  2A</div>
+          <div class="film-frame-number">→3  3A</div>
         </div>
         <div class="film-caption">
           <div class="film-caption-title">疆海 AI 客服系统</div>
@@ -3387,7 +3474,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
         </div>
       </div>
 
-      <!-- Frame 3: MoodMix -->
+      <!-- Frame 4: MoodMix -->
       <div class="film-frame frame-moodmix" onclick="openDetail('moodmix')">
         <div class="film-frame-inner">
           <div class="film-frame-number-left">KODAK PORTRA 400</div>
@@ -3398,7 +3485,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
               </div>
             </div>
           </div>
-          <div class="film-frame-number">→3  3A</div>
+          <div class="film-frame-number">→4  4A</div>
         </div>
         <div class="film-caption">
           <div class="film-caption-title">喝一杯 MoodMix</div>
@@ -3407,7 +3494,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
         </div>
       </div>
 
-      <!-- Frame 4: IdeaShu -->
+      <!-- Frame 5: IdeaShu -->
       <div class="film-frame frame-ideashu" onclick="openDetail('ideashu')">
         <div class="film-frame-inner">
           <div class="film-frame-number-left">KODAK PORTRA 400</div>
@@ -3418,7 +3505,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
               </div>
             </div>
           </div>
-          <div class="film-frame-number">→4  4A</div>
+          <div class="film-frame-number">→5  5A</div>
         </div>
         <div class="film-caption">
           <div class="film-caption-title">IdeaShu 灵感书</div>
@@ -3427,7 +3514,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
         </div>
       </div>
 
-      <!-- Frame 5: SpeakFlow -->
+      <!-- Frame 6: SpeakFlow -->
       <div class="film-frame frame-about" onclick="openDetail('about')">
         <div class="film-frame-inner">
           <div class="film-frame-number-left">KODAK PORTRA 400</div>
@@ -3438,7 +3525,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
               </div>
             </div>
           </div>
-          <div class="film-frame-number">→5  5A</div>
+          <div class="film-frame-number">→6  6A</div>
         </div>
         <div class="film-caption">
           <div class="film-caption-title">SpeakFlow</div>
@@ -3497,6 +3584,54 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
 </div>
 
 <!-- ===== DETAIL OVERLAYS ===== -->
+<div class="detail-overlay detail-overlay--ctrip" id="detail-ctrip" aria-label="携程 Trip Planner 实习经历">
+  <div class="jh-page">
+    <div class="jh-grain"></div>
+    <div class="jh-hero-grad"></div>
+    <div class="jh-hero-orb"></div>
+    <svg class="jh-infinity" width="112" height="56" viewBox="0 0 120 60" aria-hidden="true">
+      <path d="M18 42C28 16 43 10 58 31C72 51 90 45 101 18" fill="none" stroke="#79b7ff" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="31" cy="26" r="7" fill="none" stroke="#f5c95c" stroke-width="1.5"/>
+      <circle cx="58" cy="31" r="7" fill="none" stroke="#79b7ff" stroke-width="1.5"/>
+      <circle cx="88" cy="30" r="7" fill="none" stroke="#f5c95c" stroke-width="1.5"/>
+    </svg>
+    <button class="detail-close" onclick="closeDetail('ctrip')" style="position:absolute;top:20px;right:24px;z-index:10;">✕ CLOSE</button>
+    <div class="jh-content">
+      <div class="jh-tag-row">
+        <span class="jh-tag">Exposure 01 — internship</span>
+        <span class="jh-film-code">KODAK 5219 ▪ EXP 01</span>
+      </div>
+      <div class="jh-meta-row">
+        <span class="jh-meta-item">携程集团有限公司</span>
+        <span class="jh-meta-dot"></span>
+        <span class="jh-meta-item">AI 策略产品经理实习生</span>
+        <span class="jh-meta-dot"></span>
+        <span class="jh-meta-item">2026.06 — 2026.09</span>
+      </div>
+      <div class="jh-section-label"><span style="color:#79b7ff;">◆</span> 工作概述</div>
+      <div class="jh-body">负责 Trip Planner AI 行程规划 Agent 的产品规划与策略迭代，围绕用户意图理解、资源匹配和编辑预订等核心场景，推动产品由通用内容生成升级为<span class="jh-hl">可理解复杂需求、可调用实时资源、可持续编辑及交易的智能旅行助手</span>。</div>
+      <div class="jh-section-label"><span style="color:#79b7ff;">◆</span> Agent 架构设计</div>
+      <div class="jh-body">针对复杂旅行需求承接不足，负责<span class="jh-hl">结构化工作流</span>与<span class="jh-hl">端到端自主规划</span>两套 Agent 的产品方案设计，明确适用场景、模型与业务能力分工及输入输出协议；协同推进意图理解、任务编排、工具调用及异步结构化链路，完善澄清反问、失败兜底与编辑承接；协助搭建评测体系和后台看板，为分场景承接与后续架构选型提供依据。</div>
+      <div class="jh-flow" role="group" aria-label="两套 Agent 规划方案对比">
+        <div class="jh-flow-row"><div class="jh-flow-node jh-flow-entry">用户旅行需求与意图理解</div></div>
+        <div class="jh-flow-row"><span class="jh-flow-arrow" aria-hidden="true">↓</span></div>
+        <div class="jh-flow-branch">
+          <div class="jh-branch jh-branch-rag">结构化工作流<small>需求理解 → 资源召回 → POI 选点 → 线路编排 → 文案润色</small></div>
+          <div class="jh-branch jh-branch-agent">端到端自主规划<small>目标理解 → 动态任务拆解与工具调用 → 方案组织</small></div>
+        </div>
+        <div class="jh-flow-row"><span class="jh-flow-arrow" aria-hidden="true">↓</span></div>
+        <div class="jh-flow-row"><div class="jh-flow-node jh-flow-judge">Markdown 流式展示＋异步结构化</div></div>
+        <div class="jh-flow-row"><span class="jh-flow-arrow" aria-hidden="true">↓</span></div>
+        <div class="jh-flow-row"><div class="jh-flow-node jh-flow-judge">资源卡片与线路编辑</div></div>
+        <p class="jh-body ctrip-flow-note">两套方案通过同 Query 评测比较适用场景，为后续架构选型提供依据。</p>
+      </div>
+      <div class="jh-section-label"><span style="color:#79b7ff;">◆</span> 个性化 POI 推荐</div>
+      <div class="jh-body">负责用户偏好拆解与推荐策略设计，将订单、收藏等行为转化为<span class="jh-hl">意向 POI 和偏好标签</span>，推动个性化信息进入景点召回、选点与线路编排，并评估效果；同线路对比中，意向 POI 采纳率较非个性化 POI 高<span class="jh-hl-green"> 2.8 个百分点</span>。</div>
+      <div class="jh-film-bottom">▪ ▪ ▪ TRIP PLANNER ▪ ▪ ▪ AI TRAVEL ▪ ▪ ▪ PROCESS C-41 ▪ ▪ ▪</div>
+    </div>
+  </div>
+</div>
+
 <div class="detail-overlay detail-overlay--baidu" id="detail-baidu">
   <div class="jh-page">
     <div class="jh-grain"></div>
@@ -3511,8 +3646,8 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
     <button class="detail-close" onclick="closeDetail('baidu')" style="position:absolute;top:20px;right:24px;z-index:10;">✕ CLOSE</button>
     <div class="jh-content">
       <div class="jh-tag-row">
-        <span class="jh-tag">Exposure 01 — internship</span>
-        <span class="jh-film-code">KODAK 5219 ▪ EXP 01</span>
+        <span class="jh-tag">Exposure 02 — internship</span>
+        <span class="jh-film-code">KODAK 5219 ▪ EXP 02</span>
       </div>
       <div class="jh-meta-row">
         <span class="jh-meta-item">百度在线网络技术（北京）有限公司</span>
@@ -3562,8 +3697,8 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
     <button class="detail-close" onclick="closeDetail('jianghai')" style="position:absolute;top:20px;right:24px;z-index:10;">✕ CLOSE</button>
     <div class="jh-content">
       <div class="jh-tag-row">
-        <span class="jh-tag">Exposure 02 — internship</span>
-        <span class="jh-film-code">KODAK 5219 ▪ EXP 02</span>
+        <span class="jh-tag">Exposure 03 — internship</span>
+        <span class="jh-film-code">KODAK 5219 ▪ EXP 03</span>
       </div>
       <div class="jh-meta-row">
         <span class="jh-meta-item">广州疆海科技有限公司</span>
@@ -3611,8 +3746,8 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
     <button class="detail-close" onclick="closeDetail('ideashu')" style="position:absolute;top:20px;right:24px;z-index:10;">✕ CLOSE</button>
     <div class="is-content">
       <div class="is-tag-row">
-        <span class="is-tag">Exposure 04 — personal project</span>
-        <span class="is-film-code">KODAK 5219 ▪ EXP 04</span>
+        <span class="is-tag">Exposure 05 — personal project</span>
+        <span class="is-film-code">KODAK 5219 ▪ EXP 05</span>
       </div>
       <div class="is-meta-row">
         <span class="is-meta-item">IdeaShu 灵感书</span>
@@ -3796,8 +3931,8 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
     <button class="detail-close" onclick="closeDetail('moodmix')" style="position:absolute;top:20px;right:24px;z-index:10;">✕ CLOSE</button>
     <div class="mm-content">
       <div class="mm-tag-row">
-        <span class="mm-tag">Exposure 03 — personal project</span>
-        <span class="mm-film-code">KODAK 5219 ▪ EXP 03</span>
+        <span class="mm-tag">Exposure 04 — personal project</span>
+        <span class="mm-film-code">KODAK 5219 ▪ EXP 04</span>
       </div>
 
       <div class="mm-hero-split">
