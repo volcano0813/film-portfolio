@@ -778,6 +778,17 @@ body::after {
     linear-gradient(140deg, #24182b 0%, #66465f 50%, #966c76 100%);
 }
 
+.frame-bookecho .film-photo-bg { background: #e9e2d6; }
+.frame-bookecho .film-project-shot {
+  width: 100%; height: 100%; display: block; object-fit: cover; object-position: center 12%;
+  filter: saturate(.72) contrast(.96) sepia(.08); transform: scale(1.015);
+}
+.frame-bookecho .film-photo::after {
+  background:
+    linear-gradient(115deg, rgba(255,248,235,.2), transparent 46%),
+    radial-gradient(circle at 88% 18%, rgba(190,70,48,.18), transparent 34%);
+}
+
 .frame-about .film-photo-bg {
   background:
     radial-gradient(circle at 82% 18%, rgba(100,164,181,.76) 0%, transparent 44%),
@@ -827,6 +838,10 @@ body::after {
 .frame-moodmix .film-caption-tag {
   color: #d4a0c8;
   border: 1px solid rgba(212,160,200,0.25);
+}
+.frame-bookecho .film-caption-tag {
+  color: #b45b49;
+  border: 1px solid rgba(180,91,73,0.25);
 }
 .frame-about .film-caption-tag {
   color: #a855f7;
@@ -941,7 +956,7 @@ body::after {
   background: rgba(10, 10, 8, 0.85);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  z-index: 1000;
+  z-index: 9000;
   display: none;
   align-items: center;
   justify-content: center;
@@ -2254,6 +2269,7 @@ body::after {
   max-width: 780px;
   max-height: 90vh;
   overflow-y: auto;
+  overflow-x: hidden;
   background: #0c0e14;
   border-radius: 16px;
   position: relative;
@@ -2532,31 +2548,164 @@ body::after {
 .mm-fa { color: rgba(212,160,200,0.3); }
 
 .mm-agent-cards {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 8px; margin-bottom: 20px;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px; margin-bottom: 22px;
 }
 
 .mm-agent-card {
-  background: rgba(212,160,200,0.03); border: 1px solid rgba(212,160,200,0.06);
-  border-radius: 8px; padding: 10px; text-align: center;
+  position: relative; overflow: hidden;
+  background: linear-gradient(145deg, rgba(212,160,200,0.07), rgba(10,10,16,0.16));
+  border: 1px solid rgba(212,160,200,0.12);
+  border-radius: 10px; padding: 14px; text-align: left;
+}
+
+.mm-agent-card::after {
+  content: ""; position: absolute; inset: auto -24px -28px auto;
+  width: 88px; height: 88px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,160,200,0.12), transparent 68%);
+  pointer-events: none;
+}
+
+.mm-agent-head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 10px; margin-bottom: 7px;
 }
 
 .mm-agent-num {
   font-size: 8px; color: #d4a0c8; font-family: 'DM Mono', monospace;
-  letter-spacing: 1px; margin-bottom: 3px;
+  letter-spacing: 1px;
 }
 
 .mm-agent-name {
-  font-size: 10px; font-weight: 600; color: #e8c0d8; margin-bottom: 2px;
+  font-size: 13px; font-weight: 600; color: #e8c0d8; margin-bottom: 6px;
+  font-family: 'Noto Serif SC', serif;
 }
 
 .mm-agent-role {
-  font-size: 9px; color: #8a8690; line-height: 1.4; margin-bottom: 3px;
+  font-size: 10px; color: #a9a2ad; line-height: 1.7; margin-bottom: 9px;
 }
 
 .mm-agent-model {
-  font-size: 9px; color: #6e7080; font-family: 'DM Mono', monospace;
+  position: relative; z-index: 1; display: inline-flex;
+  font-size: 8px; color: #cfafc7; font-family: 'DM Mono', monospace;
+  padding: 3px 7px; border-radius: 3px;
+  border: 1px solid rgba(212,160,200,0.13);
+  background: rgba(212,160,200,0.05);
 }
+
+.mm-agent-stage {
+  font-size: 8px; color: rgba(255,248,232,0.36); letter-spacing: 1px;
+  font-family: 'DM Mono', monospace; white-space: nowrap;
+}
+
+.mm-loop {
+  position: relative; overflow: hidden;
+  margin: 0 0 24px; padding: 16px;
+  border: 1px solid rgba(212,160,200,0.13); border-radius: 12px;
+  background:
+    radial-gradient(circle at 50% 36%, rgba(212,160,200,0.09), transparent 42%),
+    rgba(7,7,12,0.18);
+}
+
+.mm-loop::before {
+  content: ""; position: absolute; inset: 0; opacity: .16; pointer-events: none;
+  background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 26px 26px;
+  mask-image: linear-gradient(to bottom, black, transparent);
+}
+
+.mm-loop-kicker {
+  position: relative; display: flex; justify-content: space-between; gap: 12px;
+  margin-bottom: 12px; color: #c99abb; font: 8px/1.4 'DM Mono', monospace;
+  letter-spacing: 1.4px;
+}
+
+.mm-loop-kicker span:last-child { color: rgba(255,248,232,.28); }
+
+.mm-loop-input,
+.mm-loop-feedback {
+  position: relative; display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px; border-radius: 7px;
+  border: 1px solid rgba(212,160,200,0.13);
+  background: rgba(212,160,200,0.055);
+  font: 9px/1.55 'DM Mono', monospace; color: #afa4b1;
+}
+
+.mm-loop-input b,
+.mm-loop-feedback b { color: #e6ccde; font-weight: 500; letter-spacing: .8px; white-space: nowrap; }
+
+.mm-loop-arrow {
+  position: relative; margin: 5px 0; text-align: center;
+  color: rgba(212,160,200,.44); font: 10px/1 'DM Mono', monospace;
+}
+
+.mm-loop-node {
+  position: relative; padding: 11px 12px; border-radius: 8px;
+  border: 1px solid rgba(212,160,200,0.15);
+  background: linear-gradient(145deg, rgba(212,160,200,.1), rgba(16,12,20,.34));
+  text-align: center;
+}
+
+.mm-loop-node em {
+  display: block; margin-bottom: 3px; color: rgba(255,248,232,.34);
+  font: normal 7px/1.3 'DM Mono', monospace; letter-spacing: 1.2px;
+}
+
+.mm-loop-node strong {
+  display: block; color: #eedce9; font: 600 11px/1.4 'Noto Serif SC', serif;
+}
+
+.mm-loop-node small {
+  display: block; margin-top: 4px; color: #8f8691; font: 8px/1.5 'DM Mono', monospace;
+}
+
+.mm-loop-branch {
+  position: relative; display: grid; grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.mm-loop-feedback {
+  justify-content: center; text-align: center;
+  border-style: dashed;
+}
+
+.mm-loop-return {
+  position: relative; margin-top: 8px; padding-top: 9px;
+  border-top: 1px solid rgba(212,160,200,.09);
+  color: #c99abb; font: 8px/1.6 'DM Mono', monospace;
+  letter-spacing: .45px; text-align: center;
+}
+
+.mm-loop-return b { color: #f0d8e8; font-weight: 500; }
+
+.mm-schema-row {
+  display: flex; flex-wrap: wrap; gap: 6px; margin: -4px 0 22px;
+}
+
+.mm-schema-pill {
+  padding: 4px 8px; border-radius: 3px;
+  border: 1px solid rgba(212,160,200,.13); color: #a99ca9;
+  background: rgba(8,8,13,.18); font: 8px/1.35 'DM Mono', monospace;
+}
+
+.mm-schema-pill b { color: #d7b9d1; font-weight: 500; }
+
+.mm-value-grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px; margin: 0 0 18px;
+}
+
+.mm-value {
+  padding: 13px; border-top: 1px solid rgba(212,160,200,.22);
+  background: linear-gradient(to bottom, rgba(212,160,200,.045), transparent);
+}
+
+.mm-value b {
+  display: block; margin-bottom: 5px; color: #ead7e5;
+  font: 600 10px/1.5 'Noto Serif SC', serif;
+}
+
+.mm-value span { color: #8f8791; font-size: 9px; line-height: 1.65; }
 
 .mm-func-cards {
   display: grid; grid-template-columns: 1fr 1fr;
@@ -2651,6 +2800,300 @@ body::after {
 .mm-film-bottom {
   margin-top: 28px; font-size: 7px; letter-spacing: 3px;
   color: rgba(255,255,255,0.06); font-family: 'DM Mono', monospace; text-align: center;
+}
+
+@media (max-width: 640px) {
+  .detail-overlay--moodmix { align-items: stretch; padding: 0; }
+  .mm-page { max-height: 100vh; border-radius: 0; }
+  .mm-grain { border-radius: 0; }
+  .mm-content { padding: 68px 18px 28px; }
+  .mm-tag-row { padding-right: 70px; align-items: flex-start; flex-direction: column; gap: 4px; }
+  .mm-hero-split { grid-template-columns: 1fr; gap: 20px; }
+  .mm-vf-vert { width: min(62vw, 220px); margin: 10px auto 0; }
+  .mm-hero-info { padding-top: 0; }
+  .mm-tabs { overflow-x: auto; scrollbar-width: none; }
+  .mm-tab { min-width: 116px; padding-inline: 8px; }
+  .mm-card-row-3, .mm-agent-cards, .mm-func-cards, .mm-value-grid { grid-template-columns: 1fr; }
+  .mm-loop { padding: 13px; }
+  .mm-loop-kicker { flex-direction: column; gap: 3px; }
+  .mm-loop-input, .mm-loop-feedback { align-items: flex-start; flex-direction: column; gap: 4px; }
+  .mm-loop-branch { grid-template-columns: 1fr; gap: 8px; }
+  .mm-schema-row { gap: 5px; }
+  .mm-arch-flow { justify-content: flex-start; }
+}
+
+/* ===== BOOKECHO DETAIL PAGE ===== */
+.detail-overlay.detail-overlay--bookecho {
+  background: rgba(31, 24, 17, .84);
+  --be-paper: #f3eee4;
+  --be-paper-deep: #e7dece;
+  --be-ink: #1d1914;
+  --be-muted: #756b5e;
+  --be-red: #b84935;
+  --be-line: rgba(67, 52, 36, .14);
+}
+
+.be-page {
+  position: relative; width: 100%; max-width: 780px; max-height: 90vh;
+  overflow-y: auto; overflow-x: hidden; border-radius: 16px;
+  color: var(--be-ink);
+  background:
+    radial-gradient(circle at 92% 7%, rgba(184,73,53,.09), transparent 28%),
+    linear-gradient(145deg, #f8f4eb 0%, var(--be-paper) 50%, var(--be-paper-deep) 100%);
+  box-shadow: 0 30px 90px rgba(18, 12, 7, .46), inset 0 0 90px rgba(255,255,255,.28);
+  scrollbar-width: none;
+}
+.be-page::-webkit-scrollbar { display: none; }
+
+.be-grain {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: .08;
+  background-image: radial-gradient(rgba(70,53,34,.7) .45px, transparent .55px);
+  background-size: 4px 4px;
+}
+
+.be-page::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: .18;
+  background-image:
+    linear-gradient(rgba(80,58,34,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(80,58,34,.018) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.detail-overlay.detail-overlay--bookecho .detail-close {
+  color: rgba(29,25,20,.62); border-color: rgba(29,25,20,.22);
+  background: rgba(248,244,235,.7); backdrop-filter: blur(10px);
+}
+.detail-overlay.detail-overlay--bookecho .detail-close:hover {
+  color: var(--be-red); border-color: rgba(184,73,53,.48);
+}
+
+.be-content { position: relative; z-index: 2; padding: 40px 38px 34px; }
+
+.be-tag-row {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 18px;
+  font: 8px/1.4 'DM Mono', monospace; letter-spacing: 1.8px; text-transform: uppercase;
+}
+.be-tag { color: var(--be-red); }
+.be-film-code { color: rgba(29,25,20,.28); }
+
+.be-hero {
+  display: grid; grid-template-columns: 214px minmax(0, 1fr);
+  gap: 30px; align-items: center; padding-bottom: 26px;
+}
+
+.be-hero-shot {
+  position: relative; width: 214px; aspect-ratio: 763 / 1653; overflow: hidden;
+  border: 8px solid rgba(255,252,245,.86); border-radius: 5px;
+  background: #e8e0d2;
+  box-shadow: 18px 22px 42px -26px rgba(38,27,16,.72), 0 0 0 1px rgba(70,53,34,.12);
+  transform: rotate(-1deg);
+}
+.be-hero-shot img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.be-hero-shot::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(115deg, rgba(255,255,255,.2), transparent 36%);
+}
+
+.be-hero-copy { position: relative; padding-right: 6px; }
+.be-side-title {
+  position: absolute; right: -24px; top: -7px; writing-mode: vertical-rl;
+  color: rgba(184,73,53,.36); font: 500 10px/1.2 'Noto Serif SC', serif;
+  letter-spacing: 5px;
+}
+.be-kicker {
+  margin-bottom: 8px; color: var(--be-red);
+  font: 9px/1.4 'DM Mono', monospace; letter-spacing: 1.5px;
+}
+.be-title {
+  color: var(--be-ink); font: 600 clamp(30px, 4.3vw, 46px)/1.04 'Noto Serif SC', serif;
+  letter-spacing: 1px;
+}
+.be-title small {
+  display: block; margin-top: 8px; color: var(--be-muted);
+  font: 400 13px/1.5 'Spectral', 'Noto Serif SC', serif; letter-spacing: 1.8px;
+}
+.be-lead {
+  margin-top: 18px; color: #544b40;
+  font: 12px/1.9 'Noto Serif SC', serif;
+}
+.be-quote {
+  margin: 18px 0 0; padding: 9px 0 9px 18px;
+  border-left: 2px solid rgba(184,73,53,.35); color: var(--be-red);
+  font: 500 14px/1.7 'Noto Serif SC', serif;
+}
+.be-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 17px; }
+.be-chip {
+  padding: 4px 9px; border: 1px solid rgba(70,53,34,.14); border-radius: 999px;
+  color: #76695b; background: rgba(255,252,245,.44);
+  font: 8px/1.2 'DM Mono', monospace;
+}
+
+.be-cta {
+  display: inline-flex; align-items: center; justify-content: space-between; gap: 18px;
+  margin-top: 18px; padding: 11px 15px; border-radius: 5px;
+  color: #f7f0e5; background: #211c16; border: 1px solid #211c16;
+  text-decoration: none; font: 10px/1.2 'DM Mono', monospace;
+  box-shadow: 0 12px 24px -18px rgba(20,14,8,.75);
+  transition: transform .2s ease, background .2s ease, border-color .2s ease;
+}
+.be-cta:hover { transform: translateY(-2px); background: var(--be-red); border-color: var(--be-red); }
+.be-cta span:last-child { font-size: 15px; }
+
+.be-tabs {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--be-line); border-bottom: 1px solid var(--be-line);
+}
+.be-tab {
+  appearance: none; border: 0; border-bottom: 2px solid transparent;
+  padding: 13px 8px 11px; color: rgba(29,25,20,.45); background: transparent;
+  font: 9px/1.4 'DM Mono', monospace; letter-spacing: 1px; cursor: none;
+  transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+.be-tab:hover { color: var(--be-red); background: rgba(184,73,53,.025); }
+.be-tab.on { color: var(--be-red); border-bottom-color: var(--be-red); }
+
+.be-panel { display: none; padding-top: 26px; }
+.be-panel.on { display: block; }
+.be-section-title {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 11px;
+  color: var(--be-ink); font: 600 15px/1.5 'Noto Serif SC', serif;
+}
+.be-section-title::before {
+  content: ""; width: 8px; height: 8px; flex: none; background: var(--be-red);
+  transform: rotate(45deg); opacity: .8;
+}
+.be-body {
+  max-width: 650px; margin-bottom: 20px; color: #645a4e;
+  font: 11px/1.95 'Noto Serif SC', serif;
+}
+.be-body b { color: var(--be-red); font-weight: 500; }
+
+.be-journey {
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 7px; margin-bottom: 22px;
+}
+.be-step {
+  position: relative; min-height: 92px; padding: 12px 9px;
+  border: 1px solid var(--be-line); border-radius: 8px;
+  background: rgba(255,252,245,.48);
+}
+.be-step:not(:last-child)::after {
+  content: "→"; position: absolute; top: 34px; right: -8px; z-index: 2;
+  color: rgba(184,73,53,.55); font: 10px/1 'DM Mono', monospace;
+}
+.be-step em { color: var(--be-red); font: normal 8px/1 'DM Mono', monospace; }
+.be-step strong { display: block; margin: 8px 0 4px; color: #282119; font: 600 11px/1.4 'Noto Serif SC', serif; }
+.be-step span { color: #817568; font-size: 9px; line-height: 1.5; }
+
+.be-feature-grid,
+.be-guard-grid,
+.be-skill-grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px; margin-bottom: 22px;
+}
+.be-feature,
+.be-guard,
+.be-skill {
+  padding: 14px; border: 1px solid var(--be-line); border-radius: 9px;
+  background: rgba(255,252,245,.42);
+}
+.be-feature small,
+.be-guard small,
+.be-skill small {
+  display: block; margin-bottom: 6px; color: var(--be-red);
+  font: 8px/1.3 'DM Mono', monospace; letter-spacing: .8px;
+}
+.be-feature b,
+.be-guard b,
+.be-skill b {
+  display: block; margin-bottom: 6px; color: #2a231b;
+  font: 600 12px/1.5 'Noto Serif SC', serif;
+}
+.be-feature span,
+.be-guard span,
+.be-skill span { color: #796e61; font-size: 9px; line-height: 1.7; }
+
+.be-rag {
+  position: relative; margin-bottom: 22px; padding: 18px;
+  border: 1px solid var(--be-line); border-radius: 10px;
+  background:
+    linear-gradient(90deg, rgba(184,73,53,.045) 1px, transparent 1px),
+    rgba(255,252,245,.48);
+  background-size: 34px 100%;
+}
+.be-rag-label {
+  display: flex; justify-content: space-between; gap: 12px; margin-bottom: 14px;
+  color: #8a7e70; font: 8px/1.4 'DM Mono', monospace; letter-spacing: 1px;
+}
+.be-rag-flow {
+  display: flex; align-items: stretch; justify-content: center; gap: 6px;
+}
+.be-rag-node {
+  flex: 1 1 0; min-width: 0; padding: 10px 8px; border-radius: 6px;
+  border: 1px solid rgba(70,53,34,.13); background: rgba(248,244,235,.72);
+  text-align: center;
+}
+.be-rag-node b { display: block; color: #352c23; font: 600 9px/1.45 'Noto Serif SC', serif; }
+.be-rag-node span { display: block; margin-top: 4px; color: #8a7d6e; font-size: 7px; line-height: 1.5; }
+.be-rag-node.is-gate { border-color: rgba(184,73,53,.35); background: rgba(184,73,53,.07); }
+.be-rag-arrow { align-self: center; color: rgba(184,73,53,.62); font: 10px/1 'DM Mono', monospace; }
+.be-boundary {
+  display: flex; justify-content: space-between; gap: 12px; margin-top: 14px; padding-top: 12px;
+  border-top: 1px dashed rgba(184,73,53,.22); color: #766b5e;
+  font: 8px/1.55 'DM Mono', monospace;
+}
+.be-boundary b { color: var(--be-red); font-weight: 500; }
+
+.be-skill-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.be-skill { position: relative; padding-left: 48px; }
+.be-skill-num {
+  position: absolute; left: 14px; top: 14px; color: rgba(184,73,53,.34);
+  font: 600 20px/1 'DM Mono', monospace;
+}
+
+.be-arch {
+  margin-bottom: 20px; padding: 16px; border: 1px solid var(--be-line);
+  border-radius: 10px; background: rgba(255,252,245,.46);
+}
+.be-arch-kicker { margin-bottom: 10px; color: var(--be-red); font: 8px/1.4 'DM Mono', monospace; letter-spacing: 1px; }
+.be-arch-flow { display: flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.be-arch-node {
+  padding: 6px 9px; border: 1px solid rgba(70,53,34,.15); border-radius: 4px;
+  color: #675c50; background: rgba(248,244,235,.7); font: 8px/1.4 'DM Mono', monospace;
+}
+.be-arch-node.is-core { color: var(--be-red); border-color: rgba(184,73,53,.28); }
+.be-arch-arr { color: rgba(184,73,53,.48); }
+.be-arch-note { margin-top: 11px; color: #82776b; font-size: 9px; line-height: 1.75; }
+
+.be-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.be-tags span {
+  padding: 4px 8px; border: 1px solid rgba(70,53,34,.14); border-radius: 3px;
+  color: #766a5d; font: 8px/1.3 'DM Mono', monospace;
+}
+.be-film-bottom {
+  margin-top: 28px; text-align: center; color: rgba(65,50,34,.15);
+  font: 7px/1.4 'DM Mono', monospace; letter-spacing: 3px;
+}
+
+@media (max-width: 640px) {
+  .detail-overlay--bookecho { align-items: stretch; padding: 0; }
+  .be-page { max-height: 100vh; border-radius: 0; }
+  .be-content { padding: 68px 18px 28px; }
+  .be-tag-row { padding-right: 68px; flex-direction: column; align-items: flex-start; gap: 4px; }
+  .be-hero { grid-template-columns: 1fr; gap: 24px; }
+  .be-hero-shot { width: min(58vw, 214px); margin: 0 auto; }
+  .be-hero-copy { padding-right: 0; }
+  .be-side-title { display: none; }
+  .be-tabs { overflow-x: auto; scrollbar-width: none; }
+  .be-tab { min-width: 122px; }
+  .be-journey { grid-template-columns: 1fr; }
+  .be-step { min-height: 0; }
+  .be-step:not(:last-child)::after { content: "↓"; top: auto; right: 50%; bottom: -9px; transform: translateX(50%); }
+  .be-feature-grid, .be-guard-grid, .be-skill-grid { grid-template-columns: 1fr; }
+  .be-rag-flow { flex-direction: column; }
+  .be-rag-arrow { transform: rotate(90deg); }
+  .be-rag-label, .be-boundary { flex-direction: column; gap: 4px; }
+  .be-arch-flow { justify-content: flex-start; }
 }
 /* ===== DAYLIGHT EDITORIAL SHELL ===== */
 :root {
@@ -3139,6 +3582,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
 .frame-ctrip .film-caption-tag { color: #0d70c8; border-color: rgba(13,112,200,.34); }
 .frame-jianghai .film-caption-tag { color: #2d8178; border-color: rgba(45,129,120,.32); }
 .frame-moodmix .film-caption-tag { color: #8a5f82; border-color: rgba(138,95,130,.3); }
+.frame-bookecho .film-caption-tag { color: #a85140; border-color: rgba(168,81,64,.3); }
 .frame-ideashu .film-caption-tag { color: #b65045; border-color: rgba(182,80,69,.3); }
 .frame-about .film-caption-tag { color: #536b94; border-color: rgba(83,107,148,.3); }
 
@@ -3494,7 +3938,25 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
         </div>
       </div>
 
-      <!-- Frame 5: IdeaShu -->
+      <!-- Frame 5: BookEcho -->
+      <div class="film-frame frame-bookecho" onclick="openDetail('bookecho')">
+        <div class="film-frame-inner">
+          <div class="film-frame-number-left">KODAK PORTRA 400</div>
+          <div class="film-photo">
+            <div class="film-photo-bg">
+              <img class="film-project-shot" src="assets/bookecho-home.jpg" alt="书应 BookEcho 阅读与角色对话界面">
+            </div>
+          </div>
+          <div class="film-frame-number">→5  5A</div>
+        </div>
+        <div class="film-caption">
+          <div class="film-caption-title">书应 BookEcho</div>
+          <div class="film-caption-desc">与书中人对话的 AI 阅读陪伴<br>进度 RAG · 集邮 · 个性化回信</div>
+          <div class="film-caption-tag">独立项目 · 2026.06</div>
+        </div>
+      </div>
+
+      <!-- Frame 6: IdeaShu -->
       <div class="film-frame frame-ideashu" onclick="openDetail('ideashu')">
         <div class="film-frame-inner">
           <div class="film-frame-number-left">KODAK PORTRA 400</div>
@@ -3505,7 +3967,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
               </div>
             </div>
           </div>
-          <div class="film-frame-number">→5  5A</div>
+          <div class="film-frame-number">→6  6A</div>
         </div>
         <div class="film-caption">
           <div class="film-caption-title">IdeaShu 灵感书</div>
@@ -3514,7 +3976,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
         </div>
       </div>
 
-      <!-- Frame 6: SpeakFlow -->
+      <!-- Frame 7: SpeakFlow -->
       <div class="film-frame frame-about" onclick="openDetail('about')">
         <div class="film-frame-inner">
           <div class="film-frame-number-left">KODAK PORTRA 400</div>
@@ -3525,7 +3987,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
               </div>
             </div>
           </div>
-          <div class="film-frame-number">→6  6A</div>
+          <div class="film-frame-number">→7  7A</div>
         </div>
         <div class="film-caption">
           <div class="film-caption-title">SpeakFlow</div>
@@ -3746,8 +4208,8 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
     <button class="detail-close" onclick="closeDetail('ideashu')" style="position:absolute;top:20px;right:24px;z-index:10;">✕ CLOSE</button>
     <div class="is-content">
       <div class="is-tag-row">
-        <span class="is-tag">Exposure 05 — personal project</span>
-        <span class="is-film-code">KODAK 5219 ▪ EXP 05</span>
+        <span class="is-tag">Exposure 06 — personal project</span>
+        <span class="is-film-code">KODAK 5219 ▪ EXP 06</span>
       </div>
       <div class="is-meta-row">
         <span class="is-meta-item">IdeaShu 灵感书</span>
@@ -3949,12 +4411,12 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
         <div class="mm-hero-info">
           <div class="mm-hero-name">喝一杯 MoodMix</div>
           <div class="mm-hero-sub">基于心境的饮品推荐引擎</div>
-          <div class="mm-hero-desc">说出此刻心境，AI 推荐最契合的那一杯——附近买得到，在家也调得出。用东方哲学做语义桥梁，填补「情绪→饮品」之间的选择黑箱。</div>
+          <div class="mm-hero-desc">说出此刻心境，AI 不只推荐最契合的那一杯，还把它交付成在家调得出、附近找得到的真实选择；收藏、打卡与评价会继续进入下一轮推荐。</div>
           <div class="mm-hero-quote">此刻，心境如何？<br>万般心绪，皆可入杯。</div>
           <div class="mm-hero-tags">
-            <span class="mm-hero-tag-item">4 Agent</span>
-            <span class="mm-hero-tag-item">东方哲学体系</span>
-            <span class="mm-hero-tag-item">400+ 饮品库</span>
+            <span class="mm-hero-tag-item">4 个业务 Agent</span>
+            <span class="mm-hero-tag-item">Schema 协作</span>
+            <span class="mm-hero-tag-item">个性化闭环</span>
           </div>
           <div class="mm-hero-cta-wrap">
             <span class="mm-hero-cta-label">体验链接</span>
@@ -3969,7 +4431,7 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
       <div class="mm-tabs">
         <div class="mm-tab on" onclick="mmTab(0)">▶ 视频演示</div>
         <div class="mm-tab" onclick="mmTab(1)">◆ 痛点 &amp; 方案</div>
-        <div class="mm-tab" onclick="mmTab(2)">◆ 架构 &amp; 成果</div>
+        <div class="mm-tab" onclick="mmTab(2)">◆ Agent 架构</div>
       </div>
 
       <div class="mm-panel on" id="mmp0">
@@ -3997,138 +4459,296 @@ html[data-theme="darkroom"] .detail-overlay { background: rgba(3,4,10,.94); }
         <div class="mm-sl"><span>◆</span> 产品方案</div>
         <div class="mm-flow-box">
           <div class="mm-flow-row">
-            <span class="mm-fn mm-fn-in">说出状态</span>
+            <span class="mm-fn mm-fn-in">说出心境</span>
             <span class="mm-fa">→</span>
-            <span class="mm-fn mm-fn-mid">AI 理解与匹配</span>
+            <span class="mm-fn mm-fn-mid">推荐与选择</span>
             <span class="mm-fa">→</span>
-            <span class="mm-fn mm-fn-out">交付饮品</span>
+            <span class="mm-fn mm-fn-out">DIY / 到店交付</span>
+            <span class="mm-fa">→</span>
+            <span class="mm-fn mm-fn-mid">反馈学习</span>
           </div>
           <div class="mm-flow-row" style="margin-top:6px; font-size:10px; color:#8a8690;">
             <span style="min-width:90px;text-align:center;">文本 / 场景标签</span>
             <span style="min-width:16px;"></span>
-            <span style="min-width:150px;text-align:center;">情绪解析 · 五行推理 · 向量匹配</span>
+            <span style="min-width:125px;text-align:center;">理解 · 映射 · 约束 · 排序</span>
             <span style="min-width:16px;"></span>
-            <span style="min-width:100px;text-align:center;">附近可买 / DIY</span>
+            <span style="min-width:110px;text-align:center;">库存配方 / POI 证据</span>
+            <span style="min-width:16px;"></span>
+            <span style="min-width:90px;text-align:center;">收藏 · 打卡 · 评价</span>
           </div>
         </div>
 
-        <div class="mm-sl"><span>◆</span> 三个创新点</div>
-        <div class="mm-card-row-3">
+        <div class="mm-sl"><span>◆</span> 四个产品支点</div>
+        <div class="mm-func-cards">
           <div class="mm-card">
             <div class="mm-card-t-accent">01 心境驱动</div>
-            <div class="mm-card-b">以情绪而非品类作为推荐入口，开创新决策路径</div>
+            <div class="mm-card-b">从情绪和核心需求出发，而不是让用户先懂品类</div>
           </div>
           <div class="mm-card">
-            <div class="mm-card-t-accent">02 双路径交付</div>
-            <div class="mm-card-b">附近门店可买 + 专属 DIY 配方，自制到店都能落地</div>
+            <div class="mm-card-t-accent">02 东方语义映射</div>
+            <div class="mm-card-b">用五行、阴阳与时辰把抽象心境翻译成可匹配特征</div>
           </div>
           <div class="mm-card">
-            <div class="mm-card-t-accent">03 东方哲学桥梁</div>
-            <div class="mm-card-b">五行/阴阳/时辰做语义翻译层，不是噱头是匹配逻辑</div>
+            <div class="mm-card-t-accent">03 双路径交付</div>
+            <div class="mm-card-b">同一推荐既能生成库存可执行配方，也能寻找可承接门店</div>
+          </div>
+          <div class="mm-card">
+            <div class="mm-card-t-accent">04 反馈学习</div>
+            <div class="mm-card-b">用真实行为更新当前偏好，而不是把画像停在首次问卷</div>
           </div>
         </div>
       </div>
 
       <div class="mm-panel" id="mmp2">
-        <div class="mm-sl"><span>◆</span> 4-Agent 协作架构</div>
+        <div class="mm-sl"><span>◆</span> 推荐 — 交付 — 反馈 — 学习</div>
+        <div class="mm-bd">四个 Agent 各自维护清晰职责，通过结构化 Schema 交接结果；既避免共享可变上下文带来的串扰，也让每一步都能独立评估、替换与回放。</div>
+
+        <div class="mm-loop" role="group" aria-label="MoodMix 四 Agent 个性化闭环">
+          <div class="mm-loop-kicker">
+            <span>4-AGENT DECISION LOOP</span>
+            <span>NO SHARED MUTABLE CONTEXT</span>
+          </div>
+          <div class="mm-loop-input"><b>CONTEXT IN</b><span>情绪表达 · 明确约束 · 时间场景 · PreferenceSnapshot</span></div>
+          <div class="mm-loop-arrow">↓</div>
+          <div class="mm-loop-node">
+            <em>01 · RECOMMEND</em>
+            <strong>推荐 Agent</strong>
+            <small>情绪与需求 → 东方语义映射 → 约束过滤 → 个性化召回排序</small>
+          </div>
+          <div class="mm-loop-arrow">↓ &nbsp; CHOOSE DELIVERY &nbsp; ↓</div>
+          <div class="mm-loop-branch">
+            <div class="mm-loop-node">
+              <em>02 · MAKE IT</em>
+              <strong>DIY Agent</strong>
+              <small>库存核对 · 用量步骤 · 缺料替代</small>
+            </div>
+            <div class="mm-loop-node">
+              <em>03 · FIND IT</em>
+              <strong>到店 Agent</strong>
+              <small>位置 · POI · 营业状态 · 菜单证据</small>
+            </div>
+          </div>
+          <div class="mm-loop-arrow">↓</div>
+          <div class="mm-loop-feedback"><b>REAL FEEDBACK</b><span>收藏 · 打卡 · 评分 · 交付选择</span></div>
+          <div class="mm-loop-arrow">↓</div>
+          <div class="mm-loop-node">
+            <em>04 · LEARN</em>
+            <strong>个性化 Agent</strong>
+            <small>更新口味权重与交付偏好，生成当前用户状态</small>
+          </div>
+          <div class="mm-loop-return">↺ &nbsp; <b>PreferenceSnapshot vNext</b> 回到下一轮推荐</div>
+        </div>
+
+        <div class="mm-sl"><span>◆</span> 四个 Agent 如何分工</div>
         <div class="mm-agent-cards">
           <div class="mm-agent-card">
-            <div class="mm-agent-num">AGENT 01</div>
-            <div class="mm-agent-name">聚合分析师</div>
-            <div class="mm-agent-role">六维语义 + 中医辨证 + 八维向量</div>
-            <div class="mm-agent-model">Qwen2.5-7B</div>
+            <div class="mm-agent-head"><div class="mm-agent-num">AGENT 01</div><div class="mm-agent-stage">RECOMMEND</div></div>
+            <div class="mm-agent-name">推荐 Agent</div>
+            <div class="mm-agent-role">提取此刻的情绪与核心需求，经五行、阴阳、时辰完成文化语义映射；先执行酒精、咖啡因等硬约束，再结合历史偏好召回与排序候选。</div>
+            <div class="mm-agent-model">OUT · RecommendationResult</div>
           </div>
           <div class="mm-agent-card">
-            <div class="mm-agent-num">AGENT 02</div>
-            <div class="mm-agent-name">意境文案师</div>
-            <div class="mm-agent-role">30-50字诗意社交卡片</div>
-            <div class="mm-agent-model">Qwen2.5-32B</div>
+            <div class="mm-agent-head"><div class="mm-agent-num">AGENT 02</div><div class="mm-agent-stage">DIY DELIVERY</div></div>
+            <div class="mm-agent-name">DIY Agent</div>
+            <div class="mm-agent-role">读取用户现有原料库存，把推荐转成真实可执行的配方：明确用量、步骤、器具与替代方案，并标注无法满足的缺口。</div>
+            <div class="mm-agent-model">OUT · DIYRecipePlan</div>
           </div>
           <div class="mm-agent-card">
-            <div class="mm-agent-num">AGENT 03</div>
-            <div class="mm-agent-name">质量质检员</div>
-            <div class="mm-agent-role">8项安全检查+质量勋章</div>
-            <div class="mm-agent-model">Qwen2.5-7B</div>
+            <div class="mm-agent-head"><div class="mm-agent-num">AGENT 03</div><div class="mm-agent-stage">STORE DELIVERY</div></div>
+            <div class="mm-agent-name">到店 Agent</div>
+            <div class="mm-agent-role">基于实时位置、POI、营业状态和菜单证据寻找承接门店；没有原款时，按同类饮品 → 相似风味 → 同类门店逐级放宽。</div>
+            <div class="mm-agent-model">OUT · StoreOptionSet</div>
           </div>
           <div class="mm-agent-card">
-            <div class="mm-agent-num">AGENT 04</div>
-            <div class="mm-agent-name">调饮专家</div>
-            <div class="mm-agent-role">自定义饮品分析+制作问答</div>
-            <div class="mm-agent-model">Qwen2.5-7B</div>
+            <div class="mm-agent-head"><div class="mm-agent-num">AGENT 04</div><div class="mm-agent-stage">LEARNING</div></div>
+            <div class="mm-agent-name">个性化 Agent</div>
+            <div class="mm-agent-role">消费收藏、打卡、评价和交付选择等真实反馈，持续更新口味权重与交付偏好，为下一轮提供版本化的当前状态。</div>
+            <div class="mm-agent-model">OUT · PreferenceSnapshot</div>
           </div>
         </div>
 
-        <div class="mm-sl"><span>◆</span> 核心技术决策</div>
+        <div class="mm-sl"><span>◆</span> 关键产品决策</div>
         <div class="mm-func-cards">
           <div class="mm-func-card">
             <div class="mm-func-icon">DECISION 01</div>
-            <div class="mm-func-name">六维情绪解析</div>
-            <div class="mm-func-desc">情绪/躯体/时空/神志/仪轨/场域六维拆解，经中医辨证转为八维饮品特征向量</div>
+            <div class="mm-func-name">硬约束先于个性化</div>
+            <div class="mm-func-desc">酒精、咖啡因、忌口等安全与明确偏好先过滤，历史喜好只在可行集合内参与排序。</div>
           </div>
           <div class="mm-func-card">
             <div class="mm-func-icon">DECISION 02</div>
-            <div class="mm-func-name">本地向量搜索</div>
-            <div class="mm-func-desc">400+ 饮品库，加权余弦相似度 + Kappa 动态权重，无 LLM 调用，Top 9 &lt;100ms</div>
+            <div class="mm-func-name">库存决定配方可执行性</div>
+            <div class="mm-func-desc">DIY 不复述标准酒谱，而是围绕已拥有原料重组步骤，并显式提供缺料和替代策略。</div>
           </div>
           <div class="mm-func-card">
             <div class="mm-func-icon">DECISION 03</div>
-            <div class="mm-func-name">首屏渲染优先</div>
-            <div class="mm-func-desc">主链路 3-5s 首屏，文案/质检 Agent 异步执行，推荐语渐进加载</div>
+            <div class="mm-func-name">门店匹配必须有证据</div>
+            <div class="mm-func-desc">距离不是唯一条件；营业状态和菜单信息共同决定“找得到”是否真的等于“喝得到”。</div>
           </div>
           <div class="mm-func-card">
             <div class="mm-func-icon">DECISION 04</div>
-            <div class="mm-func-name">哲学标签系统</div>
-            <div class="mm-func-desc">三标签（辨证/策略/体感），推荐语 15-28 字因果结构，本地规则无 LLM</div>
+            <div class="mm-func-name">偏好来自行为而非猜测</div>
+            <div class="mm-func-desc">收藏、打卡、评价与交付选择作为可追溯事件，聚合成有版本的 PreferenceSnapshot。</div>
           </div>
         </div>
 
-        <div class="mm-sl"><span>◆</span> 技术架构</div>
+        <div class="mm-sl"><span>◆</span> Schema 交接协议</div>
         <div class="mm-arch-box">
-          <div class="mm-arch-label">MAIN PIPELINE (SYNC) → 3-5s</div>
+          <div class="mm-arch-label">TYPED HANDOFF · VERSIONED STATE</div>
           <div class="mm-arch-flow">
-            <span class="mm-an mm-a-in">用户输入</span>
+            <span class="mm-an mm-a-in">MoodContext</span>
             <span class="mm-a-arr">→</span>
-            <span class="mm-an mm-a-mid">实体预处理</span>
+            <span class="mm-an mm-a-mid">RecommendationResult</span>
             <span class="mm-a-arr">→</span>
-            <span class="mm-an mm-a-mid">Agent 1</span>
+            <span class="mm-an mm-a-mid">DeliveryPlan</span>
             <span class="mm-a-arr">→</span>
-            <span class="mm-an mm-a-mid">向量搜索</span>
+            <span class="mm-an mm-a-mid">FeedbackEvent</span>
             <span class="mm-a-arr">→</span>
-            <span class="mm-an mm-a-out">首屏渲染</span>
+            <span class="mm-an mm-a-out">PreferenceSnapshot</span>
           </div>
-          <div style="height:10px;"></div>
-          <div class="mm-arch-label">ASYNC PIPELINE → 渐进加载</div>
-          <div class="mm-arch-flow">
-            <span class="mm-an mm-a-in">推荐结果</span>
-            <span class="mm-a-arr">→</span>
-            <span class="mm-an mm-a-mid">Agent 2 文案</span>
-            <span class="mm-a-arr">→</span>
-            <span class="mm-an mm-a-mid">Agent 3 质检</span>
-            <span class="mm-a-arr">→</span>
-            <span class="mm-an mm-a-out">UI 更新</span>
-          </div>
-          <div class="mm-arch-note">React + Node.js + Express。Agent 2 走 Qwen2.5-32B（文案需更强模型），其余走 Qwen2.5-7B。400+ 饮品库预加载内存，向量搜索零 LLM 调用。部署 Render。</div>
+          <div class="mm-arch-note">每个 Agent 只读取明确字段、写回新的结构化结果，不直接修改其他 Agent 的上下文。这样既能保留推荐理由与证据链，也能让 DIY、到店与个性化能力按需独立演进。</div>
         </div>
 
-        <div class="mm-sl"><span>◆</span> 核心成果</div>
-        <div class="mm-metrics">
-          <div class="mm-metric"><div class="mm-metric-val">4.2/5</div><div class="mm-metric-lbl">情绪解读一致性</div></div>
-          <div class="mm-metric"><div class="mm-metric-val">70%</div><div class="mm-metric-lbl">库存匹配命中率</div></div>
-          <div class="mm-metric"><div class="mm-metric-val">+32%</div><div class="mm-metric-lbl">个性化属性命中</div></div>
+        <div class="mm-schema-row" aria-label="核心 Schema">
+          <span class="mm-schema-pill"><b>IN</b> MoodContext</span>
+          <span class="mm-schema-pill"><b>OUT</b> RecommendationResult</span>
+          <span class="mm-schema-pill"><b>OUT</b> DIYRecipePlan</span>
+          <span class="mm-schema-pill"><b>OUT</b> StoreOptionSet</span>
+          <span class="mm-schema-pill"><b>EVENT</b> FeedbackEvent</span>
+          <span class="mm-schema-pill"><b>STATE</b> PreferenceSnapshot</span>
+        </div>
+
+        <div class="mm-sl"><span>◆</span> 架构带来的产品价值</div>
+        <div class="mm-value-grid">
+          <div class="mm-value"><b>推荐可解释</b><span>文化映射、显式约束和历史偏好各自有清晰位置，不把结果藏进黑箱。</span></div>
+          <div class="mm-value"><b>交付可执行</b><span>用户选择“自己做”或“线下喝”后，由专门 Agent 承接最后一公里。</span></div>
+          <div class="mm-value"><b>个性化可持续</b><span>真实反馈生成新的当前状态，让每一轮体验都成为下一轮的训练信号。</span></div>
         </div>
 
         <div class="mm-tags">
           <span class="mm-tag-item">React</span>
           <span class="mm-tag-item">Node.js</span>
-          <span class="mm-tag-item">Qwen2.5-7B</span>
-          <span class="mm-tag-item">Qwen2.5-32B</span>
           <span class="mm-tag-item">五行/阴阳/时辰</span>
-          <span class="mm-tag-item">Cosine Similarity</span>
+          <span class="mm-tag-item">Inventory-aware DIY</span>
+          <span class="mm-tag-item">POI &amp; Menu Evidence</span>
+          <span class="mm-tag-item">PreferenceSnapshot</span>
           <span class="mm-tag-item">Render</span>
         </div>
       </div>
 
       <div class="mm-film-bottom">▪ ▪ ▪ KODAK 5219 ▪ ▪ ▪ PORTRA 400 ▪ ▪ ▪ PROCESS C-41 ▪ ▪ ▪</div>
+    </div>
+  </div>
+</div>
+
+<div class="detail-overlay detail-overlay--bookecho" id="detail-bookecho" aria-label="书应 BookEcho 项目详情">
+  <div class="be-page">
+    <div class="be-grain"></div>
+    <button class="detail-close" onclick="closeDetail('bookecho')" style="position:absolute;top:20px;right:24px;z-index:10;">✕ CLOSE</button>
+    <div class="be-content">
+      <div class="be-tag-row">
+        <span class="be-tag">Exposure 05 — independent lead · 2026.06</span>
+        <span class="be-film-code">BOOKECHO ▪ EXP 05</span>
+      </div>
+
+      <div class="be-hero">
+        <div class="be-hero-shot">
+          <img src="assets/bookecho-home.jpg" alt="书应 BookEcho 移动端首页">
+        </div>
+        <div class="be-hero-copy">
+          <div class="be-side-title">书页有声 · 人物有信</div>
+          <div class="be-kicker">AI READING COMPANION</div>
+          <h2 class="be-title">书应 BookEcho<small>让阅读从独自理解，变成与书中人同行</small></h2>
+          <p class="be-lead">围绕阅读进度，把原文证据、角色口吻与长期关系记忆组织成可持续的陪伴体验。读者可以在划线处发问、收集人物节点，并在读完后收到真正属于这段旅程的回信。</p>
+          <p class="be-quote">“从你停下来的那一句开始。”</p>
+          <div class="be-chips">
+            <span class="be-chip">Progress-aware RAG</span>
+            <span class="be-chip">Character Memory</span>
+            <span class="be-chip">Final Letters</span>
+          </div>
+          <a class="be-cta" href="https://bookecho-7oyn.onrender.com/" target="_blank" rel="noopener noreferrer" title="在新标签页打开，不离开本站">
+            <span>打开 BookEcho 在线体验</span><span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="be-tabs" role="tablist" aria-label="BookEcho 项目内容">
+        <button class="be-tab on" type="button" role="tab" aria-selected="true" onclick="beTab(0)">01 产品体验</button>
+        <button class="be-tab" type="button" role="tab" aria-selected="false" onclick="beTab(1)">02 防剧透 RAG</button>
+        <button class="be-tab" type="button" role="tab" aria-selected="false" onclick="beTab(2)">03 Skills &amp; 架构</button>
+      </div>
+
+      <div class="be-panel on" id="bep0" role="tabpanel">
+        <div class="be-section-title">一段围绕阅读进度生长的关系</div>
+        <p class="be-body">BookEcho 不把对话做成脱离正文的通用聊天框，而是把每一次停顿、提问和读完的时刻串成旅程。<b>书中角色只谈你已经抵达的地方</b>，陪伴感来自共同经历，而不是提前揭晓答案。</p>
+        <div class="be-journey" aria-label="BookEcho 核心体验路径">
+          <div class="be-step"><em>01</em><strong>导入书籍</strong><span>TXT / PDF / EPUB，或选择公共示例书</span></div>
+          <div class="be-step"><em>02</em><strong>沉浸阅读</strong><span>保存进度，让系统知道此刻读到哪里</span></div>
+          <div class="be-step"><em>03</em><strong>划句提问</strong><span>带着原文语境与书中角色展开对话</span></div>
+          <div class="be-step"><em>04</em><strong>节点集邮</strong><span>把相遇、选择与关系变化留成纪念</span></div>
+          <div class="be-step"><em>05</em><strong>角色回信</strong><span>在旅程终点收到有共同记忆的来信</span></div>
+        </div>
+        <div class="be-feature-grid">
+          <div class="be-feature"><small>CONVERSATION</small><b>对话紧贴原文</b><span>从当前句子进入，不要求读者重新解释上下文。</span></div>
+          <div class="be-feature"><small>COLLECTION</small><b>关键节点可收藏</b><span>让阅读里易逝的情绪与人物关系变成可回看的印记。</span></div>
+          <div class="be-feature"><small>LETTER</small><b>结局不是结束</b><span>读完后的回信会调用共同经历，完成一段关系的收束。</span></div>
+        </div>
+        <div class="be-tags">
+          <span>5 本公共示例书</span><span>阅读进度</span><span>关系记忆</span><span>人物头像</span><span>藏书票式印章</span>
+        </div>
+      </div>
+
+      <div class="be-panel" id="bep1" role="tabpanel" hidden>
+        <div class="be-section-title">答案的边界，就是读者的进度</div>
+        <p class="be-body">检索先服从阅读进度，再谈相关性。系统只允许召回当前章节之前的证据，并把证据交给角色口吻层组织回答，从链路上降低剧透与凭空编造。</p>
+        <div class="be-rag" role="group" aria-label="BookEcho 防剧透检索流程">
+          <div class="be-rag-label"><span>PROGRESS-BOUNDED RETRIEVAL</span><span>READER-SAFE CONTEXT</span></div>
+          <div class="be-rag-flow">
+            <div class="be-rag-node"><b>当前阅读进度</b><span>BOOK · CHAPTER · POSITION</span></div>
+            <span class="be-rag-arrow">→</span>
+            <div class="be-rag-node is-gate"><b>安全边界过滤</b><span>lastSafeChapter ≤ currentChapter</span></div>
+            <span class="be-rag-arrow">→</span>
+            <div class="be-rag-node"><b>证据片段</b><span>RELEVANT SAFE CHUNKS</span></div>
+            <span class="be-rag-arrow">→</span>
+            <div class="be-rag-node"><b>稳定角色口吻</b><span>PERSONA + RELATIONSHIP</span></div>
+            <span class="be-rag-arrow">→</span>
+            <div class="be-rag-node"><b>有依据的回应</b><span>GROUNDED REPLY</span></div>
+          </div>
+          <div class="be-boundary"><span><b>允许：</b>已读内容与已发生关系</span><span><b>拒绝：</b>未来章节、结局与未验证推断</span></div>
+        </div>
+        <div class="be-guard-grid">
+          <div class="be-guard"><small>GUARD 01</small><b>硬进度边界</b><span>将读者所在章节变成检索约束，而不是只在提示词里请求“不要剧透”。</span></div>
+          <div class="be-guard"><small>GUARD 02</small><b>证据可回溯</b><span>关系记忆携带 evidence ID，回答能够回到共同读过的内容。</span></div>
+          <div class="be-guard"><small>GUARD 03</small><b>人物一致性</b><span>角色设定与累积关系共同约束表达，减少长对话中的人设漂移。</span></div>
+        </div>
+        <div class="be-tags"><span>Chunk Retrieval</span><span>Evidence IDs</span><span>Spoiler Guard</span><span>Persona Stability</span></div>
+      </div>
+
+      <div class="be-panel" id="bep2" role="tabpanel" hidden>
+        <div class="be-section-title">一个编排器，六项可复用能力</div>
+        <p class="be-body">核心能力拆成独立 Skill，由 BookEchoOrchestrator 按阅读场景组合调用。内容处理、对话、视觉资产与数据层彼此解耦，模型与存储也保留可替换接口。</p>
+        <div class="be-skill-grid">
+          <div class="be-skill"><span class="be-skill-num">01</span><small>BOOK-IMPORT</small><b>书籍导入</b><span>解析 TXT / PDF / EPUB，建立章节与检索片段。</span></div>
+          <div class="be-skill"><span class="be-skill-num">02</span><small>CHAT</small><b>角色对话</b><span>组合安全证据、人物设定与关系记忆。</span></div>
+          <div class="be-skill"><span class="be-skill-num">03</span><small>LETTER</small><b>个性化回信</b><span>在读完节点归纳共同经历，生成角色来信。</span></div>
+          <div class="be-skill"><span class="be-skill-num">04</span><small>AVATAR</small><b>人物头像</b><span>为角色生成一致的视觉识别资产。</span></div>
+          <div class="be-skill"><span class="be-skill-num">05</span><small>STAMP</small><b>纪念印章</b><span>把关键阅读节点转化为可收藏的视觉印记。</span></div>
+          <div class="be-skill"><span class="be-skill-num">06</span><small>SPINE</small><b>书脊生成</b><span>为个人书架补齐统一而有辨识度的封面元素。</span></div>
+        </div>
+        <div class="be-arch">
+          <div class="be-arch-kicker">SYSTEM COMPOSITION</div>
+          <div class="be-arch-flow">
+            <span class="be-arch-node">Reader UI</span><span class="be-arch-arr">→</span>
+            <span class="be-arch-node is-core">BookEchoOrchestrator</span><span class="be-arch-arr">→</span>
+            <span class="be-arch-node">6 Domain Skills</span><span class="be-arch-arr">→</span>
+            <span class="be-arch-node">ModelGateway</span><span class="be-arch-arr">→</span>
+            <span class="be-arch-node">Qianfan / OpenAI</span>
+          </div>
+          <div class="be-arch-note">数据层支持 Postgres 与 JSON fallback；服务与模型经统一接口衔接，让原型环境与持久化部署可以沿用同一套产品逻辑。</div>
+        </div>
+        <div class="be-tags"><span>FastAPI</span><span>Postgres / JSON</span><span>ModelGateway</span><span>Qianfan</span><span>OpenAI</span><span>Domain Skills</span></div>
+      </div>
+
+      <div class="be-film-bottom">▪ ▪ ▪ BOOKECHO ▪ ▪ ▪ READER SAFE ▪ ▪ ▪ LETTERS REMEMBER ▪ ▪ ▪</div>
     </div>
   </div>
 </div>
@@ -4745,6 +5365,19 @@ function isTab(i) {
 function mmTab(i) {
   document.querySelectorAll('.mm-tab').forEach(function(t,x){ t.classList.toggle('on',x===i); });
   document.querySelectorAll('.mm-panel').forEach(function(p,x){ p.classList.toggle('on',x===i); });
+}
+
+function beTab(i) {
+  document.querySelectorAll('.be-tab').forEach(function(t, x) {
+    const active = x === i;
+    t.classList.toggle('on', active);
+    t.setAttribute('aria-selected', String(active));
+  });
+  document.querySelectorAll('.be-panel').forEach(function(p, x) {
+    const active = x === i;
+    p.classList.toggle('on', active);
+    p.hidden = !active;
+  });
 }
 
 (function () {
